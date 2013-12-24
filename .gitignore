@@ -1,11 +1,25 @@
+# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+# should NOT be excluded as they contain compiler settings and other important
+# information for Eclipse / Flash Builder.
+
 # Build and Release Folders
 bin/
 bin-debug/
 bin-release/
+KonataMob/bin/
+KonataMob/bin-debug/
+KonataMob/bin-release/
+KonataWeb/bin/
+KonataWeb/bin-debug/
+KonataWeb/bin-release/
+KonataMob/bin-release-temp/
+KonataWeb/release
+outputfolder/
 
 # Other files and folders
 .settings/
+KonataMob/.settings/
+KonataWeb/.settings/
 
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# Orig files from merge
+*.orig

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="templelane.png">
+	<!--
+	Created with ShoeBox
+	http://renderhjs.net/shoebox/
+	-->
+	<SubTexture name="templelane_000"	x="0"	y="225"	width="623"	height="224" frameX="-0" frameY="-0" frameWidth="623" frameHeight="224"/>
+	<SubTexture name="templelane_001"	x="0"	y="450"	width="623"	height="224" frameX="-0" frameY="-0" frameWidth="623" frameHeight="224"/>
+	<SubTexture name="templelane_002"	x="0"	y="675"	width="623"	height="224" frameX="-0" frameY="-0" frameWidth="623" frameHeight="224"/>
+	<SubTexture name="templelane_003"	x="0"	y="0"	width="623"	height="224" frameX="-0" frameY="-0" frameWidth="623" frameHeight="224"/>
+</TextureAtlas>

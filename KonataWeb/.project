@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>KonataWeb</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.adobe.flexbuilder.project.flexbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>[source path] Starling-Extension-Particle-System-master-src</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/Konata/libraries/Starling-Extension-Particle-System-master/src</locationURI>
+		</link>
+		<link>
+			<name>[source path] Konata-src</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/Konata/libraries/Konata/src</locationURI>
+		</link>
+		<link>
+			<name>[source path] assets</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/Konata/libraries/Konata/assets</locationURI>
+		</link>
+		<link>
+			<name>[source path] starling-src</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/Konata/libraries/starling/src</locationURI>
+		</link>
+		<link>
+			<name>[source path] system</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/Konata/libraries/Konata/system</locationURI>
+		</link>
+		<link>
+			<name>bin-debug</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/Konata/outputfolder</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>

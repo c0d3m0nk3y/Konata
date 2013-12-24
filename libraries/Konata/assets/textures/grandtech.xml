@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="grandtech.png">
+	<!--
+	Created with ShoeBox
+	http://renderhjs.net/shoebox/
+	-->
+	<SubTexture name="grandtech_000"	x="0"	y="1040"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
+	<SubTexture name="grandtech_001"	x="769"	y="260"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
+	<SubTexture name="grandtech_002"	x="769"	y="0"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
+	<SubTexture name="grandtech_003"	x="0"	y="1560"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
+	<SubTexture name="grandtech_004"	x="0"	y="1300"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
+	<SubTexture name="grandtech_005"	x="769"	y="520"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
+	<SubTexture name="grandtech_006"	x="0"	y="780"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
+	<SubTexture name="grandtech_007"	x="0"	y="520"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
+	<SubTexture name="grandtech_008"	x="0"	y="260"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
+	<SubTexture name="grandtech_009"	x="0"	y="0"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
+</TextureAtlas>
