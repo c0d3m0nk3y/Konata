@@ -1,5 +1,4 @@
-package com.oak  
-{
+package com.oak {
 	import flash.desktop.NativeApplication;
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -15,17 +14,13 @@ package com.oak
 	import starling.utils.RectangleUtil;
 	import starling.utils.ScaleMode;
 	
-	[SWF(frameRate="30", width="480", height="320", backgroundColor="0x333333")]
-	public class KonataMob extends Sprite
-	{
+	[SWF(frameRate = "30", width = "480", height = "320", backgroundColor = "0x333333")]
+	public class KonataMob extends Sprite {
 		// Startup image for HD screens
-		[Embed(source="../../../../libraries/Konata/system/startupHD.png")]
+		[Embed(source = "../../../../libraries/Konata/system/startupHD.png")]
 		private static var BackgroundHD:Class;
 		
-		private var mStarling:Starling;
-		
-		public function KonataMob()
-		{
+		public function KonataMob() {
 			super();
 			
 			// This project requires the sources of the "demo" project. Add them either by 
@@ -37,17 +32,14 @@ package com.oak
 			
 			
 			var iOS:Boolean = Capabilities.manufacturer.indexOf("iOS") != -1;
-			if(iOS)
-			{
+			if (iOS) {
 				Support.platform = Constants.PLATFORM_IOS
-			}
-			else
-			{
+			} else {
 				Support.platform = Constants.PLATFORM_ANDROID;
 			}
 			
-			Starling.multitouchEnabled = false;  // useful on mobile devices
-			Starling.handleLostContext = !iOS;  // not necessary on iOS. Saves a lot of memory!
+			Starling.multitouchEnabled = false; // useful on mobile devices
+			Starling.handleLostContext = !iOS; // not necessary on iOS. Saves a lot of memory!
 			
 			// create a suitable viewport for the screen size
 			// 
@@ -57,10 +49,7 @@ package com.oak
 			var stageHeight:int = 320;
 			var stageWidth:int = stageHeight * stage.fullScreenWidth / stage.fullScreenHeight;
 			
-			var viewPort:Rectangle = RectangleUtil.fit(
-				new Rectangle(0, 0, stageWidth, stageHeight), 
-				new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), 
-				ScaleMode.NO_BORDER, false);
+			var viewPort:Rectangle = RectangleUtil.fit(new Rectangle(0, 0, stageWidth, stageHeight), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), ScaleMode.NO_BORDER, false);
 			
 			// create the AssetManager, which handles all required assets for this resolution
 			
@@ -69,11 +58,7 @@ package com.oak
 			var assets:AssetManager = new AssetManager(scaleFactor);
 			
 			assets.verbose = Capabilities.isDebugger && Constants.DEBUG_ASSETS;
-			assets.enqueue(
-				appDir.resolvePath("audio"),
-				appDir.resolvePath("fonts"),
-				appDir.resolvePath("textures")
-			);
+			assets.enqueue(appDir.resolvePath("audio"), appDir.resolvePath("fonts"), appDir.resolvePath("textures"));
 			
 			// While Stage3D is initializing, the screen will be blank. To avoid any flickering, 
 			// we display a startup image now and remove it below, when Starling is ready to go.
@@ -91,20 +76,19 @@ package com.oak
 			
 			//For the width, you need to multiply height by (image width in pixels / image height in pixels)
 			background.height = viewPort.height;
-			background.width = background.height * 1137/640;
-			background.x = viewPort.width/2 - background.width/2;
+			background.width = background.height * 1137 / 640;
+			background.x = viewPort.width / 2 - background.width / 2;
 			background.y = viewPort.y;
 			background.smoothing = true;
 			addChild(background);
 			
 			// launch Starling
 			mStarling = new Starling(Konata, stage, viewPort);
-			mStarling.stage.stageWidth  = stageWidth;  // <- !same size on all devices
+			mStarling.stage.stageWidth = stageWidth; // <- !same size on all devices
 			mStarling.stage.stageHeight = stageHeight; // <- same size on all devices
-			mStarling.simulateMultitouch  = false;
+			mStarling.simulateMultitouch = false;
 			mStarling.enableErrorChecking = false;
-			mStarling.addEventListener(starling.events.Event.ROOT_CREATED, function():void
-			{
+			mStarling.addEventListener(starling.events.Event.ROOT_CREATED, function():void {
 				removeChild(background);
 				
 				var game:Konata = mStarling.root as Konata;
@@ -120,14 +104,14 @@ package com.oak
 			
 			NativeApplication.nativeApplication.addEventListener(flash.events.Event.DEACTIVATE, onDeactivate);
 		}
-
-		private function onActivate(e:flash.events.Event):void
-		{
+		
+		private var mStarling:Starling;
+		
+		private function onActivate(e:flash.events.Event):void {
 			mStarling.start();
 		}
 		
-		private function onDeactivate(e:flash.events.Event):void
-		{
+		private function onDeactivate(e:flash.events.Event):void {
 			mStarling.stop();
 		}
 	}

@@ -1,16 +1,13 @@
-package scenes
-{
+package scenes {
 	import avmplus.getQualifiedClassName;
 	
 	import starling.display.Button;
 	import starling.display.Sprite;
 	
-	public class MainMenu extends Sprite
-	{
+	public class MainMenu extends Sprite {
 		public static var instance:MainMenu;
 		
-		public function MainMenu()
-		{
+		public function MainMenu() {
 			instance = this;
 			
 			var start:Button = new Button(Konata.assets.getTexture("big"), "Start");
@@ -19,5 +16,5 @@ package scenes
 			start.name = getQualifiedClassName(GamePage);
 			addChild(start);
 		}
-    }
+	}
 }
