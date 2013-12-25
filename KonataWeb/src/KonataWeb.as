@@ -39,7 +39,7 @@ package {
 			start();
 		}
 		
-		private function onRootCreated(event:Event, game:Konata):void {
+		private function onRootCreated(event:Event, konata:Konata):void {
 			// set framerate to 30 in software mode
 			if (mStarling.context.driverInfo.toLowerCase().indexOf("software") != -1)
 				mStarling.nativeStage.frameRate = 30;
@@ -53,7 +53,7 @@ package {
 			var bgTexture:Texture = Texture.fromBitmap(new Background());
 			
 			// game will first load resources, then start menu
-			game.start(bgTexture, assets);
+			konata.start(bgTexture, assets);
 		}
 		
 		private function start():void {
