@@ -1,27 +1,33 @@
-package
-{
+package {
 	import flash.media.Sound;
+	import flash.media.SoundChannel;
+	import flash.media.SoundTransform;
 	
 	import starling.textures.Texture;
 	import starling.utils.AssetManager;
-
-	public class Assets
-	{
+	
+	public class Assets {
+		
 		private static var _assetManager:AssetManager;
 		
-		public function Assets() {
-		}
-
 		public static function set assetManager(value:AssetManager):void {
 			_assetManager = value;
-		}
-
-		public static function getTexture(name:String):Texture {
-			return _assetManager.getTexture(name);
 		}
 		
 		public static function getSound(name:String):Sound {
 			return _assetManager.getSound(name);
+		}
+		
+		public static function getTexture(name:String):Texture {
+			return _assetManager.getTexture(name);
+		}
+		
+		public static function playSound(name:String, startTime:Number=0, loops:int=0, transform:SoundTransform=null):SoundChannel {
+			return _assetManager.playSound(name, startTime, loops, transform);
+		}
+		
+		public function Assets() {
+			throw new Error("No need to instantiate an Asset object, do not call the constructor directly.");
 		}
 	}
 }

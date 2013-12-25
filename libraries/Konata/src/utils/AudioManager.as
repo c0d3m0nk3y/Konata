@@ -4,64 +4,80 @@ package utils {
 	import flash.media.SoundMixer;
 	import flash.media.SoundTransform;
 	
-	import starling.core.Starling;
-	
 	public class AudioManager {
 		
 		public static const MUSIC_LEVEL:Number = 0.25;
 		
-		public function AudioManager() {
-			pop = Assets.getSound("pop");
+		private static var _instance:AudioManager;
 		
+		public static function playMusic():void {
+			instance.playMusic();
+		}
+		
+		public static function playSound(name:String, startTime:Number=0, loops:int=0, transform:SoundTransform=null):SoundChannel {
+			return instance.playSound(name, startTime, loops, transform);
+		}
+		
+		public static function silenceAll():void {
+			instance.silenceAll();
+		}
+		
+		public static function unsilenceAll():void {
+			instance.unsilenceAll();
+		}
+		
+		private static function get instance():AudioManager {
+			return _instance ? _instance : new AudioManager();
+		}
+		
+		public function AudioManager() {
+			if (_instance) {
+				throw new Error("AudioManager is a singleton, do not call the constructor directly.");
+			}
+			_instance = this;
 		}
 		
 		private var music:Sound;
-		
 		private var musicChannel:SoundChannel;
-		private var pop:Sound;
 		
 		private var transform:SoundTransform = new SoundTransform(AudioManager.MUSIC_LEVEL);
 		
-		public function pauseMusic():void {
+		private function silenceAll():void {
+			SoundMixer.soundTransform.volume = 0;//new SoundTransform(0);
+		}
+		
+		private function unsilenceAll():void {
+			SoundMixer.soundTransform.volume = 1;//new SoundTransform(1);
+		}
+		
+		private function pauseMusic():void {
 			SoundMixer.soundTransform = new SoundTransform(0);
 		}
 		
-		public function playDelayedSounds(soundFunction:Function, delay:Number, repeat:int, repeatDelay:Number):void {
-			//			Support.log("OSounds.playDelayedSounds delay " + delay + ", repeat " + repeat + ", repeatDelay " + repeatDelay); 
-			Starling.juggler.delayCall(startSoundTimer, delay, soundFunction, repeat, repeatDelay);
-		}
-		
-		public function playMusic():void {
+		private function playMusic():void {
 			stopMusic();
 			SoundMixer.soundTransform = new SoundTransform(1);
 			musicChannel = music.play(0, 9999, transform);
 		}
 		
-		public function playPop():void {
-			pop.play();
+		private function playSound(name:String, startTime:Number=0, loops:int=0, transform:SoundTransform=null):SoundChannel {
+			return Assets.playSound(name, startTime, loops, transform);
 		}
 		
-		public function resumeMusic():void {
+		private function resumeMusic():void {
 			SoundMixer.soundTransform = new SoundTransform(1);
 		}
 		
-		public function setMusic(sound:Sound):void {
+		private function setMusic(sound:Sound):void {
 			music = sound;
 		}
 		
-		public function setMusicVolume(vol:Number):void {
+		private function setMusicVolume(vol:Number):void {
 			musicChannel.soundTransform.volume = vol;
 		}
 		
-		public function stopMusic():void {
+		private function stopMusic():void {
 			musicChannel.stop();
-		}
-		
-		private function startSoundTimer(soundFunction:Function, repeat:int, delay:Number):void {
-			//			Support.log("OSounds.startSoundTimer delay " + delay + ", repeat " + repeat);
-			for (var i:int = 0; i < repeat; i++) {
-				Starling.juggler.delayCall(soundFunction, delay + i * delay);
-			}
 		}
 	}
 }

@@ -18,13 +18,11 @@ package {
 	import starling.utils.HAlign;
 	import starling.utils.VAlign;
 	
-	import utils.AudioManager;
 	import utils.ProgressBar;
 	
 	public class Konata extends Sprite {
 		
 		public static var instance:Konata;
-		public static var oSounds:AudioManager;
 		
 		public static function addDebug(str:String):void {
 			if (instance)
@@ -180,7 +178,6 @@ package {
 		
 		private function onAssetsLoaded():void {
 			assetsLoaded = true;
-			oSounds = new AudioManager();
 			
 			var background:Image = new Image(Assets.getTexture("background"));
 			background.pivotX = background.width / 2;
