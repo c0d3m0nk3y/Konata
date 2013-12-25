@@ -7,8 +7,8 @@ package {
 	import starling.utils.AssetManager;
 	
 	public class Assets {
-		
 		private static var _assetManager:AssetManager;
+		private static var _loaded:Boolean;
 		
 		public static function set assetManager(value:AssetManager):void {
 			_assetManager = value;
@@ -20,6 +20,14 @@ package {
 		
 		public static function getTexture(name:String):Texture {
 			return _assetManager.getTexture(name);
+		}
+		
+		public static function get loaded():Boolean {
+			return _loaded;
+		}
+		
+		public static function set loaded(value:Boolean):void {
+			_loaded = value;
 		}
 		
 		public static function playSound(name:String, startTime:Number=0, loops:int=0, transform:SoundTransform=null):SoundChannel {

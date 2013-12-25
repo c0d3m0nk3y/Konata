@@ -48,8 +48,6 @@ package {
 			Starling.current.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, checkKeyPress, false, 0, true);
 		}
 		
-		public var assetsLoaded:Boolean = false;
-		
 		private var backgroundImage:Image;
 		private var debugBack:Quad;
 		private var debugText:TextField;
@@ -177,7 +175,7 @@ package {
 		}
 		
 		private function onAssetsLoaded():void {
-			assetsLoaded = true;
+			Assets.loaded = true;
 			
 			var background:Image = new Image(Assets.getTexture("background"));
 			background.pivotX = background.width / 2;
