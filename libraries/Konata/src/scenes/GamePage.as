@@ -71,7 +71,7 @@ package scenes
 			particles = new Vector.<PDParticleSystem>();
 			for(var i:int = 0; i < 10; i++)
 			{
-				var particle:PDParticleSystem = new PDParticleSystem(XML(new ParticleAssets.ParticleXML()), Konata.assets.getTexture("small"));
+				var particle:PDParticleSystem = new PDParticleSystem(XML(new ParticleAssets.ParticleXML()), Assets.getTexture("small"));
 				Starling.juggler.add(particle);
 				particle.scaleX = 0.5;
 				particle.scaleY = 0.5;

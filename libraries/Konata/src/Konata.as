@@ -25,15 +25,10 @@ package {
 		
 		public static var instance:Konata;
 		public static var oSounds:AudioManager;
-		private static var sAssets:AssetManager;
 		
 		public static function addDebug(str:String):void {
 			if (instance)
 				instance.addDebug(str);
-		}
-		
-		public static function get assets():AssetManager {
-			return sAssets;
 		}
 		
 		public static function closeScene():void {
@@ -78,8 +73,8 @@ package {
 			}
 		}
 		
-		public function start(background:Texture, assets:AssetManager):void {
-			sAssets = assets;
+		public function start(background:Texture, assetManager:AssetManager):void {
+			Assets.assetManager = assetManager;
 			//			Support.setPlatform();
 			
 			// The background is passed into this method for two reasons:
@@ -106,7 +101,7 @@ package {
 			mLoadingProgress.y = Constants.GameHeight * 0.7;
 			addChild(mLoadingProgress);
 			
-			assets.loadQueue(function(ratio:Number):void {
+			assetManager.loadQueue(function(ratio:Number):void {
 				mLoadingProgress.ratio = ratio;
 				// a progress bar should always show the 100% for a while,
 				// so we show the main menu only after a short delay. 
@@ -187,7 +182,7 @@ package {
 			assetsLoaded = true;
 			oSounds = new AudioManager();
 			
-			var background:Image = new Image(Konata.assets.getTexture("background"));
+			var background:Image = new Image(Assets.getTexture("background"));
 			background.pivotX = background.width / 2;
 			background.x = Constants.GameWidth / 2;
 			addChild(background);

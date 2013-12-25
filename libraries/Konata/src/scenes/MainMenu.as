@@ -10,7 +10,7 @@ package scenes {
 		public function MainMenu() {
 			instance = this;
 			
-			var start:Button = new Button(Konata.assets.getTexture("big"), "Start");
+			var start:Button = new Button(Assets.getTexture("big"), "Start");
 			start.x = (Constants.GameWidth - start.width) * 0.5;
 			start.y = (Constants.GameHeight - start.height) * 0.5;
 			start.name = getQualifiedClassName(GamePage);

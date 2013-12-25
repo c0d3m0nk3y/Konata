@@ -91,10 +91,10 @@ package com.oak {
 			mStarling.addEventListener(starling.events.Event.ROOT_CREATED, function():void {
 				removeChild(background);
 				
-				var game:Konata = mStarling.root as Konata;
+				var konata:Konata = mStarling.root as Konata;
 				var bgTexture:Texture = Texture.fromBitmap(background, false, false, scaleFactor);
 				
-				game.start(bgTexture, assets);
+				konata.start(bgTexture, assets);
 				mStarling.start();
 			});
 			

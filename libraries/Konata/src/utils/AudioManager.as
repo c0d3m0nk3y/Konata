@@ -11,7 +11,7 @@ package utils {
 		public static const MUSIC_LEVEL:Number = 0.25;
 		
 		public function AudioManager() {
-			pop = Konata.assets.getSound("pop");
+			pop = Assets.getSound("pop");
 		
 		}
 		

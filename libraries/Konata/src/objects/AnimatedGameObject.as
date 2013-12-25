@@ -17,7 +17,7 @@ package objects {
 				var framesString:String = "000" + imageIndex;
 				framesString = framesString.substr(framesString.length - 3);
 				
-				var image:Image = new Image(Konata.assets.getTexture(spriteSheetName + "_" + framesString));
+				var image:Image = new Image(Assets.getTexture(spriteSheetName + "_" + framesString));
 				if (frameWidth != 0)
 					image.width = frameWidth;
 				if (frameHeight != 0)
