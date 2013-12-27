@@ -1,4 +1,4 @@
-package com.oak {
+package io.github.c0d3m0nk3y {
 	import flash.desktop.NativeApplication;
 	import flash.display.Bitmap;
 	import flash.display.Sprite;
@@ -17,7 +17,7 @@ package com.oak {
 	[SWF(frameRate = "30", width = "480", height = "320", backgroundColor = "0x333333")]
 	public class KonataMob extends Sprite {
 		// Startup image for HD screens
-		[Embed(source = "../../../../libraries/Konata/system/startup.png")]
+		[Embed(source = "../../../../../libraries/Konata/system/startup.png")]
 		private static var BackgroundHD:Class;
 		
 		public function KonataMob() {
