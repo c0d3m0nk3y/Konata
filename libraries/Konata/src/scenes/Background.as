@@ -8,7 +8,7 @@ package scenes {
 		
 		public function Background(spriteSheetName:String, frames:int) {
 			super(spriteSheetName, frames, Constants.GameWidth, Constants.GameHeight);
-			msBeforeUpdate = 1 / 2;
+			fps = 3;
 		}
 	}
 }

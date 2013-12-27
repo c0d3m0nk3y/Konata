@@ -23,7 +23,6 @@ package objects {
 				if (frameHeight != 0)
 					image.height = frameHeight;
 				
-				Support.log("imgWidth " + image.width);
 				images.push(image);
 			}
 			nextImage();
@@ -32,17 +31,18 @@ package objects {
 			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 		}
 		
-		protected var msBeforeUpdate:Number = 1 / 3;
+		private var _fps:Number = 12;
 		private var currentFrame:int;
+		private var elapsedTime:Number = 0;
 		private var frames:int;
 		private var images:Vector.<Image>;
-		private var timeElapsed:Number = 0;
 		
 		public function advanceTime(timeDelta:Number):void {
-			timeElapsed += timeDelta;
-			if (timeElapsed > msBeforeUpdate) {
+			incrementElapsedTime(timeDelta);
+			
+			if (elapsedTimeExceededFPSThreshold()) {
 				update();
-				timeElapsed -= msBeforeUpdate;
+				resetElapsedTime();
 			}
 		}
 		
@@ -53,6 +53,14 @@ package objects {
 				images.pop().removeFromParent(true);
 			}
 			images = null;
+		}
+		
+		public function get fps():Number {
+			return _fps;
+		}
+		
+		public function set fps(value:Number):void {
+			_fps = value;
 		}
 		
 		protected function onAddedToStage(event:Event=null):void {
@@ -67,12 +75,24 @@ package objects {
 			nextImage();
 		}
 		
+		private function elapsedTimeExceededFPSThreshold():Boolean {
+			return elapsedTime > 1 / fps;
+		}
+		
+		private function incrementElapsedTime(timeDelta:Number):void {
+			elapsedTime += timeDelta;
+		}
+		
 		private function nextImage():void {
 			removeChild(images[currentFrame]);
 			currentFrame++;
 			if (currentFrame >= frames)
 				currentFrame = 0;
 			addChild(images[currentFrame]);
+		}
+		
+		private function resetElapsedTime():void {
+			elapsedTime = 0;
 		}
 	}
 }

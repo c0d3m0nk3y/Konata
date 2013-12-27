@@ -1,4 +1,6 @@
 package scenes {
+	import flash.media.Sound;
+	
 	import objects.Player;
 	
 	import starling.core.Starling;
@@ -39,6 +41,7 @@ package scenes {
 		
 		protected function initialiseVariables():void {
 			player = new Player();
+			player.fps = 6;
 			addChild(player);
 		}
 		

@@ -17,7 +17,7 @@ package com.oak {
 	[SWF(frameRate = "30", width = "480", height = "320", backgroundColor = "0x333333")]
 	public class KonataMob extends Sprite {
 		// Startup image for HD screens
-		[Embed(source = "../../../../libraries/Konata/system/startupHD.png")]
+		[Embed(source = "../../../../libraries/Konata/system/startup.png")]
 		private static var BackgroundHD:Class;
 		
 		public function KonataMob() {
@@ -53,12 +53,11 @@ package com.oak {
 			
 			// create the AssetManager, which handles all required assets for this resolution
 			
-			var scaleFactor:int = 2;
 			var appDir:File = File.applicationDirectory;
-			var assets:AssetManager = new AssetManager(scaleFactor);
+			var assetManager:AssetManager = new AssetManager();
 			
-			assets.verbose = Capabilities.isDebugger && Constants.DEBUG_ASSETS;
-			assets.enqueue(appDir.resolvePath("audio"), appDir.resolvePath("fonts"), appDir.resolvePath("textures"));
+			assetManager.verbose = Capabilities.isDebugger && Constants.DEBUG_ASSETS;
+			assetManager.enqueue(appDir.resolvePath("audio"), appDir.resolvePath("fonts"), appDir.resolvePath("textures"));
 			
 			// While Stage3D is initializing, the screen will be blank. To avoid any flickering, 
 			// we display a startup image now and remove it below, when Starling is ready to go.
@@ -92,9 +91,9 @@ package com.oak {
 				removeChild(background);
 				
 				var konata:Konata = mStarling.root as Konata;
-				var bgTexture:Texture = Texture.fromBitmap(background, false, false, scaleFactor);
+				var bgTexture:Texture = Texture.fromBitmap(background);//, false, false, scaleFactor);
 				
-				konata.start(bgTexture, assets);
+				konata.start(bgTexture, assetManager);
 				mStarling.start();
 			});
 			
