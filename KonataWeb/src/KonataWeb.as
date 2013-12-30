@@ -9,7 +9,7 @@ package {
 	import starling.textures.Texture;
 	import starling.utils.AssetManager;
 	
-	[SWF(frameRate = "60", width = "760", height = "640", backgroundColor = "0x333333")]
+	[SWF(frameRate = "60", width = "800", height = "600", backgroundColor = "0x333333")]
 	public class KonataWeb extends Sprite {
 		private static var _instance:KonataWeb;
 		
@@ -19,10 +19,11 @@ package {
 		
 		public function KonataWeb() {
 			_instance = this;
-			if (stage)
+			if (stage) {
 				start();
-			else
+			} else {
 				addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			}
 		}
 		
 		[Embed(source = "/startupHD.png")]

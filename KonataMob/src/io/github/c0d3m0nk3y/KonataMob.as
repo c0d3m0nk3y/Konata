@@ -14,7 +14,7 @@ package io.github.c0d3m0nk3y {
 	import starling.utils.RectangleUtil;
 	import starling.utils.ScaleMode;
 	
-	[SWF(frameRate = "30", width = "480", height = "320", backgroundColor = "0x333333")]
+	[SWF(frameRate = "30", width = "800", height = "600", backgroundColor = "0x333333")]
 	public class KonataMob extends Sprite {
 		// Startup image for HD screens
 		[Embed(source = "../../../../../libraries/Konata/system/startup.png")]
@@ -29,8 +29,6 @@ package io.github.c0d3m0nk3y {
 			// to make sure the icon and startup images are added to the compiled mobile app.
 			
 			// set general properties
-			
-			
 			var iOS:Boolean = Capabilities.manufacturer.indexOf("iOS") != -1;
 			if (iOS) {
 				Support.platform = Constants.PLATFORM_IOS
@@ -46,7 +44,7 @@ package io.github.c0d3m0nk3y {
 			// we develop the game in a *fixed* coordinate system of 320x480; the game might 
 			// then run on a device with a different resolution; for that case, we zoom the 
 			// viewPort to the optimal size for any display and load the optimal textures.
-			var stageHeight:int = 320;
+			var stageHeight:int = 600;
 			var stageWidth:int = stageHeight * stage.fullScreenWidth / stage.fullScreenHeight;
 			
 			var viewPort:Rectangle = RectangleUtil.fit(new Rectangle(0, 0, stageWidth, stageHeight), new Rectangle(0, 0, stage.fullScreenWidth, stage.fullScreenHeight), ScaleMode.NO_BORDER, false);

@@ -12,6 +12,7 @@ package {
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
+	import starling.events.KeyboardEvent;
 	import starling.text.TextField;
 	import starling.textures.Texture;
 	import starling.utils.AssetManager;
@@ -45,7 +46,7 @@ package {
 		public function Konata() {
 			instance = this;
 			
-			Starling.current.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, checkKeyPress, false, 0, true);
+//			Starling.current.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, checkKeyPress, false, 0, true);
 		}
 		
 		private var backgroundImage:Image;
@@ -111,7 +112,7 @@ package {
 			});
 			
 			addEventListener(Event.TRIGGERED, onButtonTriggered);
-//			stage.addEventListener(starling.events.KeyboardEvent.KEY_DOWN, onKey);
+			KeyRegister.initialise();
 			
 			initDebug();
 		}
@@ -129,17 +130,17 @@ package {
 			}
 		}
 		
-		private function checkKeyPress(event:flash.events.KeyboardEvent=null):void {
-			switch (event.keyCode) {
-				case Keyboard.BACK:
-					
-					if (mCurrentScene) {
-						event.preventDefault();
-						closeScene();
-					}
-					break;
-			}
-		}
+//		private function checkKeyPress(event:flash.events.KeyboardEvent=null):void {
+//			switch (event.keyCode) {
+//				case Keyboard.BACK:
+//					
+//					if (mCurrentScene) {
+//						event.preventDefault();
+//						closeScene();
+//					}
+//					break;
+//			}
+//		}
 		
 		private function closeScene():void {
 			if (mCurrentScene) {
@@ -184,14 +185,6 @@ package {
 			
 			showMainMenu();
 		}
-		
-//		private function onKey(event:starling.events.KeyboardEvent):void
-//		{
-//			if (event.keyCode == Keyboard.SPACE)
-//				Starling.current.showStats = !Starling.current.showStats;
-//			else if (event.keyCode == Keyboard.X)
-//				Starling.context.dispose();
-//		}
 		
 		private function onButtonTriggered(event:Event):void {
 			var button:Button = event.target as Button;
