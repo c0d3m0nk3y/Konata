@@ -59,11 +59,5 @@ package {
 		private static function onKeyUp(event:starling.events.KeyboardEvent):void {
 			setDown(event.keyCode, false);
 		}
-		//		private function onKeyDown(event:starling.events.KeyboardEvent):void {
-		//			if (event.keyCode == Keyboard.SPACE)
-		//				Starling.current.showStats = !Starling.current.showStats;
-		//			else if (event.keyCode == Keyboard.X)
-		//				Starling.context.dispose();
-		//		}
 	}
 }
