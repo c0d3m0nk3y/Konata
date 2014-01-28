@@ -41,7 +41,7 @@ package objects {
 			incrementElapsedTime(timeDelta);
 			
 			if (elapsedTimeExceededFPSThreshold()) {
-				update();
+				nextImage();
 				resetElapsedTime();
 			}
 		}
@@ -69,10 +69,6 @@ package objects {
 		
 		protected function onRemovedFromStage(event:Event=null):void {
 			Starling.current.juggler.remove(this);
-		}
-		
-		protected function update():void {
-			nextImage();
 		}
 		
 		private function elapsedTimeExceededFPSThreshold():Boolean {
