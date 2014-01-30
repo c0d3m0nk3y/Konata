@@ -2,8 +2,10 @@ package objects {
 	import flash.geom.Point;
 	
 	import starling.animation.IAnimatable;
+	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.Sprite;
+	import starling.events.Event;
 	import starling.textures.Texture;
 	
 	public class GameObject extends Sprite implements IAnimatable {
@@ -16,10 +18,21 @@ package objects {
 			
 			initialise();
 			
-			setImage(texture);
+			if(texture) setImage(texture);
+			
+			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
+			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 		}
 		
-		public function setImage(texture:Texture):void {
+		private function onAddedToStage(event:Event=null):void {
+			Starling.current.juggler.add(this);
+		}
+		
+		private function onRemovedFromStage(event:Event=null):void {
+			Starling.current.juggler.remove(this);
+		}
+		
+		private function setImage(texture:Texture):void {
 			removeImage();
 			setImageFromTexture(texture);
 			addImage();
@@ -61,5 +74,10 @@ package objects {
 			
 			y += _velocity.y;
 		}
+
+		public function set weight(value:Number):void {
+			_weight = value;
+		}
+
 	}
 }

@@ -24,9 +24,6 @@ package objects {
 				images.push(image);
 			}
 			nextImage();
-			
-			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
-			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 		}
 		
 		private var _fps:Number = 12;
@@ -61,13 +58,6 @@ package objects {
 			_fps = value;
 		}
 		
-		protected function onAddedToStage(event:Event=null):void {
-			Starling.current.juggler.add(this);
-		}
-		
-		protected function onRemovedFromStage(event:Event=null):void {
-			Starling.current.juggler.remove(this);
-		}
 		
 		private function elapsedTimeExceededFPSThreshold():Boolean {
 			return elapsedTime > 1 / fps;
