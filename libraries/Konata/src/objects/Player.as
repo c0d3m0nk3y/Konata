@@ -21,28 +21,30 @@ package objects {
 			move(time);
 		}
 		
-		private function jump(timeDelta:Number):void {
-			startJumpIfNotJumping();
+		private function jump():void {
+			if (jumpPressed() && !_jumping) {
+				startJump();
+			}
 		}
 		
 		private function jumpPressed():Boolean {
-			return KeyRegister.isDown(Keyboard.UP);
+			return KeyRegister.isKeyDown(Keyboard.UP);
 		}
 		
 		private function move(timeDelta:Number):void {
 			moveLeft(timeDelta);
 			moveRight(timeDelta);
-			jump(timeDelta);
+			jump();
 		}
 		
 		private function moveLeft(timeDelta):void {
-			if (KeyRegister.isDown(Keyboard.LEFT)) {
+			if (KeyRegister.isKeyDown(Keyboard.LEFT)) {
 				x -= timeDelta * 100;
 			}
 		}
 		
 		private function moveRight(timeDelta):void {
-			if (KeyRegister.isDown(Keyboard.RIGHT)) {
+			if (KeyRegister.isKeyDown(Keyboard.RIGHT)) {
 				x += timeDelta * 100;
 			}
 		}
@@ -50,12 +52,6 @@ package objects {
 		private function startJump():void {
 			_jumping = true;
 			_velocity.y = -JUMP_POWER;
-		}
-		
-		private function startJumpIfNotJumping():void {
-			if (jumpPressed() && !_jumping) {
-				startJump();
-			}
 		}
 	}
 }
