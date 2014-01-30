@@ -45,7 +45,7 @@ package scenes {
 		}
 		
 		protected function setBackground(name):void {
-			addChildAt(BackgroundFactory.get(name), 0);
+			addChildAt(BackgroundFactory.getBG(name), 0);
 		}
 	}
 

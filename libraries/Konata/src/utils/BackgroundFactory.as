@@ -10,8 +10,8 @@ package utils {
 		 *
 		 * @param name the name of the background.
 		 */
-		public static function get(name:String):Background {
-			return instance.get(name);
+		public static function getBG(name:String):Background {
+			return instance.getBG(name);
 		}
 		
 		private static function get instance():BackgroundFactory {
@@ -30,7 +30,7 @@ package utils {
 		private var background:Background;
 		private var backgrounds:Object;
 		
-		private function get(name:String):Background {
+		private function getBG(name:String):Background {
 			if (background) {
 				background.destroy();
 				background.removeFromParent(true);
