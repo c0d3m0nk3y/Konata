@@ -2,42 +2,27 @@ package objects {
 	import flash.ui.Keyboard;
 	
 	public class Player extends AnimatedGameObject {
-		private static const JUMP_POWER:Number = 10;
+		private static const JUMP_POWER:Number = 2;
 		
 		public function Player() {
 			super("cherub", 12);
 			
 			pivotX = width * 0.5;
 			pivotY = height * 0.5;
+			
+			_weight = 1;
 		}
 		
 		private var _jumping:Boolean;
-		private var _yVelocity:Number;
 		
-		override public function advanceTime(timeDelta:Number):void {
-			super.advanceTime(timeDelta);
+		override protected function update(time:Number):void {
+			super.update(time);
 			
-			move(timeDelta);
+			move(time);
 		}
 		
 		private function jump(timeDelta:Number):void {
 			startJumpIfNotJumping();
-			
-			fakeJump(timeDelta);
-		}
-		
-		// TODO: Gravity and collision will halt the jump.
-		// _jumping should go to false when such a collision is detected.
-		private function fakeJump(timeDelta:Number):void {
-			if (_jumping) {
-				y += _yVelocity;
-				
-				_yVelocity += timeDelta * 50;
-				
-				if (_yVelocity >= JUMP_POWER) {
-					_jumping = false;
-				}
-			}
 		}
 		
 		private function jumpPressed():Boolean {
@@ -64,7 +49,7 @@ package objects {
 		
 		private function startJump():void {
 			_jumping = true;
-			_yVelocity = -JUMP_POWER;
+			_velocity.y = -JUMP_POWER;
 		}
 		
 		private function startJumpIfNotJumping():void {

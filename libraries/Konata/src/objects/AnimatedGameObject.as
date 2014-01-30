@@ -1,11 +1,9 @@
 package objects {
-	import starling.animation.IAnimatable;
 	import starling.core.Starling;
 	import starling.display.Image;
-	import starling.display.Sprite;
 	import starling.events.Event;
 	
-	public class AnimatedGameObject extends Sprite implements IAnimatable {
+	public class AnimatedGameObject extends GameObject {
 		
 		public function AnimatedGameObject(spriteSheetName:String, frames:int, frameWidth:Number=0, frameHeight:Number=0) {
 			super();
@@ -37,8 +35,8 @@ package objects {
 		private var frames:int;
 		private var images:Vector.<Image>;
 		
-		public function advanceTime(timeDelta:Number):void {
-			incrementElapsedTime(timeDelta);
+		override protected function update(time:Number):void {
+			incrementElapsedTime(time);
 			
 			if (elapsedTimeExceededFPSThreshold()) {
 				nextImage();
@@ -75,8 +73,8 @@ package objects {
 			return elapsedTime > 1 / fps;
 		}
 		
-		private function incrementElapsedTime(timeDelta:Number):void {
-			elapsedTime += timeDelta;
+		private function incrementElapsedTime(time:Number):void {
+			elapsedTime += time;
 		}
 		
 		private function nextImage():void {
