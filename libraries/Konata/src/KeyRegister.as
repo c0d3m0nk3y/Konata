@@ -19,7 +19,7 @@ package {
 			addEventListeners();
 		}
 		
-		public static function isDown(key):Boolean {
+		public static function isKeyDown(key):Boolean {
 			if (keyIsInValidRange(key)) {
 				return _keyDown[key];
 			} else {
@@ -27,7 +27,7 @@ package {
 			}
 		}
 		
-		public static function setDown(key:int, value:Boolean):void {
+		public static function setKeyDown(key:int, value:Boolean):void {
 			if (keyIsInValidRange(key)) {
 				_keyDown[key] = value;
 			}
@@ -53,11 +53,11 @@ package {
 		}
 		
 		private static function onKeyDown(event:starling.events.KeyboardEvent):void {
-			setDown(event.keyCode, true);
+			setKeyDown(event.keyCode, true);
 		}
 		
 		private static function onKeyUp(event:starling.events.KeyboardEvent):void {
-			setDown(event.keyCode, false);
+			setKeyDown(event.keyCode, false);
 		}
 	}
 }
