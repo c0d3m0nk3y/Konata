@@ -1,7 +1,6 @@
 package objects {
 	import starling.core.Starling;
 	import starling.display.Image;
-	import starling.events.Event;
 	
 	public class AnimatedGameObject extends GameObject {
 		
