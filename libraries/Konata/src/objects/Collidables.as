@@ -14,7 +14,7 @@ package objects {
 		}
 		
 		/**
-		 * Detect any collision in the given direction.
+		 * Returns true if any collision found in the given direction.
 		 *
 		 * @param direction use Collidables.UP/RIGHT/DOWN/LEFT
 		 */
@@ -83,6 +83,16 @@ package objects {
 		
 		private function removeCollidable(collidable:GameObject):void {
 			_collidables.splice(_collidables.indexOf(collidable), 1);
+		}
+		
+		private function destroy():void {
+			while(_collidables.length > 0) {
+				_collidables.pop();
+			}
+			
+			_collidables = null;
+			
+			_instance = null;
 		}
 	}
 }
