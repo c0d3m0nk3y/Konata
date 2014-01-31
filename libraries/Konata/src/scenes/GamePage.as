@@ -29,6 +29,7 @@ package scenes {
 			go.width = Constants.GameWidth;
 			go.height = Constants.GameHeight * 0.25;
 			go.y = Constants.GameHeight * 0.75;
+			go.solid = true;
 			addChild(go);
 		}
 		

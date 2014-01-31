@@ -11,6 +11,8 @@ package objects {
 			pivotY = height * 0.5;
 			
 			_weight = 1;
+			
+			solid = true;
 		}
 		
 		private var _jumping:Boolean;

@@ -38,7 +38,8 @@ package utils {
 			}
 			
 			background = new Background(name, backgrounds[name]);
-			
+			background.solid = false;
+			background.name = name;
 			return background;
 		}
 		

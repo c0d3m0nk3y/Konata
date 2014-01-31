@@ -12,6 +12,7 @@ package objects {
 		protected var _weight:Number;
 		protected var _velocity:Point;
 		private var _image:Image;
+		private var _solid:Boolean;
 		
 		public function GameObject(texture:Texture=null) {
 			super();
@@ -26,10 +27,12 @@ package objects {
 		
 		private function onAddedToStage(event:Event=null):void {
 			Starling.current.juggler.add(this);
+			updateCollidables();
 		}
 		
 		private function onRemovedFromStage(event:Event=null):void {
 			Starling.current.juggler.remove(this);
+			Collidables.removeCollidable(this);
 		}
 		
 		private function setImage(texture:Texture):void {
@@ -58,6 +61,7 @@ package objects {
 		private function initialise():void {
 			_weight = 0;
 			_velocity = new Point(0,0);
+			_solid = false;
 		}
 		
 		public function advanceTime(time:Number):void {
@@ -70,6 +74,20 @@ package objects {
 		}
 		
 		private function gravity(time:Number):void {
+			if(_weight == 0) return;
+			
+			if(surfaceBelow()) {
+				
+			} else {
+				applyGravity(time);
+			}
+		}
+		
+		private function surfaceBelow():Boolean {
+			return Collidables.collides(this, Collidables.DOWN);
+		}
+		
+		private function applyGravity(time:Number):void {
 			_velocity.y += _weight * time;
 			
 			y += _velocity.y;
@@ -79,5 +97,19 @@ package objects {
 			_weight = value;
 		}
 
+		public function set solid(value:Boolean):void {
+			_solid = value;
+			
+			updateCollidables();
+		}
+
+		private function updateCollidables():void {
+			if(_solid) {
+				Collidables.addCollidable(this);
+			} else {
+				Collidables.removeCollidable(this);
+			}
+			
+		}
 	}
 }
