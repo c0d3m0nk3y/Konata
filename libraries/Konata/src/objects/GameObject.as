@@ -59,12 +59,16 @@ package objects {
 			y += _velocity.y;
 		}
 		
+		private function enableJump():void {
+			_jumping = false;
+		}
+		
 		private function gravity(time:Number):void {
-			if (_weight == 0)
+			if (weightless)
 				return;
 			
 			if (surfaceBelow()) {
-				_jumping = false;
+				enableJump();
 			} else {
 				applyGravity(time);
 			}
@@ -115,6 +119,16 @@ package objects {
 				Collidables.removeCollidable(this);
 			}
 		
+		}
+		
+		private function get weightless():Boolean {
+			return _weight == 0;
+		}
+		
+		override public function dispose():void {
+			Collidables.removeCollidable(this);
+			
+			super.dispose();
 		}
 	}
 }
