@@ -7,8 +7,8 @@ package objects {
 		public function AnimatedGameObject(spriteSheetName:String, frames:int, frameWidth:Number=0, frameHeight:Number=0) {
 			super();
 			
-			this.frames = frames;
-			images = new Vector.<Image>();
+			this._frames = frames;
+			_images = new Vector.<Image>();
 			
 			for (var imageIndex:int = 0; imageIndex < frames; imageIndex++) {
 				var framesString:String = "000" + imageIndex;
@@ -20,33 +20,21 @@ package objects {
 				if (frameHeight != 0)
 					image.height = frameHeight;
 				
-				images.push(image);
+				_images.push(image);
 			}
 			nextImage();
 		}
 		
 		private var _fps:Number = 12;
-		private var currentFrame:int;
-		private var elapsedTime:Number = 0;
-		private var frames:int;
-		private var images:Vector.<Image>;
+		private var _currentFrame:int;
+		private var _elapsedTime:Number = 0;
+		private var _frames:int;
+		private var _images:Vector.<Image>;
 		
-		override protected function update(time:Number):void {
-			incrementElapsedTime(time);
+		override public function dispose():void {
+			destroy();
 			
-			if (elapsedTimeExceededFPSThreshold()) {
-				nextImage();
-				resetElapsedTime();
-			}
-		}
-		
-		public function destroy():void {
-			Starling.current.juggler.remove(this);
-			
-			while (images.length > 0) {
-				images.pop().removeFromParent(true);
-			}
-			images = null;
+			super.dispose()
 		}
 		
 		public function get fps():Number {
@@ -57,25 +45,43 @@ package objects {
 			_fps = value;
 		}
 		
+		override protected function update(time:Number):void {
+			incrementElapsedTime(time);
+			
+			if (elapsedTimeExceededFPSThreshold()) {
+				nextImage();
+				resetElapsedTime();
+			}
+		}
+		
+		private function destroy():void {
+			Starling.current.juggler.remove(this);
+			
+			while (_images.length > 0) {
+				_images.pop().removeFromParent(true);
+			}
+			_images = null;
+		}
+		
 		
 		private function elapsedTimeExceededFPSThreshold():Boolean {
-			return elapsedTime > 1 / fps;
+			return _elapsedTime > 1 / fps;
 		}
 		
 		private function incrementElapsedTime(time:Number):void {
-			elapsedTime += time;
+			_elapsedTime += time;
 		}
 		
 		private function nextImage():void {
-			removeChild(images[currentFrame]);
-			currentFrame++;
-			if (currentFrame >= frames)
-				currentFrame = 0;
-			addChild(images[currentFrame]);
+			removeChild(_images[_currentFrame]);
+			_currentFrame++;
+			if (_currentFrame >= _frames)
+				_currentFrame = 0;
+			addChild(_images[_currentFrame]);
 		}
 		
 		private function resetElapsedTime():void {
-			elapsedTime = 0;
+			_elapsedTime = 0;
 		}
 	}
 }

@@ -1,6 +1,4 @@
 package {
-	import flash.events.KeyboardEvent;
-	import flash.ui.Keyboard;
 	import flash.utils.getDefinitionByName;
 	
 	import scenes.MainMenu;
@@ -12,7 +10,6 @@ package {
 	import starling.display.Quad;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.events.KeyboardEvent;
 	import starling.text.TextField;
 	import starling.textures.Texture;
 	import starling.utils.AssetManager;

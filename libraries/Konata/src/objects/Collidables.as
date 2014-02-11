@@ -22,12 +22,12 @@ package objects {
 			return instance.collides(gameObject, direction);
 		}
 		
-		public static function get instance():Collidables {
-			return _instance ? _instance : new Collidables();
-		}
-		
 		public static function removeCollidable(collidable:GameObject):void {
 			instance.removeCollidable(collidable);
+		}
+		
+		private static function get instance():Collidables {
+			return _instance ? _instance : new Collidables();
 		}
 		
 		public function Collidables() {
@@ -61,6 +61,16 @@ package objects {
 			return false;
 		}
 		
+		private function destroy():void {
+			while (_collidables.length > 0) {
+				_collidables.pop();
+			}
+			
+			_collidables = null;
+			
+			_instance = null;
+		}
+		
 		private function init():void {
 			_collidables = new Vector.<GameObject>();
 		}
@@ -83,16 +93,6 @@ package objects {
 		
 		private function removeCollidable(collidable:GameObject):void {
 			_collidables.splice(_collidables.indexOf(collidable), 1);
-		}
-		
-		private function destroy():void {
-			while(_collidables.length > 0) {
-				_collidables.pop();
-			}
-			
-			_collidables = null;
-			
-			_instance = null;
 		}
 	}
 }

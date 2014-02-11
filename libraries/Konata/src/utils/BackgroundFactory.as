@@ -32,7 +32,6 @@ package utils {
 		
 		private function getBG(name:String):Background {
 			if (background) {
-				background.destroy();
 				background.removeFromParent(true);
 				background = null;
 			}

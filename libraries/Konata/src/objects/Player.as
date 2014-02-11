@@ -3,19 +3,17 @@ package objects {
 	
 	public class Player extends AnimatedGameObject {
 		private static const JUMP_POWER:Number = 10;
-		private var _moveSpeed:int;
 		
 		public function Player() {
 			super("cherub", 12);
-			
-			pivotX = width * 0.5;
-			pivotY = height * 0.5;
 			
 			_weight = 20;
 			_moveSpeed = 200;
 			
 			solid = true;
 		}
+		
+		private var _moveSpeed:int;
 		
 		override protected function update(time:Number):void {
 			super.update(time);
@@ -39,20 +37,21 @@ package objects {
 			jump();
 		}
 		
-		private function moveLeft(timeDelta):void {
+		private function moveLeft(timeDelta:Number):void {
 			if (KeyRegister.isKeyDown(Keyboard.LEFT)) {
 				x -= timeDelta * _moveSpeed;
 			}
 		}
 		
-		private function moveRight(timeDelta):void {
+		private function moveRight(timeDelta:Number):void {
 			if (KeyRegister.isKeyDown(Keyboard.RIGHT)) {
 				x += timeDelta * _moveSpeed;
 			}
 		}
 		
 		private function startJump():void {
-			if(!_jumping) y += -JUMP_POWER;
+			if (!_jumping)
+				y += -JUMP_POWER;
 			_jumping = true;
 			_velocity.y = -JUMP_POWER;
 		}
