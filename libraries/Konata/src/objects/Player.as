@@ -11,6 +11,8 @@ package objects {
 			_moveSpeed = 200;
 			
 			solid = true;
+			
+			name ="Player";
 		}
 		
 		private var _moveSpeed:int;
@@ -22,9 +24,13 @@ package objects {
 		}
 		
 		private function jump():void {
-			if (jumpPressed() && !_jumping) {
+			if (jumpReady()){
 				startJump();
 			}
+		}
+		
+		private function jumpReady():Boolean {
+			return surfaceBelow() && jumpPressed() && !_jumping;
 		}
 		
 		private function jumpPressed():Boolean {

@@ -33,6 +33,12 @@ package objects {
 			update(time);
 		}
 		
+		override public function dispose():void {
+			Collidables.removeCollidable(this);
+			
+			super.dispose();
+		}
+		
 		public function set solid(value:Boolean):void {
 			_solid = value;
 			
@@ -41,6 +47,10 @@ package objects {
 		
 		public function set weight(value:Number):void {
 			_weight = value;
+		}
+		
+		protected function surfaceBelow():Boolean {
+			return Collidables.collides(this, Collidables.DOWN);
 		}
 		
 		protected function update(time:Number):void {
@@ -108,10 +118,6 @@ package objects {
 			_image = new Image(texture);
 		}
 		
-		private function surfaceBelow():Boolean {
-			return Collidables.collides(this, Collidables.DOWN);
-		}
-		
 		private function updateCollidables():void {
 			if (_solid) {
 				Collidables.addCollidable(this);
@@ -123,12 +129,6 @@ package objects {
 		
 		private function get weightless():Boolean {
 			return _weight == 0;
-		}
-		
-		override public function dispose():void {
-			Collidables.removeCollidable(this);
-			
-			super.dispose();
 		}
 	}
 }
