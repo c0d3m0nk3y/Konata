@@ -49,16 +49,14 @@ package objects {
 		}
 		
 		private function collides(gameObject:GameObject, direction:int):Boolean {
-//			var collisionRect:Rectangle = makeCollisionRect(gameObject, direction);
 			var collisionPoint:Point = makeCollisionPoint(gameObject, direction);
 			var collidableRect:Rectangle;
 			
 			for each (var collidable:GameObject in _collidables) {
 				if (gameObject != collidable) {
-//					if (collisionRect.intersects(new Rectangle(collidable.x, collidable.y, collidable.width, collidable.height))) {
 					collidableRect = new Rectangle(collidable.x, collidable.y, collidable.width, collidable.height);
 					
-					if(collidableRect.containsPoint(collisionPoint)) {
+					if (collidableRect.containsPoint(collisionPoint)) {
 						return true;
 					}
 				}
@@ -95,22 +93,6 @@ package objects {
 			}
 			
 			return collisionPoint;
-		}
-		
-		private function makeCollisionRect(gameObject:GameObject, direction:int):Rectangle {
-			var collisionRect:Rectangle;
-			
-			if (direction == UP) {
-				collisionRect = new Rectangle(gameObject.x, gameObject.y - 1, gameObject.width, gameObject.height);
-			} else if (direction == DOWN) {
-				collisionRect = new Rectangle(gameObject.x, gameObject.y + 1, gameObject.width, gameObject.height);
-			} else if (direction == LEFT) {
-				collisionRect = new Rectangle(gameObject.x - 1, gameObject.y, gameObject.width, gameObject.height);
-			} else if (direction == RIGHT) {
-				collisionRect = new Rectangle(gameObject.x + 1, gameObject.y, gameObject.width, gameObject.height);
-			}
-			
-			return collisionRect;
 		}
 		
 		private function removeCollidable(collidable:GameObject):void {
