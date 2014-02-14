@@ -1,4 +1,5 @@
 package objects {
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
 	public class Collidables {
@@ -48,11 +49,16 @@ package objects {
 		}
 		
 		private function collides(gameObject:GameObject, direction:int):Boolean {
-			var collisionRect:Rectangle = makeCollisionRect(gameObject, direction);
+//			var collisionRect:Rectangle = makeCollisionRect(gameObject, direction);
+			var collisionPoint:Point = makeCollisionPoint(gameObject, direction);
+			var collidableRect:Rectangle;
 			
 			for each (var collidable:GameObject in _collidables) {
 				if (gameObject != collidable) {
-					if (collisionRect.intersects(new Rectangle(collidable.x, collidable.y, collidable.width, collidable.height))) {
+//					if (collisionRect.intersects(new Rectangle(collidable.x, collidable.y, collidable.width, collidable.height))) {
+					collidableRect = new Rectangle(collidable.x, collidable.y, collidable.width, collidable.height);
+					
+					if(collidableRect.containsPoint(collisionPoint)) {
 						return true;
 					}
 				}
@@ -73,6 +79,22 @@ package objects {
 		
 		private function init():void {
 			_collidables = new Vector.<GameObject>();
+		}
+		
+		private function makeCollisionPoint(gameObject:GameObject, direction:int):Point {
+			var collisionPoint:Point;
+			
+			if (direction == UP) {
+				collisionPoint = new Point(gameObject.x + gameObject.width * 0.5, gameObject.y - 1);
+			} else if (direction == DOWN) {
+				collisionPoint = new Point(gameObject.x + gameObject.width * 0.5, gameObject.y + gameObject.height + 1);
+			} else if (direction == LEFT) {
+				collisionPoint = new Point(gameObject.x - 1, gameObject.y + gameObject.height * 0.5);
+			} else if (direction == RIGHT) {
+				collisionPoint = new Point(gameObject.x + gameObject.width + 1, gameObject.y + gameObject.height * 0.5);
+			}
+			
+			return collisionPoint;
 		}
 		
 		private function makeCollisionRect(gameObject:GameObject, direction:int):Rectangle {

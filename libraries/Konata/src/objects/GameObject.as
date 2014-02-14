@@ -66,7 +66,7 @@ package objects {
 		private function applyGravity(time:Number):void {
 			_velocity.y += _weight * time;
 			
-			y += _velocity.y;
+			y += int(_velocity.y);
 		}
 		
 		private function enableJump():void {

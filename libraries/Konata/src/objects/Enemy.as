@@ -18,7 +18,7 @@ package objects {
 			
 			avoidFallingOffEdge(time);
 		
-//			avoidBumping(time);
+			avoidBumping(time);
 		}
 		
 		private function avoidBumping(time:Number):void {
