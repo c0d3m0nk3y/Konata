@@ -14,12 +14,9 @@ package scenes {
 		}
 		
 		private var _upButton:Image;
-		private var enemy:Enemy;
-		private var enemy2:Enemy;
-		private var enemy3:Enemy;
+		private var enemies:Vector.<Enemy>;
 		
 		private var goLeft:GameObject;
-		private var goRight:GameObject;
 		
 		private var player:Player;
 		
@@ -34,29 +31,21 @@ package scenes {
 			}
 			
 			addChild(goLeft);
-			addChild(goRight);
 			
-			addChild(enemy);
-			addChild(enemy2);
-			addChild(enemy3);
+			for each(var enemy:Enemy in enemies) {
+				addChild(enemy);
+			}
 			
 			addChild(player);
 		}
 		
 		private function makeObjects():void {
 			goLeft = new GameObject(Assets.getTexture("small"));
-			goLeft.width = Constants.GameWidth * 0.4;
+			goLeft.width = Constants.GameWidth * 0.8;
 			goLeft.height = Constants.GameHeight * 0.25;
 			goLeft.y = Constants.GameHeight * 0.75;
 			goLeft.x = Constants.GameWidth * 0.15;
 			goLeft.solid = true;
-			
-			goRight = new GameObject(Assets.getTexture("small"));
-			goRight.width = Constants.GameWidth * 0.1;
-			goRight.height = Constants.GameHeight * 0.25;
-			goRight.x = Constants.GameWidth * 0.8;
-			goRight.y = Constants.GameHeight * 0.75;
-			goRight.solid = true;
 			
 			player = new Player();
 			player.fps = 6;
@@ -66,11 +55,12 @@ package scenes {
 			enemy = new Enemy("cherub", 12);
 			enemy.x = Constants.GameWidth * 0.2;
 			
-			enemy2 = new Enemy("cherub", 12);
-			enemy2.x = Constants.GameWidth * 0.4;
-			
-			enemy3 = new Enemy("cherub", 12);
-			enemy3.x = Constants.GameWidth * 0.6;
+			enemies = new Vector.<Enemy>();
+			for(var enemyIndex:int = 0; enemyIndex < 20; enemyIndex++) {
+				var enemy:Enemy = new Enemy("cherub", 12);
+				enemy.x = Math.random() * Constants.GameWidth;
+				enemies.push(enemy);
+			}
 		}
 	}
 }

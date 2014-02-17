@@ -6,7 +6,7 @@ package objects {
 			
 			solid = true;
 			_velocity.x = 200;
-			_weight = 1;
+			_weight = 20;
 			
 			name = "Enemy";
 		}
