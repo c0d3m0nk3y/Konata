@@ -27,6 +27,10 @@ package objects {
 			instance.removeCollidable(collidable);
 		}
 		
+		public static function topYOfFirstDownwardCollision(gameObject:GameObject):Number {
+			return instance.topYOfFirstDownwardCollision(gameObject);
+		}
+		
 		private static function get instance():Collidables {
 			return _instance ? _instance : new Collidables();
 		}
@@ -97,6 +101,23 @@ package objects {
 		
 		private function removeCollidable(collidable:GameObject):void {
 			_collidables.splice(_collidables.indexOf(collidable), 1);
+		}
+		
+		private function topYOfFirstDownwardCollision(gameObject:GameObject):Number {
+			var collisionPoint:Point = makeCollisionPoint(gameObject, DOWN);
+			var collidableRect:Rectangle;
+			
+			for each (var collidable:GameObject in _collidables) {
+				if (gameObject != collidable) {
+					collidableRect = new Rectangle(collidable.x, collidable.y, collidable.width, collidable.height);
+					
+					if (collidableRect.containsPoint(collisionPoint)) {
+						return collidable.y;
+					}
+				}
+			}
+			
+			return -1;
 		}
 	}
 }

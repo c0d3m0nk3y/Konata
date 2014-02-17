@@ -77,10 +77,13 @@ package objects {
 			if (weightless)
 				return;
 			
-			if (surfaceBelow()) {
-				enableJump();
-			} else {
+			var collisionY:Number = topOfSurfaceBelow();
+			
+			if (collisionY == -1) {
 				applyGravity(time);
+			} else {
+				landAt(collisionY);
+				enableJump();
 			}
 		}
 		
@@ -89,6 +92,10 @@ package objects {
 			_velocity = new Point(0, 0);
 			_solid = false;
 			_jumping = false;
+		}
+		
+		private function landAt(yLocation:Number):void {
+			y = yLocation - height;
 		}
 		
 		private function onAddedToStage(event:Event=null):void {
@@ -116,6 +123,10 @@ package objects {
 		
 		private function setImageFromTexture(texture:Texture):void {
 			_image = new Image(texture);
+		}
+		
+		private function topOfSurfaceBelow():Number {
+			return Collidables.topYOfFirstDownwardCollision(this);
 		}
 		
 		private function updateCollidables():void {
