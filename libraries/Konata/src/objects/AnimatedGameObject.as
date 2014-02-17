@@ -25,9 +25,9 @@ package objects {
 			nextImage();
 		}
 		
-		private var _fps:Number = 12;
-		private var _currentFrame:int;
+		protected var _currentFrame:int;
 		private var _elapsedTime:Number = 0;
+		private var _fps:Number = 12;
 		private var _frames:int;
 		private var _images:Vector.<Image>;
 		
@@ -45,6 +45,21 @@ package objects {
 			_fps = value;
 		}
 		
+		protected function addCurrentFrame():void {
+			addChild(_images[_currentFrame]);
+		}
+		
+		protected function nextImage():void {
+			removeCurrentFrame();
+			_currentFrame++;
+			wrapFrames();
+			addCurrentFrame();
+		}
+		
+		protected function removeCurrentFrame():void {
+			removeChild(_images[_currentFrame]);
+		}
+		
 		override protected function update(time:Number):void {
 			incrementElapsedTime(time);
 			
@@ -52,6 +67,11 @@ package objects {
 				nextImage();
 				resetElapsedTime();
 			}
+		}
+		
+		protected function wrapFrames():void {
+			if (_currentFrame >= _frames)
+				_currentFrame = 0;
 		}
 		
 		private function destroy():void {
@@ -70,14 +90,6 @@ package objects {
 		
 		private function incrementElapsedTime(time:Number):void {
 			_elapsedTime += time;
-		}
-		
-		private function nextImage():void {
-			removeChild(_images[_currentFrame]);
-			_currentFrame++;
-			if (_currentFrame >= _frames)
-				_currentFrame = 0;
-			addChild(_images[_currentFrame]);
 		}
 		
 		private function resetElapsedTime():void {

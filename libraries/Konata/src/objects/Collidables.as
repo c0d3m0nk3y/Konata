@@ -27,6 +27,9 @@ package objects {
 			instance.removeCollidable(collidable);
 		}
 		
+		/**
+		 * Returns the Y position of the first collision found, or -1 if no collision found.
+		 */
 		public static function topYOfFirstDownwardCollision(gameObject:GameObject):Number {
 			return instance.topYOfFirstDownwardCollision(gameObject);
 		}
@@ -58,7 +61,7 @@ package objects {
 			
 			for each (var collidable:GameObject in _collidables) {
 				if (gameObject != collidable) {
-					collidableRect = new Rectangle(collidable.x, collidable.y, collidable.width, collidable.height);
+					collidableRect = makeCollidableRect(collidable);
 					
 					if (collidableRect.containsPoint(collisionPoint)) {
 						return true;
@@ -81,6 +84,17 @@ package objects {
 		
 		private function init():void {
 			_collidables = new Vector.<GameObject>();
+		}
+		
+		private function makeCollidableRect(collidable:GameObject):Rectangle {
+			var xOffset:Number = 0;
+			var yOffset:Number = 0;
+			if (collidable.scaleX < 0)
+				xOffset = collidable.width;
+			if (collidable.scaleY < 0)
+				yOffset = collidable.height;
+			
+			return new Rectangle(collidable.x - xOffset, collidable.y - yOffset, collidable.width, collidable.height);
 		}
 		
 		private function makeCollisionPoint(gameObject:GameObject, direction:int):Point {
@@ -109,7 +123,7 @@ package objects {
 			
 			for each (var collidable:GameObject in _collidables) {
 				if (gameObject != collidable) {
-					collidableRect = new Rectangle(collidable.x, collidable.y, collidable.width, collidable.height);
+					collidableRect = makeCollidableRect(collidable);
 					
 					if (collidableRect.containsPoint(collisionPoint)) {
 						return collidable.y;
