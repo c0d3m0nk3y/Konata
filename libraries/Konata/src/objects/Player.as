@@ -42,21 +42,9 @@ package objects {
 			
 			move(time);
 			
-			_walking = (KeyRegister.isKeyDown(Keyboard.LEFT) || KeyRegister.isKeyDown(Keyboard.RIGHT));
+			detectWalking();
 			
-			if (KeyRegister.isKeyDown(Keyboard.LEFT)) {
-				if (_direction == RIGHT) {
-					changeDirection();
-					x -= width;
-				}
-				_direction = LEFT;
-			} else if (KeyRegister.isKeyDown(Keyboard.RIGHT)) {
-				if (_direction == LEFT) {
-					changeDirection();
-					x += width;
-				}
-				_direction = RIGHT;
-			}
+			flipOnDirectionChange();
 		}
 		
 		override protected function wrapFrames():void {
@@ -66,6 +54,34 @@ package objects {
 		
 		private function changeDirection():void {
 			scaleX *= -1;
+		}
+		
+		private function detectWalking():void {
+			_walking = (KeyRegister.isKeyDown(Keyboard.LEFT) || KeyRegister.isKeyDown(Keyboard.RIGHT));
+		}
+		
+		private function flipLeft():void {
+			if (_direction == RIGHT) {
+				changeDirection();
+				x -= width;
+			}
+			_direction = LEFT;
+		}
+		
+		private function flipOnDirectionChange():void {
+			if (KeyRegister.isKeyDown(Keyboard.LEFT)) {
+				flipLeft();
+			} else if (KeyRegister.isKeyDown(Keyboard.RIGHT)) {
+				flipRight();
+			}
+		}
+		
+		private function flipRight():void {
+			if (_direction == LEFT) {
+				changeDirection();
+				x += width;
+			}
+			_direction = RIGHT;
 		}
 		
 		private function jump():void {
