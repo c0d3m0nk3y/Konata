@@ -49,6 +49,10 @@ package objects {
 			addChild(_images[_currentFrame]);
 		}
 		
+		protected function flipHorizontally():void {
+			scaleX *= -1;
+		}
+		
 		protected function nextImage():void {
 			removeCurrentFrame();
 			_currentFrame++;

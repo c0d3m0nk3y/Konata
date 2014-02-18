@@ -52,17 +52,13 @@ package objects {
 				_currentFrame = WALK_START_FRAME;
 		}
 		
-		private function changeDirection():void {
-			scaleX *= -1;
-		}
-		
 		private function detectWalking():void {
 			_walking = (KeyRegister.isKeyDown(Keyboard.LEFT) || KeyRegister.isKeyDown(Keyboard.RIGHT));
 		}
 		
 		private function flipLeft():void {
 			if (_direction == RIGHT) {
-				changeDirection();
+				flipHorizontally();
 				x -= width;
 			}
 			_direction = LEFT;
@@ -78,7 +74,7 @@ package objects {
 		
 		private function flipRight():void {
 			if (_direction == LEFT) {
-				changeDirection();
+				flipHorizontally();
 				x += width;
 			}
 			_direction = RIGHT;
