@@ -58,7 +58,7 @@ package scenes {
 			enemies = new Vector.<Enemy>();
 			for(var enemyIndex:int = 0; enemyIndex < 1; enemyIndex++) {
 				var enemy:Enemy = new Enemy("cherub", 12);
-				enemy.x = Math.random() * Constants.GameWidth;
+				enemy.x = Constants.GameWidth * 0.5;
 				enemies.push(enemy);
 			}
 		}
