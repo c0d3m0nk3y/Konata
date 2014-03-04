@@ -90,9 +90,9 @@ package objects {
 			var xOffset:Number = 0;
 			var yOffset:Number = 0;
 			if (collidable.scaleX < 0)
-				xOffset = collidable.width;
+				xOffset = collidable.width * -collidable.scaleX;
 			if (collidable.scaleY < 0)
-				yOffset = collidable.height;
+				yOffset = collidable.height * -collidable.scaleY;
 			
 			return new Rectangle(collidable.x - xOffset, collidable.y - yOffset, collidable.width, collidable.height);
 		}
@@ -101,13 +101,17 @@ package objects {
 			var collisionPoint:Point;
 			
 			if (direction == UP) {
-				collisionPoint = new Point(gameObject.x + gameObject.width * 0.5, gameObject.y - 1);
+				collisionPoint = new Point(gameObject.x + (gameObject.width * gameObject.scaleX) * 0.5,
+											gameObject.y - 1);
 			} else if (direction == DOWN) {
-				collisionPoint = new Point(gameObject.x + gameObject.width * 0.5, gameObject.y + gameObject.height + 1);
+				collisionPoint = new Point(gameObject.x + (gameObject.width * gameObject.scaleX) * 0.5,
+											gameObject.y + (gameObject.height * gameObject.scaleY) + 1);
 			} else if (direction == LEFT) {
-				collisionPoint = new Point(gameObject.x - 1, gameObject.y + gameObject.height * 0.5);
+				collisionPoint = new Point(gameObject.x - 1,
+											gameObject.y + (gameObject.height * gameObject.scaleY) * 0.5);
 			} else if (direction == RIGHT) {
-				collisionPoint = new Point(gameObject.x + gameObject.width + 1, gameObject.y + gameObject.height * 0.5);
+				collisionPoint = new Point(gameObject.x + (gameObject.width * gameObject.scaleX) + 1,
+											gameObject.y + (gameObject.height * gameObject.scaleY) * 0.5);
 			}
 			
 			return collisionPoint;
