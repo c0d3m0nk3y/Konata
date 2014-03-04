@@ -60,13 +60,11 @@ package objects {
 		private function reverseDirection(time:Number):void {
 			moveBackwards(time);
 			invertHorizontalVelocity();
-			
+			flipHorizontally();
 			if(_direction == LEFT) {
-				flipHorizontally();
 				x += width;
 				_direction = RIGHT;
 			} else if(_direction == RIGHT) {
-				flipHorizontally();
 				x -= width;
 				_direction = LEFT;
 			}
