@@ -20,6 +20,12 @@ package
 		
 		// Texture Atlas
 		
+		[Embed(source="/textures/sprites.xml", mimeType="application/octet-stream")]
+		public static const sprites_xml:Class;
+		
+		[Embed(source="/textures/sprites.png")]
+		public static const sprites:Class;
+		
 		[Embed(source="/textures/atlas.xml", mimeType="application/octet-stream")]
 		public static const atlas_xml:Class;
 		
