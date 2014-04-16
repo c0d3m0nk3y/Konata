@@ -4,10 +4,10 @@
 	Created with ShoeBox
 	http://renderhjs.net/shoebox/
 	-->
-	<SubTexture name="bg.png"	x="0"	y="0"	width="800"	height="600" frameX="-0" frameY="-0" frameWidth="800" frameHeight="600"/>
+	<SubTexture name="background.png"	x="0"	y="0"	width="800"	height="600" frameX="-0" frameY="-0" frameWidth="800" frameHeight="600"/>
 	<SubTexture name="dirt.png"	x="0"	y="796"	width="64"	height="64" frameX="-0" frameY="-0" frameWidth="64" frameHeight="64"/>
 	<SubTexture name="grass.png"	x="0"	y="731"	width="64"	height="64" frameX="-0" frameY="-0" frameWidth="64" frameHeight="64"/>
-	<SubTexture name="left platform.png"	x="0"	y="861"	width="64"	height="64" frameX="-0" frameY="-0" frameWidth="64" frameHeight="64"/>
-	<SubTexture name="middle platform.png"	x="0"	y="666"	width="64"	height="64" frameX="-0" frameY="-0" frameWidth="64" frameHeight="64"/>
-	<SubTexture name="right platform.png"	x="0"	y="601"	width="64"	height="64" frameX="-0" frameY="-0" frameWidth="64" frameHeight="64"/>
+	<SubTexture name="left_platform.png"	x="0"	y="861"	width="64"	height="64" frameX="-0" frameY="-0" frameWidth="64" frameHeight="64"/>
+	<SubTexture name="middle_platform.png"	x="0"	y="666"	width="64"	height="64" frameX="-0" frameY="-0" frameWidth="64" frameHeight="64"/>
+	<SubTexture name="right_platform.png"	x="0"	y="601"	width="64"	height="64" frameX="-0" frameY="-0" frameWidth="64" frameHeight="64"/>
 </TextureAtlas>
