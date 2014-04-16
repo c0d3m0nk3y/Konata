@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TextureAtlas imagePath="grandtech.png">
-	<!--
-	Created with ShoeBox
-	http://renderhjs.net/shoebox/
-	-->
 	<SubTexture name="grandtech_000"	x="0"	y="1040"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
 	<SubTexture name="grandtech_001"	x="769"	y="260"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
 	<SubTexture name="grandtech_002"	x="769"	y="0"	width="768"	height="259" frameX="-0" frameY="-0" frameWidth="768" frameHeight="259"/>
