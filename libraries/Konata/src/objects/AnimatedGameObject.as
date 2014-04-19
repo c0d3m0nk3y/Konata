@@ -83,7 +83,7 @@ package objects {
 				_currentFrame = 0;
 		}
 		
-		private function destroy():void {
+		protected function destroy():void {
 			Starling.current.juggler.remove(this);
 			
 			while (_images.length > 0) {

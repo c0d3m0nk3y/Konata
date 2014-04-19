@@ -35,5 +35,15 @@ package scenes {
 			removeChild(_images[_currentFrame]);
 			removeChild(_secondImages[_currentFrame]);
 		}
+		
+		override protected function destroy():void {
+			super.destroy();
+			
+			while (_secondImages.length > 0) {
+				_secondImages.pop().removeFromParent(true);
+			}
+			
+			_secondImages = null;
+		}
 	}
 }
