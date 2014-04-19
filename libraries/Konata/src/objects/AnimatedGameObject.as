@@ -1,6 +1,7 @@
 package objects {
 	import starling.core.Starling;
 	import starling.display.Image;
+	import starling.events.Event;
 	
 	public class AnimatedGameObject extends GameObject {
 		
@@ -22,6 +23,10 @@ package objects {
 				
 				_images.push(image);
 			}
+		}
+		
+		override protected function onAddedToStage(event:Event=null):void {
+			super.onAddedToStage(event);
 			nextImage();
 		}
 		
@@ -29,7 +34,7 @@ package objects {
 		private var _elapsedTime:Number = 0;
 		private var _fps:Number = 12;
 		private var _frames:int;
-		private var _images:Vector.<Image>;
+		protected var _images:Vector.<Image>;
 		
 		override public function dispose():void {
 			destroy();

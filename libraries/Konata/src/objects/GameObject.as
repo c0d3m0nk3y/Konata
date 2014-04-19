@@ -98,7 +98,7 @@ package objects {
 			y = yLocation - height;
 		}
 		
-		private function onAddedToStage(event:Event=null):void {
+		protected function onAddedToStage(event:Event=null):void {
 			Starling.current.juggler.add(this);
 			updateCollidables();
 		}

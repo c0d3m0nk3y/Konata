@@ -16,7 +16,7 @@ package objects {
 			_weight = 20;
 			_moveSpeed = 200;
 			_standing = true;
-			
+			_walking = false;
 			solid = true;
 			
 			name = "Player";
