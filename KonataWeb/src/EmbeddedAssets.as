@@ -26,12 +26,6 @@ package
 		[Embed(source="/textures/sprites.png")]
 		public static const sprites:Class;
 		
-		[Embed(source="/textures/atlas.xml", mimeType="application/octet-stream")]
-		public static const atlas_xml:Class;
-		
-		[Embed(source="/textures/atlas.png")]
-		public static const atlas:Class;
-		
 		[Embed(source="/textures/templelane.xml", mimeType="application/octet-stream")]
 		public static const templelane_xml:Class;
 		
