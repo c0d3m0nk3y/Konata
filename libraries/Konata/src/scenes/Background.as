@@ -14,28 +14,24 @@ package scenes {
 			
 			_secondImages = new Vector.<Image>();
 			
-			for each(var image:Image in _images) {
+			for each (var image:Image in _images) {
 				var secondImage:Image = new Image(image.texture);
 				secondImage.width = image.width;
 				secondImage.height = image.height;
 				
-				secondImage.x = image.width - 1;
+				secondImage.x = image.width;
 				
 				_secondImages.push(secondImage);
 			}
 		}
 		
-		private var _secondImages:Vector.<Image>;
 		private var _scrollSpeed:int;
+		
+		private var _secondImages:Vector.<Image>;
 		
 		override protected function addCurrentFrame():void {
 			addChild(_images[_currentFrame]);
 			addChild(_secondImages[_currentFrame]);
-		}
-		
-		override protected function removeCurrentFrame():void {
-			removeChild(_images[_currentFrame]);
-			removeChild(_secondImages[_currentFrame]);
 		}
 		
 		override protected function destroy():void {
@@ -48,14 +44,44 @@ package scenes {
 			_secondImages = null;
 		}
 		
+		override protected function removeCurrentFrame():void {
+			removeChild(_images[_currentFrame]);
+			removeChild(_secondImages[_currentFrame]);
+		}
+		
 		override protected function update(time:Number):void {
 			super.update(time);
 			scrollBackgrounds();
 		}
 		
+		private function resetBackgroundPositions():void {
+			setBackgroundPositions(0);
+		}
+		
 		private function scrollBackgrounds():void {
-			_images[_currentFrame].x -= _scrollSpeed;
-			_secondImages[_currentFrame].x -= _scrollSpeed;
+			setBackgroundPositions(_images[_currentFrame].x - _scrollSpeed);
+			
+			wrapBackground();
+		}
+		
+		private function secondImageFallingOffScreen():Boolean {
+			return _secondImages[_currentFrame].x <= 0;
+		}
+		
+		private function setBackgroundPositions(xPos:int):void {
+			for each (var image:Image in _images) {
+				image.x = xPos;
+			}
+			
+			for each (var secondImage:Image in _secondImages) {
+				secondImage.x = xPos + secondImage.width;
+			}
+		}
+		
+		private function wrapBackground():void {
+			if (secondImageFallingOffScreen()) {
+				resetBackgroundPositions();
+			}
 		}
 	}
 }
