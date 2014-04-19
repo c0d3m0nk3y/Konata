@@ -9,7 +9,7 @@ package scenes {
 		
 		public function Background(spriteSheetName:String, frames:int) {
 			super(spriteSheetName, frames, Constants.GameWidth, Constants.GameHeight);
-			fps = 30;
+			fps = 3;
 			_scrollSpeed = 5;
 			
 			_secondImages = new Vector.<Image>();
@@ -48,8 +48,8 @@ package scenes {
 			_secondImages = null;
 		}
 		
-		override protected function doUpdate():void {
-			super.doUpdate();
+		override protected function update(time:Number):void {
+			super.update(time);
 			scrollBackgrounds();
 		}
 		
