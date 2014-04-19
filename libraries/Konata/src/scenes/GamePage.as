@@ -24,7 +24,7 @@ package scenes {
 			super.initialise();
 			
 			if (Support.isMobile()) {
-				_upButton = new Image(Assets.getTexture("big"));
+				_upButton = new Image(Assets.getTexture("grass"));
 				_upButton.x = _upButton.width * 0.5;
 				_upButton.y = Constants.GameHeight - _upButton.height * 2;
 				addChild(_upButton);
@@ -40,7 +40,7 @@ package scenes {
 		}
 		
 		private function makeObjects():void {
-			goLeft = new GameObject(Assets.getTexture("small"));
+			goLeft = new GameObject(Assets.getTexture("dirt"));
 			goLeft.width = Constants.GameWidth * 0.8;
 			goLeft.height = Constants.GameHeight * 0.25;
 			goLeft.y = Constants.GameHeight * 0.75;

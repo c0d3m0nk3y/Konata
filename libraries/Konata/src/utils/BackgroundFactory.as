@@ -45,8 +45,7 @@ package utils {
 		private function init():void {
 			backgrounds = {
 				"templelane":"4",
-				"racingtrack":"8",
-				"grandtech":"10"
+				"hills_background":"1"
 			};
 		}
 	}

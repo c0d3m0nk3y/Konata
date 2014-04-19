@@ -38,18 +38,6 @@ package
 		[Embed(source="/textures/templelane.png")]
 		public static const templelane:Class;
 		
-		[Embed(source="/textures/racingtrack.xml", mimeType="application/octet-stream")]
-		public static const racingtrack_xml:Class;
-		
-		[Embed(source="/textures/racingtrack.png")]
-		public static const racingtrack:Class;
-		
-		[Embed(source="/textures/grandtech.xml", mimeType="application/octet-stream")]
-		public static const grandtech_xml:Class;
-		
-		[Embed(source="/textures/grandtech.png")]
-		public static const grandtech:Class;
-		
 		[Embed(source="/textures/cherub.png")]
 		public static const cherub:Class;
 		
