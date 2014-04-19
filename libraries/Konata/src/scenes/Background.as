@@ -9,7 +9,8 @@ package scenes {
 		
 		public function Background(spriteSheetName:String, frames:int) {
 			super(spriteSheetName, frames, Constants.GameWidth, Constants.GameHeight);
-			fps = 3;
+			fps = 30;
+			_scrollSpeed = 5;
 			
 			_secondImages = new Vector.<Image>();
 			
@@ -18,13 +19,14 @@ package scenes {
 				secondImage.width = image.width;
 				secondImage.height = image.height;
 				
-				secondImage.y = image.width;
+				secondImage.x = image.width - 1;
 				
 				_secondImages.push(secondImage);
 			}
 		}
 		
 		private var _secondImages:Vector.<Image>;
+		private var _scrollSpeed:int;
 		
 		override protected function addCurrentFrame():void {
 			addChild(_images[_currentFrame]);
@@ -44,6 +46,16 @@ package scenes {
 			}
 			
 			_secondImages = null;
+		}
+		
+		override protected function doUpdate():void {
+			super.doUpdate();
+			scrollBackgrounds();
+		}
+		
+		private function scrollBackgrounds():void {
+			_images[_currentFrame].x -= _scrollSpeed;
+			_secondImages[_currentFrame].x -= _scrollSpeed;
 		}
 	}
 }

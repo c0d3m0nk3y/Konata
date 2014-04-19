@@ -58,6 +58,10 @@ package objects {
 			scaleX *= -1;
 		}
 		
+		protected function doUpdate():void {
+			nextImage();
+		}
+		
 		protected function nextImage():void {
 			removeCurrentFrame();
 			_currentFrame++;
@@ -73,7 +77,7 @@ package objects {
 			incrementElapsedTime(time);
 			
 			if (elapsedTimeExceededFPSThreshold()) {
-				nextImage();
+				doUpdate();
 				resetElapsedTime();
 			}
 		}
