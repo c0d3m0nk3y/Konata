@@ -29,7 +29,7 @@ package objects
 			var terrainBatch:QuadBatch = new QuadBatch();
 			
 			_grass = new Vector.<Image>();
-			var grassTexture:Texture = Assets.getTexture("grass");
+			var grassTexture:Texture = Assets.getTexture("grass2");
 			for(var grassIndex:int = 0; grassIndex < width; grassIndex++) {
 				var grassImage:Image = new Image(grassTexture);
 				grassImage.blendMode = BlendMode.NONE;
