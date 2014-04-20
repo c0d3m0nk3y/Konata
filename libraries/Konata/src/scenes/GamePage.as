@@ -1,7 +1,7 @@
 package scenes {
 	import objects.Enemy;
-	import objects.GameObject;
 	import objects.Player;
+	import objects.Terrain;
 	
 	import starling.display.Image;
 	
@@ -16,7 +16,7 @@ package scenes {
 		private var _upButton:Image;
 		private var enemies:Vector.<Enemy>;
 		
-		private var goLeft:GameObject;
+		private var _terrain:Terrain;
 		
 		private var player:Player;
 		
@@ -30,7 +30,7 @@ package scenes {
 				addChild(_upButton);
 			}
 			
-			addChild(goLeft);
+			addChild(_terrain);
 			
 			for each(var enemy:Enemy in enemies) {
 				addChild(enemy);
@@ -40,13 +40,9 @@ package scenes {
 		}
 		
 		private function makeObjects():void {
-			goLeft = new GameObject(Assets.getTexture("dirt"));
-			goLeft.width = Constants.GameWidth * 0.8;
-			goLeft.height = Constants.GameHeight * 0.25;
-			goLeft.y = Constants.GameHeight * 0.75;
-			goLeft.x = Constants.GameWidth * 0.15;
-			goLeft.solid = true;
-			
+			_terrain = new Terrain(8, 3);
+			_terrain.x = (Constants.GameWidth - _terrain.width) * 0.5;
+			_terrain.y = Constants.GameHeight - _terrain.height;
 			player = new Player();
 			player.fps = 6;
 			player.x = Constants.GameWidth * 0.8;
