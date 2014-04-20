@@ -7,6 +7,8 @@
 	<SubTexture name="hills_background_000"	x="0"	y="0"	width="800"	height="600"/>
 	<SubTexture name="dirt"	x="0"	y="796"	width="64"	height="64"/>
 	<SubTexture name="grass"	x="0"	y="731"	width="64"	height="64"/>
+	<SubTexture name="dirt2"	x="65"	y="796"	width="64"	height="64"/>
+	<SubTexture name="grass2"	x="65"	y="731"	width="64"	height="64"/>
 	<SubTexture name="left_platform"	x="0"	y="861"	width="64"	height="64"/>
 	<SubTexture name="middle_platform"	x="0"	y="666"	width="64"	height="64"/>
 	<SubTexture name="right_platform"	x="0"	y="601"	width="64"	height="64"/>
