@@ -29,10 +29,10 @@ package objects
 			var terrainBatch:QuadBatch = new QuadBatch();
 			
 			_grass = new Vector.<Image>();
-			var grassTexture:Texture = Assets.getTexture("grass2");
+			var grassTexture:Texture = Assets.getTexture("grass");
 			for(var grassIndex:int = 0; grassIndex < width; grassIndex++) {
 				var grassImage:Image = new Image(grassTexture);
-				grassImage.blendMode = BlendMode.NONE;
+//				grassImage.blendMode = BlendMode.NONE;
 				grassImage.x = grassIndex * grassImage.width;
 //				addChild(grassImage);
 				terrainBatch.addImage(grassImage);
@@ -41,7 +41,7 @@ package objects
 			
 			if(height > 1) {
 				_dirt = new Vector.<Image>();
-				var dirtTexture:Texture = Assets.getTexture("dirt2");
+				var dirtTexture:Texture = Assets.getTexture("dirt");
 				for(var dirtX:int = 0; dirtX < width; dirtX++) {
 					for(var dirtY:int = 0; dirtY < height; dirtY++) {
 						var dirtImage:Image = new Image(dirtTexture);
