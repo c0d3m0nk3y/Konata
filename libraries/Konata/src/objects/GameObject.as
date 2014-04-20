@@ -13,6 +13,8 @@ package objects {
 		public function GameObject(texture:Texture=null) {
 			super();
 			
+			touchable = false;
+			
 			initialise();
 			
 			if (texture)
