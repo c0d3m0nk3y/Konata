@@ -1,7 +1,5 @@
 package objects
 {
-	import flash.geom.Point;
-	
 	import starling.display.BlendMode;
 	import starling.display.Image;
 	import starling.display.QuadBatch;
@@ -21,7 +19,7 @@ package objects
 			var terrainBatch:QuadBatch = new QuadBatch();
 			
 			_grass = new Vector.<Image>();
-			var grassTexture:Texture = Assets.getTexture("grass");
+			var grassTexture:Texture = Assets.getTexture("grass_00");
 			for(var grassIndex:int = 0; grassIndex < width; grassIndex++) {
 				var grassImage:Image = new Image(grassTexture);
 				grassImage.x = grassIndex * grassImage.width;
@@ -31,7 +29,7 @@ package objects
 			
 			if(height > 1) {
 				_dirt = new Vector.<Image>();
-				var dirtTexture:Texture = Assets.getTexture("dirt");
+				var dirtTexture:Texture = Assets.getTexture("dirt_00");
 				for(var dirtX:int = 0; dirtX < width; dirtX++) {
 					for(var dirtY:int = 0; dirtY < height; dirtY++) {
 						var dirtImage:Image = new Image(dirtTexture);
