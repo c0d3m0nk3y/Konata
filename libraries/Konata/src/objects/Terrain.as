@@ -26,22 +26,21 @@ package objects
 //			grassImage.setTexCoords(3, new Point(width, 1));
 //			grassImage.width *= width;
 			
+			var terrainBatch:QuadBatch = new QuadBatch();
+			
 			_grass = new Vector.<Image>();
-			var grassBatch:QuadBatch = new QuadBatch();
 			var grassTexture:Texture = Assets.getTexture("grass");
 			for(var grassIndex:int = 0; grassIndex < width; grassIndex++) {
 				var grassImage:Image = new Image(grassTexture);
 				grassImage.blendMode = BlendMode.NONE;
 				grassImage.x = grassIndex * grassImage.width;
 //				addChild(grassImage);
-				grassBatch.addImage(grassImage);
+				terrainBatch.addImage(grassImage);
 				_grass.push(grassImage);
 			}
-			addChild(grassBatch);
 			
 			if(height > 1) {
 				_dirt = new Vector.<Image>();
-				var dirtBatch:QuadBatch = new QuadBatch();
 				var dirtTexture:Texture = Assets.getTexture("dirt2");
 				for(var dirtX:int = 0; dirtX < width; dirtX++) {
 					for(var dirtY:int = 0; dirtY < height; dirtY++) {
@@ -50,12 +49,13 @@ package objects
 						dirtImage.x = dirtX * dirtImage.width;
 						dirtImage.y = (dirtY + 1) * dirtImage.height;
 //						addChild(dirt);
-						dirtBatch.addImage(dirtImage);
+						terrainBatch.addImage(dirtImage);
 						_dirt.push(dirtImage);
 					}
 				}
 			}
-			addChild(dirtBatch);
+			
+			addChild(terrainBatch);
 			
 			flatten();
 		}
