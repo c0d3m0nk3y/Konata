@@ -85,6 +85,7 @@ package io.github.c0d3m0nk3y {
 			mStarling.stage.stageHeight = stageHeight; // <- same size on all devices
 			mStarling.simulateMultitouch = false;
 			mStarling.enableErrorChecking = false;
+			mStarling.showStats = true;
 			mStarling.addEventListener(starling.events.Event.ROOT_CREATED, function():void {
 				removeChild(background);
 				
