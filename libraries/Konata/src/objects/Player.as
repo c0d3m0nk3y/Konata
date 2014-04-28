@@ -1,6 +1,8 @@
 package objects {
 	import flash.ui.Keyboard;
 	
+	import scenes.GamePage;
+	
 	public class Player extends AnimatedGameObject {
 		private static const JUMP_POWER:Number = 10;
 		
@@ -14,9 +16,10 @@ package objects {
 			super("cherub", 12);
 			
 			_weight = 20;
-			_moveSpeed = 200;
+			_moveSpeed = 400;
 			_standing = true;
 			_walking = false;
+			_direction = LEFT;
 			solid = true;
 			
 			name = "Player";
@@ -45,6 +48,8 @@ package objects {
 			detectWalking();
 			
 			flipOnDirectionChange();
+			
+			x -= GamePage.scrollSpeed;
 		}
 		
 		override protected function wrapFrames():void {

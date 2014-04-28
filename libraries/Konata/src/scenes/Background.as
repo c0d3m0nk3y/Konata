@@ -10,7 +10,7 @@ package scenes {
 		public function Background(spriteSheetName:String, frames:int) {
 			super(spriteSheetName, frames, Constants.GameWidth, Constants.GameHeight);
 			fps = 3;
-			_scrollSpeed = 5;
+			_scrollSpeed = GamePage.scrollSpeed / 2;
 			
 			_secondImages = new Vector.<Image>();
 			
@@ -31,7 +31,7 @@ package scenes {
 		
 		override protected function addCurrentFrame():void {
 			addChild(_images[_currentFrame]);
-			addChild(_secondImages[_currentFrame]);
+			if(_secondImages) addChild(_secondImages[_currentFrame]);
 		}
 		
 		override protected function destroy():void {
@@ -46,7 +46,7 @@ package scenes {
 		
 		override protected function removeCurrentFrame():void {
 			removeChild(_images[_currentFrame]);
-			removeChild(_secondImages[_currentFrame]);
+			if(_secondImages) removeChild(_secondImages[_currentFrame]);
 		}
 		
 		override protected function update(time:Number):void {

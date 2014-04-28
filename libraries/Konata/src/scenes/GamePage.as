@@ -1,11 +1,12 @@
 package scenes {
-	import objects.Enemy;
 	import objects.Player;
 	import objects.Terrain;
 	
 	import starling.display.Image;
 	
 	public class GamePage extends Scene {
+		
+		public static var scrollSpeed:int = 4;
 		
 		public function GamePage() {
 			super();
@@ -14,11 +15,8 @@ package scenes {
 		}
 		
 		private var _upButton:Image;
-		private var enemies:Vector.<Enemy>;
 		
-		private var _terrain:Terrain;
-		
-		private var player:Player;
+		private var _player:Player;
 		
 		override protected function initialise():void {
 			super.initialise();
@@ -30,33 +28,21 @@ package scenes {
 				addChild(_upButton);
 			}
 			
-			addChild(_terrain);
-			
-			for each(var enemy:Enemy in enemies) {
-				addChild(enemy);
-			}
-			
-			addChild(player);
+			addChild(_player);
 		}
 		
 		private function makeObjects():void {
-			_terrain = new Terrain(8, 3);
-			_terrain.x = (Constants.GameWidth - _terrain.width) * 0.5;
-			_terrain.y = Constants.GameHeight - _terrain.height;
-			player = new Player();
-			player.fps = 6;
-			player.x = Constants.GameWidth * 0.8;
-			player.y = 0;
-			
-			enemy = new Enemy("cherub", 12);
-			enemy.x = Constants.GameWidth * 0.2;
-			
-			enemies = new Vector.<Enemy>();
-			for(var enemyIndex:int = 0; enemyIndex < 1; enemyIndex++) {
-				var enemy:Enemy = new Enemy("cherub", 12);
-				enemy.x = Constants.GameWidth * 0.5;
-				enemies.push(enemy);
+			for(var i:int = 0; i < 50; i++) {
+				var t:Terrain = new Terrain(12, 2);
+				t.x = (t.width * 1.5) * i;
+				t.y = Constants.GameHeight - t.height;
+				addChild(t);
 			}
+			
+			_player = new Player();
+			_player.fps = 6;
+			_player.x = Constants.GameWidth * 0.25;
+			_player.y = t.y - _player.height;
 		}
 	}
 }

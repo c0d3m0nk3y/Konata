@@ -23,11 +23,13 @@ package objects {
 				
 				_images.push(image);
 			}
+			
+			nextImage();
 		}
 		
 		override protected function onAddedToStage(event:Event=null):void {
 			super.onAddedToStage(event);
-			nextImage();
+//			nextImage();
 		}
 		
 		protected var _currentFrame:int;
