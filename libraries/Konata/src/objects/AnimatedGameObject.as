@@ -29,7 +29,6 @@ package objects {
 		
 		override protected function onAddedToStage(event:Event=null):void {
 			super.onAddedToStage(event);
-//			nextImage();
 		}
 		
 		protected var _currentFrame:int;

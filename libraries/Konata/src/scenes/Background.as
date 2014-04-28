@@ -10,7 +10,6 @@ package scenes {
 		public function Background(spriteSheetName:String, frames:int) {
 			super(spriteSheetName, frames, Constants.GameWidth, Constants.GameHeight);
 			fps = 3;
-			_scrollSpeed = GamePage.scrollSpeed / 2;
 			
 			_secondImages = new Vector.<Image>();
 			
@@ -24,8 +23,6 @@ package scenes {
 				_secondImages.push(secondImage);
 			}
 		}
-		
-		private var _scrollSpeed:int;
 		
 		private var _secondImages:Vector.<Image>;
 		
@@ -59,7 +56,7 @@ package scenes {
 		}
 		
 		private function scrollBackgrounds():void {
-			setBackgroundPositions(_images[_currentFrame].x - _scrollSpeed);
+			setBackgroundPositions(_images[_currentFrame].x - GamePage.scrollSpeed * 0.5);
 			
 			wrapBackground();
 		}

@@ -15,6 +15,7 @@ package objects {
 		public function Player() {
 			super("cherub", 12);
 			
+			_alive = true;
 			_weight = 20;
 			_moveSpeed = 400;
 			_standing = true;
@@ -30,6 +31,7 @@ package objects {
 		private var _moveSpeed:int;
 		private var _standing:Boolean;
 		private var _walking:Boolean;
+		private var _alive:Boolean;
 		
 		override protected function nextImage():void {
 			if (_walking) {
@@ -43,6 +45,8 @@ package objects {
 		override protected function update(time:Number):void {
 			super.update(time);
 			
+			if(!_alive) return;
+			
 			move(time);
 			
 			detectWalking();
@@ -50,6 +54,28 @@ package objects {
 			flipOnDirectionChange();
 			
 			x -= GamePage.scrollSpeed;
+			
+			fallOffScreen();
+		}
+		
+		private function fallOffScreen():void {
+			if(y + height >= Constants.GameHeight) {
+				die();
+			}
+			
+			if(bump()) {
+				die();
+			}
+		}
+		
+		private function bump():Boolean {
+			return Collidables.collides(this, _velocity.x > 0 ? Collidables.RIGHT : Collidables.LEFT);
+		}
+		
+		private function die():void {
+			_alive = false;
+			weight = 0;
+			GamePage.scrollSpeed = 0;
 		}
 		
 		override protected function wrapFrames():void {

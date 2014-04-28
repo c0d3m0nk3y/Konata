@@ -6,7 +6,7 @@ package scenes {
 	
 	public class GamePage extends Scene {
 		
-		public static var scrollSpeed:int = 4;
+		public static var scrollSpeed:int = 8;
 		
 		public function GamePage() {
 			super();
@@ -33,9 +33,11 @@ package scenes {
 		
 		private function makeObjects():void {
 			for(var i:int = 0; i < 50; i++) {
-				var t:Terrain = new Terrain(12, 2);
+				var t:Terrain = new Terrain(8, 2);
 				t.x = (t.width * 1.5) * i;
-				t.y = Constants.GameHeight - t.height;
+				var randOffset:int = Math.random() * (Constants.GameHeight * 0.2);
+				t.y = Constants.GameHeight - t.height
+					- randOffset;
 				addChild(t);
 			}
 			
