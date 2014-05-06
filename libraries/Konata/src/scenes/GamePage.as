@@ -1,8 +1,6 @@
 package scenes {
 	import objects.Player;
 	
-	import starling.display.Image;
-	
 	public class GamePage extends Scene {
 		
 		public static var scrollSpeed:int = 8;
@@ -12,8 +10,6 @@ package scenes {
 			
 			makeObjects();
 		}
-		
-		private var _upButton:Image;
 		
 		private var _player:Player;
 		
