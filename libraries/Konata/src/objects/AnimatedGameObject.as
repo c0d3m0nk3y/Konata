@@ -70,7 +70,7 @@ package objects {
 			removeChild(_images[_currentFrame]);
 		}
 		
-		override protected function update(time:Number):void {
+		override public function advanceTime(time:Number):void {
 			incrementElapsedTime(time);
 			
 			if (elapsedTimeExceededFPSThreshold()) {

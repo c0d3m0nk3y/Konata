@@ -109,7 +109,6 @@ package {
 			});
 			
 			addEventListener(Event.TRIGGERED, onButtonTriggered);
-			KeyRegister.initialise();
 			
 			initDebug();
 		}
@@ -175,7 +174,7 @@ package {
 		private function onAssetsLoaded():void {
 			Assets.loaded = true;
 			
-			var background:Image = new Image(Assets.getTexture("background"));
+			var background:Image = new Image(Assets.getTexture("bg"));
 			background.pivotX = background.width / 2;
 			background.x = Constants.GameWidth / 2;
 			addChild(background);

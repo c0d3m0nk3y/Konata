@@ -23,7 +23,7 @@ package scenes {
 		}
 		
 		protected function initialise():void {
-			setBackground(Background.HILLS_BACKGROUND);
+//			setBackground(Background.DEFAULT);
 			
 			addEventListener(TouchEvent.TOUCH, onTouch);
 			addEventListener(Event.ENTER_FRAME, onTick);

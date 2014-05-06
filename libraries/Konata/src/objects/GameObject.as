@@ -24,15 +24,12 @@ package objects {
 			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 		}
 		
-		protected var _jumping:Boolean;
 		protected var _velocity:Point;
-		protected var _weight:Number;
 		private var _image:Image;
 		private var _solid:Boolean;
 		
 		public function advanceTime(time:Number):void {
-			gravity(time);
-			update(time);
+			
 		}
 		
 		override public function dispose():void {
@@ -47,53 +44,15 @@ package objects {
 			updateCollidables();
 		}
 		
-		public function set weight(value:Number):void {
-			_weight = value;
-		}
-		
-		protected function surfaceBelow():Boolean {
-			return Collidables.collides(this, Collidables.DOWN);
-		}
-		
-		protected function update(time:Number):void {
-		
-		}
-		
 		private function addImage():void {
 			if (_image) {
 				addChild(_image);
 			}
 		}
 		
-		private function applyGravity(time:Number):void {
-			_velocity.y += _weight * time;
-			
-			y += int(_velocity.y);
-		}
-		
-		private function enableJump():void {
-			_jumping = false;
-		}
-		
-		private function gravity(time:Number):void {
-			if (weightless)
-				return;
-			
-			var collisionY:Number = topOfSurfaceBelow();
-			
-			if (collisionY == -1) {
-				applyGravity(time);
-			} else {
-				landAt(collisionY);
-				enableJump();
-			}
-		}
-		
 		private function initialise():void {
-			_weight = 0;
 			_velocity = new Point(0, 0);
 			_solid = false;
-			_jumping = false;
 		}
 		
 		private function landAt(yLocation:Number):void {
@@ -138,10 +97,6 @@ package objects {
 				Collidables.removeCollidable(this);
 			}
 		
-		}
-		
-		private function get weightless():Boolean {
-			return _weight == 0;
 		}
 	}
 }

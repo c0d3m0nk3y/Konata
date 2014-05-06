@@ -4,8 +4,7 @@ package scenes {
 	import starling.display.Image;
 	
 	public class Background extends AnimatedGameObject {
-		public static const HILLS_BACKGROUND:String = "hills_background";
-		public static const TEMPLE_LANE:String = "templelane";
+		public static const DEFAULT:String = "background";
 		
 		public function Background(spriteSheetName:String, frames:int) {
 			super(spriteSheetName, frames, Constants.GameWidth, Constants.GameHeight);
@@ -46,8 +45,8 @@ package scenes {
 			if(_secondImages) removeChild(_secondImages[_currentFrame]);
 		}
 		
-		override protected function update(time:Number):void {
-			super.update(time);
+		override public function advanceTime(time:Number):void {
+			super.advanceTime(time);
 			scrollBackgrounds();
 		}
 		
