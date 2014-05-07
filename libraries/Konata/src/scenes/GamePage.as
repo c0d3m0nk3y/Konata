@@ -2,7 +2,9 @@ package scenes {
 	import objects.Player;
 	import objects.Terrain;
 	
+	import starling.core.Starling;
 	import starling.display.Image;
+	import starling.display.MovieClip;
 	
 	public class GamePage extends Scene {
 		
@@ -29,6 +31,10 @@ package scenes {
 			}
 			
 			addChild(_player);
+			
+			var fml:MovieClip = new MovieClip(Assets.getTextures("cherub_"), 3);
+			starling.core.Starling.juggler.add(fml);
+			addChild(fml);
 		}
 		
 		private function makeObjects():void {
