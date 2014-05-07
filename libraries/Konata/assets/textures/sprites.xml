@@ -4,7 +4,8 @@
 	Created with ShoeBox
 	http://renderhjs.net/shoebox/
 	-->
-	<SubTexture name="ship_000"	x="0"	y="90"	width="128"	height="88" frameX="-0" frameY="-20" frameWidth="128" frameHeight="128"/>
-	<SubTexture name="ship_001"	x="0"	y="0"	width="128"	height="88" frameX="-0" frameY="-20" frameWidth="128" frameHeight="128"/>
-	<SubTexture name="bg"	x="0"	y="0"	width="1"	height="1"/>
+	<SubTexture name="bg"	x="0"	y="190"	width="1"	height="1" frameX="-0" frameY="-0" frameWidth="1" frameHeight="1"/>
+	<SubTexture name="laser"	x="0"	y="180"	width="16"	height="8" frameX="-0" frameY="-0" frameWidth="16" frameHeight="8"/>
+	<SubTexture name="ship_000"	x="0"	y="0"	width="128"	height="88" frameX="-0" frameY="-0" frameWidth="128" frameHeight="88"/>
+	<SubTexture name="ship_001"	x="0"	y="90"	width="128"	height="88" frameX="-0" frameY="-0" frameWidth="128" frameHeight="88"/>
 </TextureAtlas>
