@@ -36,7 +36,7 @@ package io.github.c0d3m0nk3y {
 				Support.platform = Constants.PLATFORM_ANDROID;
 			}
 			
-			Starling.multitouchEnabled = false; // useful on mobile devices
+			Starling.multitouchEnabled = true; // useful on mobile devices
 			Starling.handleLostContext = !iOS; // not necessary on iOS. Saves a lot of memory!
 			
 			// create a suitable viewport for the screen size
@@ -83,7 +83,7 @@ package io.github.c0d3m0nk3y {
 			mStarling = new Starling(Konata, stage, viewPort);
 			mStarling.stage.stageWidth = stageWidth; // <- !same size on all devices
 			mStarling.stage.stageHeight = stageHeight; // <- same size on all devices
-			mStarling.simulateMultitouch = false;
+//			mStarling.simulateMultitouch = false;
 			mStarling.enableErrorChecking = false;
 			mStarling.showStats = true;
 			mStarling.addEventListener(starling.events.Event.ROOT_CREATED, function():void {
