@@ -10,7 +10,6 @@ package objects {
 		public function Player() {
 			super();
 			
-			_alive = true;
 			solid = true;
 			
 			name = "Player";
@@ -25,18 +24,6 @@ package objects {
 			super.onAddedToStage(event);
 			
 			addChild(_ship);
-		}
-		
-		private var _alive:Boolean;
-		
-		override public function advanceTime(time:Number):void {
-			super.advanceTime(time);
-			
-			if(!_alive) return;
-		}
-		
-		private function die():void {
-			_alive = false;
 		}
 		
 		public function followCursor(cursorY:Number):void {

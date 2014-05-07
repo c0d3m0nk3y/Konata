@@ -1,4 +1,6 @@
 package scenes {
+	import flash.media.SoundTransform;
+	
 	import objects.Laser;
 	import objects.Player;
 	
@@ -42,6 +44,8 @@ package scenes {
 		}
 		
 		private function shootNewLaser():void {
+			Sounds.playAtVolume(Sounds.PEW, 0.4);
+			
 			if(_leftShot) {
 				var leftlaser:Laser = new Laser();
 				leftlaser.x = _player.x + _player.width * 0.1;
