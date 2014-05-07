@@ -46,7 +46,7 @@ package objects {
 		
 		private function flyTowardsCursor(cursorY:Number):void {
 			if(!isNaN(cursorY)) {
-				y -= (y - cursorY) * 0.1;
+				y -= (y - cursorY) * 0.075;
 			}
 		}
 		

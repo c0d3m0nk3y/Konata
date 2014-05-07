@@ -1,82 +1,111 @@
 package scenes {
-	import objects.AnimatedGameObject;
+	import objects.GameObject;
 	
 	import starling.display.Image;
+	import starling.events.Event;
 	
-	public class Background extends AnimatedGameObject {
-		public static const DEFAULT:String = "background";
+	public class Background extends GameObject {
+		private var _farbgl:Image;
+		private var _farbgr:Image;
+		private var _midbgl_1:Image;
+		private var _midbgr_1:Image;
+		private var _midbgl_2:Image;
+		private var _midbgr_2:Image;
+		private var _nearbgl_1:Image;
+		private var _nearbgr_1:Image;
+		private var _nearbgl_2:Image;
+		private var _nearbgr_2:Image;
 		
-		public function Background(spriteSheetName:String, frames:int) {
-			super(spriteSheetName, frames, Constants.GameWidth, Constants.GameHeight);
-			fps = 3;
+		public function Background() {
+			super();
 			
-			_secondImages = new Vector.<Image>();
+			solid = false;
 			
-			for each (var image:Image in _images) {
-				var secondImage:Image = new Image(image.texture);
-				secondImage.width = image.width;
-				secondImage.height = image.height;
-				
-				secondImage.x = image.width;
-				
-				_secondImages.push(secondImage);
-			}
+			_farbgl = new Image(Assets.getTexture("farground"));
+			_farbgl.scaleX = _farbgl.scaleY = 4;
+			_farbgr = new Image(Assets.getTexture("farground"));
+			_farbgr.scaleX = _farbgr.scaleY = 4;
+			_farbgr.x = Constants.GameWidth;
+			
+			_midbgl_1 = new Image(Assets.getTexture("midground_001"));
+			_midbgl_1.scaleX = _midbgl_1.scaleY = 4;
+			_midbgr_1 = new Image(Assets.getTexture("midground_001"));
+			_midbgr_1.scaleX = _midbgr_1.scaleY = 4;
+			_midbgr_1.x = Constants.GameWidth;
+			
+			_midbgl_2 = new Image(Assets.getTexture("midground_002"));
+			_midbgl_2.scaleX = _midbgl_2.scaleY = 4;
+			_midbgr_2 = new Image(Assets.getTexture("midground_002"));
+			_midbgr_2.scaleX = _midbgr_2.scaleY = 4;
+			_midbgr_2.x = Constants.GameWidth;
+			
+			_nearbgl_1 = new Image(Assets.getTexture("nearground_001"));
+			_nearbgl_1.scaleX = _nearbgl_1.scaleY = 4;
+			_nearbgr_1 = new Image(Assets.getTexture("nearground_001"));
+			_nearbgr_1.scaleX = _nearbgr_1.scaleY = 4;
+			_nearbgr_1.x = Constants.GameWidth;
+			
+			_nearbgl_2 = new Image(Assets.getTexture("nearground_002"));
+			_nearbgl_2.scaleX = _nearbgl_2.scaleY = 4;
+			_nearbgr_2 = new Image(Assets.getTexture("nearground_002"));
+			_nearbgr_2.scaleX = _nearbgr_2.scaleY = 4;
+			_nearbgr_2.x = Constants.GameWidth;
+		}
+		override protected function onAddedToStage(event:Event=null):void {
+			super.onAddedToStage(event);
+			
+			addChild(_farbgl);
+			addChild(_farbgr);
+			addChild(_midbgl_1);
+			addChild(_midbgr_1);
+			addChild(_midbgl_2);
+			addChild(_midbgr_2);
+			addChild(_nearbgl_1);
+			addChild(_nearbgr_1);
+			addChild(_nearbgl_2);
+			addChild(_nearbgr_2);
 		}
 		
-		private var _secondImages:Vector.<Image>;
-		
-		override protected function addCurrentFrame():void {
-			addChild(_images[_currentFrame]);
-			if(_secondImages) addChild(_secondImages[_currentFrame]);
-		}
-		
-		override protected function destroy():void {
-			super.destroy();
-			
-			while (_secondImages.length > 0) {
-				_secondImages.pop().removeFromParent(true);
-			}
-			
-			_secondImages = null;
-		}
-		
-		override protected function removeCurrentFrame():void {
-			removeChild(_images[_currentFrame]);
-			if(_secondImages) removeChild(_secondImages[_currentFrame]);
-		}
+		private var _farSpeed:int = 50;
+		private var _midSpeed:int = 250;
+		private var _nearSpeed:int = 500;
 		
 		override public function advanceTime(time:Number):void {
 			super.advanceTime(time);
-			scrollBackgrounds();
-		}
-		
-		private function resetBackgroundPositions():void {
-			setBackgroundPositions(0);
-		}
-		
-		private function scrollBackgrounds():void {
-			setBackgroundPositions(_images[_currentFrame].x - GamePage.scrollSpeed * 0.5);
 			
-			wrapBackground();
-		}
-		
-		private function secondImageFallingOffScreen():Boolean {
-			return _secondImages[_currentFrame].x <= 0;
-		}
-		
-		private function setBackgroundPositions(xPos:int):void {
-			for each (var image:Image in _images) {
-				image.x = xPos;
+			_farbgl.x -= time * _farSpeed;
+			_farbgr.x -= time * _farSpeed;
+			if(_farbgr.x <= 0) {
+				_farbgl.x = 0;
+				_farbgr.x = Constants.GameWidth;
 			}
 			
-			for each (var secondImage:Image in _secondImages) {
-				secondImage.x = xPos + secondImage.width;
+			_midbgl_1.x -= time * _midSpeed;
+			_midbgr_1.x -= time * _midSpeed;
+			if(_midbgr_1.x <= 0) {
+				_midbgl_1.x = 0;
+				_midbgr_1.x = Constants.GameWidth;
 			}
-		}
-		
-		private function wrapBackground():void {
-			if (secondImageFallingOffScreen()) {
-				resetBackgroundPositions();
+			
+			_midbgl_2.x -= time * (_midSpeed * 1.1);
+			_midbgr_2.x -= time * (_midSpeed * 1.1);
+			if(_midbgr_2.x <= 0) {
+				_midbgl_2.x = 0;
+				_midbgr_2.x = Constants.GameWidth;
+			}
+			
+			_nearbgl_1.x -= time * _nearSpeed;
+			_nearbgr_1.x -= time * _nearSpeed; 
+			if(_nearbgr_1.x <= 0) {
+				_nearbgl_1.x = 0;
+				_nearbgr_1.x = Constants.GameWidth;
+			}
+			
+			_nearbgl_2.x -= time * (_nearSpeed * 1.1);
+			_nearbgr_2.x -= time * (_nearSpeed * 1.1);
+			if(_nearbgr_2.x <= 0) {
+				_nearbgl_2.x = 0;
+				_nearbgr_2.x = Constants.GameWidth;
 			}
 		}
 	}

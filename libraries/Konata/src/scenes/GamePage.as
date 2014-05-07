@@ -57,6 +57,7 @@ package scenes {
 			_leftShot = !_leftShot;
 		}
 		
+		private var _background:Background;
 		private var _player:Player;
 		private var _touch:Touch;
 		private var _touchY:Number;
@@ -67,6 +68,7 @@ package scenes {
 		override protected function onAddedToStage():void {
 			super.onAddedToStage();
 			
+			addChild(_background);
 			addChild(_player);
 		}
 		
@@ -74,6 +76,8 @@ package scenes {
 			_player = new Player();
 			_player.x = Constants.GameWidth * 0.15;
 			_player.y = Constants.GameHeight * 0.5;
+			
+			_background = new Background();
 		}
 	}
 }

@@ -7,8 +7,6 @@ package scenes {
 	import starling.events.Event;
 	import starling.events.TouchEvent;
 	
-	import utils.BackgroundFactory;
-	
 	public class Scene extends Sprite {
 		
 		public function Scene() {
@@ -26,7 +24,7 @@ package scenes {
 		protected function onAddedToStage():void {
 			this.removeEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			
-			setBackground(Background.DEFAULT);
+			addChildAt(new Quad(Constants.GameWidth, Constants.GameHeight, 0x0),0);
 			
 			addEventListener(TouchEvent.TOUCH, onTouch);
 			addEventListener(Event.ENTER_FRAME, onTick);
@@ -40,11 +38,6 @@ package scenes {
 		
 		protected function removeAllDelayedCalls():void {
 			Starling.juggler.purge();
-		}
-		
-		protected function setBackground(name):void {
-//			addChildAt(BackgroundFactory.getBG(name), 0);
-			addChildAt(new Quad(Constants.GameWidth, Constants.GameHeight, 0x0),0);
 		}
 	}
 
