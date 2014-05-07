@@ -36,7 +36,6 @@ package scenes {
 		}
 		
 		protected function onTouch(touchEvent:TouchEvent=null):void {
-			trace("foo");
 		}
 		
 		protected function removeAllDelayedCalls():void {
@@ -45,7 +44,7 @@ package scenes {
 		
 		protected function setBackground(name):void {
 //			addChildAt(BackgroundFactory.getBG(name), 0);
-			addChildAt(new Quad(Constants.GameWidth, Constants.GameHeight, 0xffffff),0);
+			addChildAt(new Quad(Constants.GameWidth, Constants.GameHeight, 0x0),0);
 		}
 	}
 
