@@ -76,36 +76,36 @@ package scenes {
 			_farbgl.x -= time * _farSpeed;
 			_farbgr.x -= time * _farSpeed;
 			if(_farbgr.x <= 0) {
-				_farbgl.x = 0;
-				_farbgr.x = Constants.GameWidth;
+				_farbgl.x += Constants.GameWidth;
+				_farbgr.x += Constants.GameWidth;
 			}
 			
 			_midbgl_1.x -= time * _midSpeed;
 			_midbgr_1.x -= time * _midSpeed;
 			if(_midbgr_1.x <= 0) {
-				_midbgl_1.x = 0;
-				_midbgr_1.x = Constants.GameWidth;
+				_midbgl_1.x += Constants.GameWidth;
+				_midbgr_1.x += Constants.GameWidth;
 			}
 			
 			_midbgl_2.x -= time * (_midSpeed * 1.1);
 			_midbgr_2.x -= time * (_midSpeed * 1.1);
 			if(_midbgr_2.x <= 0) {
-				_midbgl_2.x = 0;
-				_midbgr_2.x = Constants.GameWidth;
+				_midbgl_2.x += Constants.GameWidth;
+				_midbgr_2.x += Constants.GameWidth;
 			}
 			
 			_nearbgl_1.x -= time * _nearSpeed;
 			_nearbgr_1.x -= time * _nearSpeed; 
 			if(_nearbgr_1.x <= 0) {
-				_nearbgl_1.x = 0;
-				_nearbgr_1.x = Constants.GameWidth;
+				_nearbgl_1.x += Constants.GameWidth;
+				_nearbgr_1.x += Constants.GameWidth;
 			}
 			
 			_nearbgl_2.x -= time * (_nearSpeed * 1.1);
 			_nearbgr_2.x -= time * (_nearSpeed * 1.1);
 			if(_nearbgr_2.x <= 0) {
-				_nearbgl_2.x = 0;
-				_nearbgr_2.x = Constants.GameWidth;
+				_nearbgl_2.x += Constants.GameWidth;
+				_nearbgr_2.x += Constants.GameWidth;
 			}
 		}
 	}

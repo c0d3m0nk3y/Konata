@@ -2,7 +2,7 @@ package {
 	import utils.AudioManager;
 	
 	public class Music {
-		public static const RETRO:String = "retro";
+		public static const SPACE:String = "spacemusic";
 		
 		private static var _volume:int;
 		

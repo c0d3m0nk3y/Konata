@@ -15,6 +15,8 @@ package scenes {
 			start.y = (Constants.GameHeight - start.height) * 0.5;
 			start.name = getQualifiedClassName(GamePage);
 			addChild(start);
+			
+			Music.playSong(Music.SPACE);
 		}
 	}
 }

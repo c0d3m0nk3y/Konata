@@ -6,7 +6,7 @@ package utils {
 	
 	public class AudioManager {
 		
-		public static const MUSIC_LEVEL:Number = 0.25;
+		public static const MUSIC_LEVEL:Number = 0.75;
 		
 		private static var _instance:AudioManager;
 		
@@ -65,7 +65,7 @@ package utils {
 		}
 		
 		private function stopMusic():void {
-			musicChannel.stop();
+			if(musicChannel) musicChannel.stop();
 		}
 		
 		private function unsilenceAll():void {
