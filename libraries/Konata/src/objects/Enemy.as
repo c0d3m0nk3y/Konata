@@ -50,7 +50,16 @@ package objects {
 		}
 		
 		private function shoot():void {
-			var laser:Laser = new Laser("red");
+			var colour:String;
+			var rand:int = Math.random() * 3;
+			if(rand == 0) {
+				colour = "red";
+			} else if(rand == 1) {
+				colour = "green";
+			} else {
+				colour = "blue";
+			}
+			var laser:Laser = new Laser(colour);
 			laser.x = x - laser.width;
 			laser.y = y;
 			laser.scaleX = laser.scaleY = -1/2;
