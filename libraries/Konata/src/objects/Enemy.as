@@ -15,7 +15,7 @@ package objects {
 			
 			name = "Enemy";
 			
-			_enemy = new MovieClip(Assets.getTextures("enemy_"), 1);
+			_enemy = new MovieClip(Assets.getTextures("enemy_"), randomFPS());
 			_enemy.x = Math.ceil(-_enemy.width/2);
 			_enemy.y = Math.ceil(-_enemy.height/2);
 			Starling.juggler.add(_enemy);
@@ -23,6 +23,10 @@ package objects {
 			x = randomStartPosition();
 			y = randomYTarget();
 			_yTarget = randomYTarget();
+		}
+		
+		private function randomFPS():Number {
+			return 0.5 + Math.random() * 4;
 		}
 		
 		public function randomVelocity():int {
@@ -73,6 +77,7 @@ package objects {
 			if(x < -width) {
 				_velocity.x = randomVelocity();
 				x = randomStartPosition();
+				_enemy.fps = randomFPS();
 			}
 		}
 	}
