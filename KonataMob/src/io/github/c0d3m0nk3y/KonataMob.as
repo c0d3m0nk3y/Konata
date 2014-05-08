@@ -14,6 +14,8 @@ package io.github.c0d3m0nk3y {
 	import starling.utils.RectangleUtil;
 	import starling.utils.ScaleMode;
 	
+	import utils.AudioManager;
+	
 	[SWF(frameRate = "30", width = "800", height = "600", backgroundColor = "0x0")]
 	public class KonataMob extends Sprite {
 		// Startup image for HD screens
