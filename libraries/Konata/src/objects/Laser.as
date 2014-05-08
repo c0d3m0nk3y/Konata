@@ -14,7 +14,7 @@ package objects
 			
 			_velocity.x = 1000;
 			
-			_laser = new Image(Assets.getTexture("laser"));
+			_laser = new Image(Assets.getTexture("bluelaser"));
 			_laser.x = Math.ceil(-_laser.width/2);
 			_laser.y = Math.ceil(-_laser.width/2);
 		}

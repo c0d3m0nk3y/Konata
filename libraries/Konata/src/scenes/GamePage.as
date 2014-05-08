@@ -1,6 +1,5 @@
 package scenes {
-	import flash.media.SoundTransform;
-	
+	import objects.Enemy;
 	import objects.Laser;
 	import objects.Player;
 	
@@ -68,12 +67,14 @@ package scenes {
 		private var _timeSinceLastShot:int = 0;
 		private var _timeBetweenShots:int = 7;
 		private var _leftShot:Boolean;
+		private var _enemy:Enemy;
 		
 		override protected function onAddedToStage():void {
 			super.onAddedToStage();
 			
 			addChild(_background);
 			addChild(_player);
+			addChild(_enemy);
 		}
 		
 		private function makeObjects():void {
@@ -82,6 +83,8 @@ package scenes {
 			_player.y = Constants.GameHeight * 0.5;
 			
 			_background = new Background();
+			
+			_enemy = new Enemy();
 		}
 	}
 }
