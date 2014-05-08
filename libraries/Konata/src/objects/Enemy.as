@@ -11,7 +11,7 @@ package objects {
 			super();
 			
 			solid = true;
-			_velocity.x = 200;
+			_velocity.x = randomVelocity();
 			
 			name = "Enemy";
 			
@@ -20,13 +20,17 @@ package objects {
 			_enemy.y = Math.ceil(-_enemy.height/2);
 			Starling.juggler.add(_enemy);
 			
-			x = Constants.GameWidth + width;
+			x = randomStartPosition();
 			y = randomYTarget();
 			_yTarget = randomYTarget();
 		}
 		
+		public function randomVelocity():int {
+			return 100 + Math.random() * 450;
+		}
+		
 		private function randomYTarget():Number {
-			return Math.random() * (Constants.GameHeight - height);
+			return Constants.GameHeight * 0.1 + (Math.random() * (Constants.GameHeight * 0.9 - height));
 		}
 		
 		override protected function onAddedToStage(event:Event=null):void {
@@ -41,17 +45,34 @@ package objects {
 			move(time);
 		}
 		
+		private function shoot():void {
+			var laser:Laser = new Laser("red");
+			laser.x = x - laser.width;
+			laser.y = y;
+			laser.scaleX = laser.scaleY = -1/2;
+			laser.velocity.x = -650;
+			parent.addChild(laser);
+			
+			Sounds.playAtVolume(Sounds.PEW, 0.1);
+		}
+		
+		private function randomStartPosition():int {
+			return Constants.GameWidth + width + Math.random() * Constants.GameWidth;
+		}
+		
 		private function move(time:Number):void {
 			x -= time * _velocity.x;
 			
-			y -= (y - _yTarget) * 0.2;
+			y -= (y - _yTarget) * 0.1;
 			
 			if(y > _yTarget - 1 && y < _yTarget + 1) {
+				shoot();
 				_yTarget = randomYTarget();
 			}
 			
-			if(x - width < 0) {
-				x = Constants.GameWidth + width;
+			if(x < -width) {
+				_velocity.x = randomVelocity();
+				x = randomStartPosition();
 			}
 		}
 	}

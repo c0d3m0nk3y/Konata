@@ -8,13 +8,13 @@ package objects
 	{
 		private var _laser:Image;
 		
-		public function Laser()
+		public function Laser(colour:String)
 		{
 			super();
 			
 			_velocity.x = 1000;
 			
-			_laser = new Image(Assets.getTexture("bluelaser"));
+			_laser = new Image(Assets.getTexture(colour + "laser"));
 			_laser.x = Math.ceil(-_laser.width/2);
 			_laser.y = Math.ceil(-_laser.width/2);
 		}
@@ -30,7 +30,7 @@ package objects
 			
 			x += _velocity.x * time;
 			
-			if(x > Constants.GameWidth + width) {
+			if(x > Constants.GameWidth + width || x < -width) {
 				removeFromParent(true);
 			}
 		}

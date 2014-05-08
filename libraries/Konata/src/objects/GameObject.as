@@ -98,5 +98,14 @@ package objects {
 			}
 		
 		}
+
+		public function set velocity(value:Point):void {
+			_velocity = value;
+		}
+		
+		public function get velocity():Point {
+			return _velocity;
+		}
+
 	}
 }

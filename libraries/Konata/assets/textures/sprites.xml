@@ -4,10 +4,10 @@
 	Created with ShoeBox
 	http://renderhjs.net/shoebox/
 	-->
-	<SubTexture name="bg"	x="0"	y="509"	width="1"	height="1" frameX="-0" frameY="-0" frameWidth="1" frameHeight="1"/>
+	<SubTexture name="bg"	x="0"	y="501"	width="1"	height="1" frameX="-0" frameY="-0" frameWidth="1" frameHeight="1"/>
 	<SubTexture name="bluelaser"	x="50"	y="463"	width="48"	height="16" frameX="-0" frameY="-0" frameWidth="48" frameHeight="16"/>
-	<SubTexture name="enemy_000"	x="88"	y="481"	width="36"	height="26" frameX="-0" frameY="-0" frameWidth="36" frameHeight="26"/>
-	<SubTexture name="enemy_001"	x="50"	y="481"	width="36"	height="26" frameX="-0" frameY="-0" frameWidth="36" frameHeight="26"/>
+	<SubTexture name="enemy_000"	x="128"	y="463"	width="26"	height="36" frameX="-0" frameY="-0" frameWidth="26" frameHeight="36"/>
+	<SubTexture name="enemy_001"	x="100"	y="463"	width="26"	height="36" frameX="-0" frameY="-0" frameWidth="26" frameHeight="36"/>
 	<SubTexture name="farground"	x="0"	y="0"	width="169"	height="138" frameX="-14" frameY="-8" frameWidth="200" frameHeight="150"/>
 	<SubTexture name="greenlaser"	x="0"	y="481"	width="48"	height="16" frameX="-0" frameY="-0" frameWidth="48" frameHeight="16"/>
 	<SubTexture name="midground_001"	x="0"	y="235"	width="152"	height="107" frameX="-33" frameY="-11" frameWidth="200" frameHeight="150"/>

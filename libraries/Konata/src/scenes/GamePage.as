@@ -46,12 +46,12 @@ package scenes {
 			Sounds.playAtVolume(Sounds.PEW, 0.4);
 			
 			if(_leftShot) {
-				var leftlaser:Laser = new Laser();
+				var leftlaser:Laser = new Laser("blue");
 				leftlaser.x = _player.x + _player.width * 0.1;
 				leftlaser.y = _player.y - _player.height * 0.2;
 				addChild(leftlaser);
 			} else {
-				var rightlaser:Laser = new Laser();
+				var rightlaser:Laser = new Laser("blue");
 				rightlaser.x = _player.x + _player.width * 0.1;
 				rightlaser.y = _player.y + _player.height * 0.55;
 				addChild(rightlaser);
@@ -67,14 +67,19 @@ package scenes {
 		private var _timeSinceLastShot:int = 0;
 		private var _timeBetweenShots:int = 7;
 		private var _leftShot:Boolean;
-		private var _enemy:Enemy;
+		private var _enemies:Vector.<Enemy>;
+		private var _numEnemies:int = 3;
 		
 		override protected function onAddedToStage():void {
 			super.onAddedToStage();
 			
 			addChild(_background);
+			
+			for each(var enemy:Enemy in _enemies) {
+				addChild(enemy);
+			}
+			
 			addChild(_player);
-			addChild(_enemy);
 		}
 		
 		private function makeObjects():void {
@@ -84,7 +89,11 @@ package scenes {
 			
 			_background = new Background();
 			
-			_enemy = new Enemy();
+			_enemies = new Vector.<Enemy>();
+			for(var i:int = 0; i < _numEnemies; i++) {
+				var enemy:Enemy = new Enemy();
+				_enemies.push(enemy);
+			}
 		}
 	}
 }
