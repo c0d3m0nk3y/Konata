@@ -34,6 +34,25 @@ package objects {
 			return instance.topYOfFirstDownwardCollision(gameObject);
 		}
 		
+		/**
+		 * Returns a collection of all solid GameObjects intersecting.
+		 */
+		public static function getCollisions(gameObject:GameObject):Vector.<GameObject> {
+			return instance.getCollisions(gameObject);
+		}
+		
+		private function getCollisions(gameObject:GameObject):Vector.<GameObject> {
+			var collisionObjects:Vector.<GameObject> = new Vector.<GameObject>();
+			
+			for each(var collidable:GameObject in _collidables) {
+				if(gameObject.bounds.intersects(collidable.bounds)) {
+					collisionObjects.push(collidable);
+				}
+			}
+			
+			return collisionObjects;
+		}
+		
 		private static function get instance():Collidables {
 			return _instance ? _instance : new Collidables();
 		}

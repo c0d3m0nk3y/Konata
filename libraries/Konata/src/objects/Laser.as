@@ -8,13 +8,18 @@ package objects
 	{
 		private var _laser:Image;
 		
-		public function Laser(colour:String)
-		{
+		public static const RED:int = 0;
+		public static const GREEN:int = 1;
+		public static const BLUE:int = 2;
+		
+		public function Laser(type:int=BLUE) {
 			super();
+			
+			solid = true;
 			
 			_velocity.x = 1000;
 			
-			_laser = new Image(Assets.getTexture(colour + "laser"));
+			_laser = new Image(Assets.getTexture("laser" + type));
 			_laser.x = Math.ceil(-_laser.width/2);
 			_laser.y = Math.ceil(-_laser.width/2);
 		}
@@ -29,10 +34,6 @@ package objects
 			super.advanceTime(time);
 			
 			x += _velocity.x * time;
-			
-			if(x > Constants.GameWidth + width || x < -width) {
-				removeFromParent(true);
-			}
 		}
 	}
 }

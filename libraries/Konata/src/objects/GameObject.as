@@ -10,6 +10,11 @@ package objects {
 	
 	public class GameObject extends Sprite implements IAnimatable {
 		
+		protected var _alreadyHit:Boolean;
+		protected var _velocity:Point;
+		private var _image:Image;
+		private var _solid:Boolean;
+		
 		public function GameObject(texture:Texture=null) {
 			super();
 			
@@ -23,10 +28,6 @@ package objects {
 			addEventListener(Event.ADDED_TO_STAGE, onAddedToStage);
 			addEventListener(Event.REMOVED_FROM_STAGE, onRemovedFromStage);
 		}
-		
-		protected var _velocity:Point;
-		private var _image:Image;
-		private var _solid:Boolean;
 		
 		public function advanceTime(time:Number):void {
 			
@@ -53,6 +54,7 @@ package objects {
 		private function initialise():void {
 			_velocity = new Point(0, 0);
 			_solid = false;
+			_alreadyHit = false;
 		}
 		
 		private function landAt(yLocation:Number):void {

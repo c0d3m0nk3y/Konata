@@ -6,6 +6,8 @@ package objects {
 	public class Enemy extends GameObject {
 		private var _enemy:MovieClip;
 		private var _yTarget:Number;
+		private var _lasers:Vector.<Laser>;
+		private var _laserCollisions:Vector.<GameObject>
 		
 		public function Enemy() {
 			super();
@@ -23,6 +25,8 @@ package objects {
 			x = randomStartPosition();
 			y = randomYTarget();
 			_yTarget = randomYTarget();
+			
+			_lasers = new Vector.<Laser>();
 		}
 		
 		private function randomFPS():Number {
@@ -47,47 +51,92 @@ package objects {
 			super.advanceTime(time);
 			
 			move(time);
+			
+			moveTowardsYTarget();
+			
+			if(arrivedAtYTarget()) {
+				setRandomYTarget();
+				shoot();
+			}
+			
+			if(leftScreen()) {
+				resetPosition();
+			}
+			
+			laserHitPlayer();
+			
+			removeOldLasers();
+		}
+		
+		
+		private function laserHitPlayer():void {
+			for each(var laser:Laser in _lasers) {
+				_laserCollisions = Collidables.getCollisions(laser);
+				
+				if(_laserCollisions) {
+					for each(var collisionObject:GameObject in _laserCollisions) {
+						var player:Player = collisionObject as Player;
+						if(player) {
+							player.kill();
+						}
+					}
+				}
+			}
+		}
+		
+		private function removeOldLasers():void {
+			var laser:Laser;
+			for(var laserIndex:int=0; laserIndex < _lasers.length; laserIndex++) {
+				laser = _lasers[laserIndex];
+				
+				if(laser.x < -laser.width) {
+					laser.removeFromParent(true);
+					_lasers.splice(laserIndex, 1);
+					laserIndex--;
+				}
+			}
 		}
 		
 		private function shoot():void {
-			var colour:String;
-			var rand:int = Math.random() * 3;
-			if(rand == 0) {
-				colour = "red";
-			} else if(rand == 1) {
-				colour = "green";
-			} else {
-				colour = "blue";
-			}
-			var laser:Laser = new Laser(colour);
+			var laser:Laser = new Laser(Math.random() * 3);
 			laser.x = x - laser.width;
 			laser.y = y;
 			laser.scaleX = laser.scaleY = -1/2;
 			laser.velocity.x = -650;
 			parent.addChild(laser);
+			_lasers.push(laser);
 			
 			Sounds.playAtVolume(Sounds.PEW, 0.1);
 		}
 		
 		private function randomStartPosition():int {
-			return Constants.GameWidth + width + Math.random() * Constants.GameWidth;
+			return Constants.GameWidth + width + (Math.random() * (Constants.GameWidth * 0.5));
 		}
 		
 		private function move(time:Number):void {
 			x -= time * _velocity.x;
-			
+		}
+		
+		private function moveTowardsYTarget():void {
 			y -= (y - _yTarget) * 0.1;
-			
-			if(y > _yTarget - 1 && y < _yTarget + 1) {
-				shoot();
-				_yTarget = randomYTarget();
-			}
-			
-			if(x < -width) {
-				_velocity.x = randomVelocity();
-				x = randomStartPosition();
-				_enemy.fps = randomFPS();
-			}
+		}
+		
+		private function setRandomYTarget():void {
+			_yTarget = randomYTarget();
+		}
+		
+		private function arrivedAtYTarget():Boolean {
+			return y > _yTarget - 1 && y < _yTarget + 1;
+		}
+		
+		private function resetPosition():void {
+			_velocity.x = randomVelocity();
+			x = randomStartPosition();
+			_enemy.fps = randomFPS();
+		}
+		
+		private function leftScreen():Boolean {
+			return x < -width;
 		}
 	}
 }

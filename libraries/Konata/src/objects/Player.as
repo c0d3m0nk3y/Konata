@@ -6,6 +6,7 @@ package objects {
 	
 	public class Player extends GameObject {
 		private var _ship:MovieClip;
+		private var _alive:Boolean;
 		
 		public function Player() {
 			super();
@@ -13,6 +14,8 @@ package objects {
 			solid = true;
 			
 			name = "Player";
+			
+			_alive = true;
 			
 			_ship = new MovieClip(Assets.getTextures("ship_"), 6);
 			_ship.x = Math.ceil(-_ship.width/2);
@@ -27,6 +30,8 @@ package objects {
 		}
 		
 		public function followCursor(cursorY:Number):void {
+			if(!_alive) return;
+			
 			flyTowardsCursor(cursorY);
 			keepWithinScreenBounds();
 		}
@@ -43,6 +48,18 @@ package objects {
 			} else if(y < height * 0.5) {
 				y = height * 0.5;
 			}
+		}
+		
+		public function kill():void {
+			_alive = false;
+		}
+
+		public function get alive():Boolean {
+			return _alive;
+		}
+
+		public function set alive(value:Boolean):void {
+			_alive = value;
 		}
 	}
 }
