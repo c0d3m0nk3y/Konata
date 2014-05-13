@@ -21,7 +21,7 @@ package scenes {
 		private var _leftShot:Boolean;
 		private var _enemies:Vector.<Enemy>;
 		private var _numEnemies:int = 3;
-		private var _screenShakeIncrement:int = 15;
+//		private var _screenShakeIncrement:int;
 		private var _screenShakeFactor:int;
 		private var _screenShaking:Boolean;
 		
@@ -52,7 +52,7 @@ package scenes {
 		
 		public function startScreenShake():void {
 			_screenShaking = true;
-			_screenShakeFactor = _screenShakeIncrement;
+			_screenShakeFactor = (4 - _player.shield) * 10;//_screenShakeIncrement;
 		}
 		
 		private function shakeScreen():void {

@@ -235,11 +235,13 @@ package objects {
 			_alive = value;
 		}
 
-		public function get score():int
-		{
+		public function get score():int {
 			return _score;
 		}
-
+		
+		public function get shield():int {
+			return _shield;
+		}
 
 	}
 }
