@@ -90,9 +90,10 @@ package objects {
 				laser = _lasers[laserIndex];
 				
 				if(laser.x < -laser.width) {
-					laser.removeFromParent(true);
 					_lasers.splice(laserIndex, 1);
 					laserIndex--;
+					laser.removeFromParent(true);
+					laser = null;
 				}
 			}
 		}

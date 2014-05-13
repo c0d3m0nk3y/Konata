@@ -1,7 +1,5 @@
 package scenes {
 	import objects.Enemy;
-	import objects.GameObject;
-	import objects.Laser;
 	import objects.Player;
 	
 	import starling.events.Event;
@@ -43,24 +41,6 @@ package scenes {
 			}
 		}
 		
-		override protected function onTouch(touchEvent:TouchEvent=null):void {
-			super.onTouch(touchEvent);
-			
-			_touch = touchEvent.getTouch(stage);
-			
-			if(_touch) {
-				_touchY = _touch.globalY;
-			}
-		}
-		
-		override protected function onTick(e:Event=null):void {
-			if(_player.alive) {
-				_player.followCursor(_touchY);
-				
-				shootLasers();
-			}
-		}
-		
 		private function shakeScreen():void {
 			if(_screenShakeFactor > 0) {
 				this.x = Math.random() * _screenShakeFactor;
@@ -72,31 +52,18 @@ package scenes {
 			}
 		}
 		
-		private function shootLasers():void {
-			_timeSinceLastShot++;
+		override protected function onTouch(touchEvent:TouchEvent=null):void {
+			super.onTouch(touchEvent);
 			
-			if(_timeSinceLastShot > _timeBetweenShots) {
-				shootNewLaser();
-				_timeSinceLastShot = 0;
+			_touch = touchEvent.getTouch(stage);
+			
+			if(_touch) {
+				_touchY = _touch.globalY;
 			}
 		}
 		
-		private function shootNewLaser():void {
-			Sounds.playAtVolume(Sounds.PEW, 0.4);
-			
-			if(_leftShot) {
-				var leftlaser:Laser = new Laser();
-				leftlaser.x = _player.x + _player.width * 0.1;
-				leftlaser.y = _player.y - _player.height * 0.2;
-				addChild(leftlaser);
-			} else {
-				var rightlaser:Laser = new Laser();
-				rightlaser.x = _player.x + _player.width * 0.1;
-				rightlaser.y = _player.y + _player.height * 0.55;
-				addChild(rightlaser);
-			}
-			
-			_leftShot = !_leftShot;
+		override protected function onTick(e:Event=null):void {
+			_player.followCursor(_touchY);
 		}
 		
 		override protected function onAddedToStage():void {

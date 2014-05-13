@@ -45,6 +45,10 @@ package objects {
 			updateCollidables();
 		}
 		
+		public function get solid():Boolean {
+			return _solid;
+		}
+		
 		private function addImage():void {
 			if (_image) {
 				addChild(_image);

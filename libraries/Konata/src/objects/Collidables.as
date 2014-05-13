@@ -27,6 +27,10 @@ package objects {
 			instance.removeCollidable(collidable);
 		}
 		
+		public static function contains(gameObject:GameObject):Boolean {
+			return instance.contains(gameObject);
+		}
+		
 		/**
 		 * Returns the Y position of the first collision found, or -1 if no collision found.
 		 */
@@ -42,10 +46,11 @@ package objects {
 		}
 		
 		private function getCollisions(gameObject:GameObject):Vector.<GameObject> {
-			var collisionObjects:Vector.<GameObject> = new Vector.<GameObject>();
+			var collisionObjects:Vector.<GameObject>;// = new Vector.<GameObject>();
 			
 			for each(var collidable:GameObject in _collidables) {
-				if(gameObject.bounds.intersects(collidable.bounds)) {
+				if(gameObject != collidable && gameObject.bounds.intersects(collidable.bounds)) {
+					if(!collisionObjects) collisionObjects = new Vector.<GameObject>();
 					collisionObjects.push(collidable);
 				}
 			}
@@ -137,7 +142,9 @@ package objects {
 		}
 		
 		private function removeCollidable(collidable:GameObject):void {
-			_collidables.splice(_collidables.indexOf(collidable), 1);
+			if(contains(collidable)) {
+				_collidables.splice(_collidables.indexOf(collidable), 1);
+			}
 		}
 		
 		private function topYOfFirstDownwardCollision(gameObject:GameObject):Number {
@@ -155,6 +162,15 @@ package objects {
 			}
 			
 			return -1;
+		}
+		
+		public function contains(gameObject:GameObject):Boolean
+		{
+			if(_collidables.indexOf(gameObject) == -1) {
+				return false;
+			} else {
+				return true;
+			}
 		}
 	}
 }
