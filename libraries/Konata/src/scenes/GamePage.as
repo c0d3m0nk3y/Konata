@@ -5,6 +5,8 @@ package scenes {
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
+	import starling.text.TextField;
+	import starling.utils.HAlign;
 	
 	public class GamePage extends Scene {
 		
@@ -19,15 +21,18 @@ package scenes {
 		private var _leftShot:Boolean;
 		private var _enemies:Vector.<Enemy>;
 		private var _numEnemies:int = 3;
-		private var _screenShakeFactor:int = 30;
+		private var _screenShakeIncrement:int = 15;
+		private var _screenShakeFactor:int;
+		private var _screenShaking:Boolean;
+		
+		private var _txtStats:TextField;
 		
 		public function GamePage() {
 			super();
 			
-			makeObjects();
-		}
-		
-		private function makeObjects():void {
+			_screenShaking = false;
+			_screenShakeFactor = 0;
+			
 			_player = new Player();
 			_player.x = Constants.GameWidth * 0.15;
 			_player.y = Constants.GameHeight * 0.5;
@@ -39,14 +44,26 @@ package scenes {
 				var enemy:Enemy = new Enemy();
 				_enemies.push(enemy);
 			}
+			
+			_txtStats = new TextField(Constants.GameWidth * 0.9, Constants.GameHeight * 0.1, "", "Veranda", 16, 0xffffff, true);
+			_txtStats.x = Constants.GameWidth * 0.1;
+			_txtStats.hAlign = HAlign.LEFT;
+		}
+		
+		public function startScreenShake():void {
+			_screenShaking = true;
+			_screenShakeFactor = _screenShakeIncrement;
 		}
 		
 		private function shakeScreen():void {
+			if(!_screenShaking) return;
+			
 			if(_screenShakeFactor > 0) {
 				this.x = Math.random() * _screenShakeFactor;
 				this.y = Math.random() * _screenShakeFactor;
 				_screenShakeFactor--;
 			} else if(this.x != 0) {
+				_screenShaking = false;
 				this.x = 0;
 				this.y = 0;
 			}
@@ -64,6 +81,10 @@ package scenes {
 		
 		override protected function onTick(e:Event=null):void {
 			_player.followCursor(_touchY);
+			
+			shakeScreen();
+			
+			_txtStats.text = "Score " + _player.score;
 		}
 		
 		override protected function onAddedToStage():void {
@@ -76,6 +97,8 @@ package scenes {
 			}
 			
 			addChild(_player);
+			
+			addChild(_txtStats);
 		}
 	}
 }

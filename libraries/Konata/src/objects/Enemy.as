@@ -77,7 +77,8 @@ package objects {
 					for each(var collisionObject:GameObject in laserCollisions) {
 						var player:Player = collisionObject as Player;
 						if(player) {
-							player.kill();
+							player.takeHit();
+							laser.remove();
 						}
 					}
 				}
@@ -92,7 +93,7 @@ package objects {
 				if(laser.x < -laser.width) {
 					_lasers.splice(laserIndex, 1);
 					laserIndex--;
-					laser.removeFromParent(true);
+					laser.remove();
 					laser = null;
 				}
 			}

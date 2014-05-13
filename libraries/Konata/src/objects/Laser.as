@@ -35,5 +35,11 @@ package objects
 			
 			x += _velocity.x * time;
 		}
+		
+		public function remove():void {
+			x = -width * 2;
+			y = -height * 2;
+			removeFromParent(true);
+		}
 	}
 }

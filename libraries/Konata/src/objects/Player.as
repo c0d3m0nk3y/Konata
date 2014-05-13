@@ -1,5 +1,8 @@
 package objects {
+	import scenes.GamePage;
+	
 	import starling.core.Starling;
+	import starling.display.Image;
 	import starling.display.MovieClip;
 	import starling.events.Event;
 	
@@ -10,6 +13,12 @@ package objects {
 		private var _lasers:Vector.<Laser>;
 		private var _timeSinceLastShot:Number;
 		private var _secondsBetweenShots:Number;
+		private var _maxShield:int;
+		private var _shield:int;
+		private var _secondsBetweenShieldRegen:Number;
+		private var _timeSinceLastShieldRegen:Number;
+		private var _shields:Vector.<Image>;
+		private var _score:int;
 		
 		public function Player() {
 			super();
@@ -29,16 +38,45 @@ package objects {
 			
 			_timeSinceLastShot = 0;
 			_secondsBetweenShots = 1;
+			
+			_shield = _maxShield = 3;
+			_timeSinceLastShieldRegen = 0;
+			_secondsBetweenShieldRegen = 1;
+			
+			_score = 0;
+			
+			var shield0:Image = new Image(Assets.getTexture("shield0"));
+			shield0.x = Math.ceil(-shield0.width/2);
+			shield0.y = Math.ceil(-shield0.height/2);
+			var shield1:Image = new Image(Assets.getTexture("shield1"));
+			shield1.x = Math.ceil(-shield1.width/2);
+			shield1.y = Math.ceil(-shield1.height/2);
+			var shield2:Image = new Image(Assets.getTexture("shield2"));
+			shield2.x = Math.ceil(-shield2.width/2);
+			shield2.y = Math.ceil(-shield2.height/2);
+			
+			_shields = new Vector.<Image>();
+			_shields.push(shield0);
+			_shields.push(shield1);
+			_shields.push(shield2);
+			
+			setShield();
 		}
 		
 		override protected function onAddedToStage(event:Event=null):void {
 			super.onAddedToStage(event);
 			
 			addChild(_ship);
+			
+			for each(var shield:Image in _shields) {
+				addChild(shield);
+			}
 		}
 		
 		override public function advanceTime(time:Number):void {
 			super.advanceTime(time);
+			
+			regenShield(time);
 			
 			shootLasers(time);
 			
@@ -49,15 +87,31 @@ package objects {
 			removeOldLasers();
 		}
 		
-		private function collideWithEnemy():void
-		{
+		private function regenShield(time:Number):void {
+			if(!_alive) return;
+			
+			if(_shield < _maxShield) {
+				_timeSinceLastShieldRegen += time;
+				
+				if(_timeSinceLastShieldRegen >= _secondsBetweenShieldRegen) {
+					_timeSinceLastShieldRegen -= _secondsBetweenShieldRegen;
+					
+					_shield++;
+					setShield();
+				}
+			} else {
+				_timeSinceLastShieldRegen = 0;
+			}
+		}
+		
+		private function collideWithEnemy():void {
 			var collisions:Vector.<GameObject> = Collidables.getCollisions(this);
 			
 			if(collisions) {
 				for each(var gameObject:GameObject in collisions) {
 					var enemy:Enemy = gameObject as Enemy;
 					if(enemy) {
-						kill();
+						takeHit();
 						enemy.kill();
 					}
 				}
@@ -75,6 +129,8 @@ package objects {
 						var enemy:Enemy = collisionObject as Enemy;
 						if(enemy) {
 							enemy.kill();
+							_score++;
+							laser.remove();
 						}
 					}
 				}
@@ -110,7 +166,7 @@ package objects {
 				if(laser.x > Constants.GameWidth) {
 					_lasers.splice(laserIndex, 1);
 					laserIndex--;
-					laser.removeFromParent(true);
+					laser.remove();
 					laser = null;
 				}
 			}
@@ -137,6 +193,36 @@ package objects {
 			}
 		}
 		
+		public function takeHit():void {
+			if(_alive) (parent as GamePage).startScreenShake();
+			
+			if(_shield > 0) {
+				_shield--;
+				_timeSinceLastShieldRegen = 0;
+				
+				setShield();
+			} else {
+				kill();
+			}
+		}
+		
+		private function setShield():void {
+			removeAllShields();
+			if(_shield == 3) {
+				_shields[0].visible = true;
+			} else if(_shield == 2) {
+				_shields[1].visible = true;
+			} else if(_shield == 1) {
+				_shields[2].visible = true;
+			}
+		}
+		
+		private function removeAllShields():void {
+			for each(var shield:Image in _shields) {
+				shield.visible = false;
+			}
+		}
+		
 		public function kill():void {
 			_alive = false;
 		}
@@ -148,5 +234,12 @@ package objects {
 		public function set alive(value:Boolean):void {
 			_alive = value;
 		}
+
+		public function get score():int
+		{
+			return _score;
+		}
+
+
 	}
 }
