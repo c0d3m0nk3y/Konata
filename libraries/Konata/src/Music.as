@@ -6,8 +6,12 @@ package {
 		
 		private static var _volume:int;
 		
-		public static function playSong(name:String):void {
+		public static function playSong(name:String=SPACE):void {
 			AudioManager.playSong(name);
+		}
+		
+		public static function stop():void {
+			AudioManager.stopMusic();
 		}
 		
 		public static function set volume(value:int):void {

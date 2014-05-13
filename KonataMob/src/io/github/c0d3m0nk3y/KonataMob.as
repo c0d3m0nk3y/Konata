@@ -5,6 +5,8 @@ package io.github.c0d3m0nk3y {
 	import flash.events.Event;
 	import flash.filesystem.File;
 	import flash.geom.Rectangle;
+	import flash.media.SoundMixer;
+	import flash.media.SoundTransform;
 	import flash.system.Capabilities;
 	
 	import starling.core.Starling;
@@ -109,9 +111,13 @@ package io.github.c0d3m0nk3y {
 		
 		private function onActivate(e:flash.events.Event):void {
 			mStarling.start();
+			
+			AudioManager.unsilenceAll()
 		}
 		
 		private function onDeactivate(e:flash.events.Event):void {
+			AudioManager.silenceAll();
+			
 			mStarling.stop();
 		}
 	}

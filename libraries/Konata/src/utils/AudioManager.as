@@ -16,6 +16,10 @@ package utils {
 			instance.playMusic();
 		}
 		
+		public static function stopMusic():void {
+			instance.stopMusic();
+		}
+		
 		public static function playSound(name:String, startTime:Number=0, loops:int=0, transform:SoundTransform=null):SoundChannel {
 			return instance.playSound(name, startTime, loops, transform);
 		}
@@ -61,7 +65,7 @@ package utils {
 		}
 		
 		private function silenceAll():void {
-			SoundMixer.soundTransform.volume = 0; //new SoundTransform(0);
+			SoundMixer.soundTransform = new SoundTransform(0);
 		}
 		
 		private function stopMusic():void {
@@ -69,7 +73,7 @@ package utils {
 		}
 		
 		private function unsilenceAll():void {
-			SoundMixer.soundTransform.volume = 1; //new SoundTransform(1);
+			SoundMixer.soundTransform = new SoundTransform(1);
 		}
 	}
 }
