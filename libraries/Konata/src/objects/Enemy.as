@@ -68,7 +68,6 @@ package objects {
 			removeOldLasers();
 		}
 		
-		
 		private function laserHitPlayer():void {
 			for each(var laser:Laser in _lasers) {
 				_laserCollisions = Collidables.getCollisions(laser);
@@ -138,6 +137,10 @@ package objects {
 		
 		private function leftScreen():Boolean {
 			return x < -width;
+		}
+		
+		public function kill():void {
+			removeFromParent(true);
 		}
 	}
 }

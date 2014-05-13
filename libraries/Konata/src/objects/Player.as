@@ -10,6 +10,7 @@ package objects {
 		private var _lasers:Vector.<Laser>;
 		private var _timeSinceLastShot:Number;
 		private var _secondsBetweenShots:Number;
+		private var _laserCollisions:Vector.<GameObject>;
 		
 		public function Player() {
 			super();
@@ -41,6 +42,25 @@ package objects {
 			super.advanceTime(time);
 			
 			shootLasers(time);
+			
+			laserHitsEnemy();
+			
+			removeOldLasers();
+		}
+		
+		private function laserHitsEnemy():void {
+			for each(var laser:Laser in _lasers) {
+				_laserCollisions = Collidables.getCollisions(laser);
+				
+				if(_laserCollisions) {
+					for each(var collisionObject:GameObject in _laserCollisions) {
+						var enemy:Enemy = collisionObject as Enemy;
+						if(enemy) {
+							enemy.kill();
+						}
+					}
+				}
+			}
 		}
 		
 		private function shootLasers(time):void {
@@ -50,11 +70,11 @@ package objects {
 				_timeSinceLastShot -= _secondsBetweenShots;
 				shoot();
 			}
-			
-			removeOldLasers();
 		}
 		
 		private function shoot():void {
+			if(!_alive) return;
+			
 			Sounds.playAtVolume(Sounds.PEW, 0.4);
 			
 			var laser:Laser = new Laser();
