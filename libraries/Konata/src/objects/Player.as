@@ -10,7 +10,6 @@ package objects {
 		private var _lasers:Vector.<Laser>;
 		private var _timeSinceLastShot:Number;
 		private var _secondsBetweenShots:Number;
-		private var _laserCollisions:Vector.<GameObject>;
 		
 		public function Player() {
 			super();
@@ -45,15 +44,34 @@ package objects {
 			
 			laserHitsEnemy();
 			
+			collideWithEnemy();
+			
 			removeOldLasers();
 		}
 		
+		private function collideWithEnemy():void
+		{
+			var collisions:Vector.<GameObject> = Collidables.getCollisions(this);
+			
+			if(collisions) {
+				for each(var gameObject:GameObject in collisions) {
+					var enemy:Enemy = gameObject as Enemy;
+					if(enemy) {
+						kill();
+						enemy.kill();
+					}
+				}
+			}
+		}
+		
 		private function laserHitsEnemy():void {
+			var laserCollisions:Vector.<GameObject>;
+			
 			for each(var laser:Laser in _lasers) {
-				_laserCollisions = Collidables.getCollisions(laser);
+				laserCollisions = Collidables.getCollisions(laser);
 				
-				if(_laserCollisions) {
-					for each(var collisionObject:GameObject in _laserCollisions) {
+				if(laserCollisions) {
+					for each(var collisionObject:GameObject in laserCollisions) {
 						var enemy:Enemy = collisionObject as Enemy;
 						if(enemy) {
 							enemy.kill();

@@ -7,7 +7,6 @@ package objects {
 		private var _enemy:MovieClip;
 		private var _yTarget:Number;
 		private var _lasers:Vector.<Laser>;
-		private var _laserCollisions:Vector.<GameObject>
 		
 		public function Enemy() {
 			super();
@@ -69,11 +68,13 @@ package objects {
 		}
 		
 		private function laserHitPlayer():void {
+			var laserCollisions:Vector.<GameObject>
+			
 			for each(var laser:Laser in _lasers) {
-				_laserCollisions = Collidables.getCollisions(laser);
+				laserCollisions = Collidables.getCollisions(laser);
 				
-				if(_laserCollisions) {
-					for each(var collisionObject:GameObject in _laserCollisions) {
+				if(laserCollisions) {
+					for each(var collisionObject:GameObject in laserCollisions) {
 						var player:Player = collisionObject as Player;
 						if(player) {
 							player.kill();
@@ -140,7 +141,7 @@ package objects {
 		}
 		
 		public function kill():void {
-			removeFromParent(true);
+			resetPosition();
 		}
 	}
 }
