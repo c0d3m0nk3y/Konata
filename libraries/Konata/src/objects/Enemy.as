@@ -13,6 +13,7 @@ package objects {
 			
 			solid = true;
 			_velocity.x = randomVelocity();
+			_velocity.y = randomVelocity(0.005,0.1);
 			
 			name = "Enemy";
 			
@@ -32,8 +33,8 @@ package objects {
 			return 0.5 + Math.random() * 4;
 		}
 		
-		public function randomVelocity():int {
-			return 100 + Math.random() * 450;
+		public function randomVelocity(start:Number=100,range:Number=450):Number {
+			return start + Math.random() * range;
 		}
 		
 		private function randomYTarget():Number {
@@ -120,7 +121,7 @@ package objects {
 		}
 		
 		private function moveTowardsYTarget():void {
-			y -= (y - _yTarget) * 0.1;
+			y -= (y - _yTarget) * _velocity.y;
 		}
 		
 		private function setRandomYTarget():void {
@@ -133,6 +134,7 @@ package objects {
 		
 		private function resetPosition():void {
 			_velocity.x = randomVelocity();
+			_velocity.y = randomVelocity(0.005,0.1);
 			x = randomStartPosition();
 			_enemy.fps = randomFPS();
 		}
