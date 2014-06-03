@@ -1,7 +1,11 @@
 package scenes {
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
+	
 	import objects.Enemy;
 	import objects.GameOverPanel;
 	import objects.Player;
+	import objects.MessageBar;
 	
 	import starling.animation.DelayedCall;
 	import starling.animation.Transitions;
@@ -36,6 +40,7 @@ package scenes {
 		private var _gameOverShown:Boolean;
 		
 		private var _greyCover:Quad;
+		private var messageBar:MessageBar;
 		
 		public function GamePage() {
 			super();
@@ -49,11 +54,7 @@ package scenes {
 			
 			_background = new Background();
 			
-			_enemies = new Vector.<Enemy>();
-			for(var i:int = 0; i < _numEnemies; i++) {
-				var enemy:Enemy = new Enemy();
-				_enemies.push(enemy);
-			}
+			createEnemies();
 			
 			_txtStats = new TextField(Constants.GameWidth * 0.9, Constants.GameHeight * 0.1, "", "Veranda", 16, 0xffffff, true);
 			_txtStats.x = Constants.GameWidth * 0.1;
@@ -62,6 +63,44 @@ package scenes {
 			_greyCover = new Quad(Constants.GameWidth, Constants.GameHeight, 0x0);
 			_greyCover.touchable = false;
 			_greyCover.alpha = 0.7;
+			
+			startLevelTimer();
+			
+			messageBar = new MessageBar();
+			messageBar.touchable = false;
+		}
+		
+		private function createEnemies():void {
+			_enemies = new Vector.<Enemy>();
+			for(var i:int = 0; i < _numEnemies; i++) {
+				var enemy:Enemy = new Enemy();
+				_enemies.push(enemy);
+			}
+		}
+		
+		private function showMessage(message:String, delay:Number=5):void {
+			messageBar.setMessage(message);
+			addChild(messageBar);
+			Starling.juggler.add(new DelayedCall(removeMessageBar, delay));
+		}
+		
+		private function startLevelTimer():void {
+			Starling.juggler.add(new DelayedCall(nextLevel, 10));
+		}
+		
+		protected function nextLevel():void {
+			if(!_player.alive) return;
+			
+			showMessage("Enemy reinforcements are arriving!");
+			var enemy:Enemy = new Enemy();
+			_enemies.push(enemy);
+			addChild(enemy);
+			
+			startLevelTimer();
+		}
+		
+		private function removeMessageBar():void {
+			removeChild(messageBar);
 		}
 		
 		public function startScreenShake():void {

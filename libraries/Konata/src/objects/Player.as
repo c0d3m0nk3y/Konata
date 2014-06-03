@@ -7,7 +7,6 @@ package objects {
 	import starling.display.MovieClip;
 	import starling.events.Event;
 	
-	
 	public class Player extends GameObject {
 		private var _ship:MovieClip;
 		private var _alive:Boolean;
