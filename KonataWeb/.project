@@ -16,14 +16,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>[source path] Starling-Extension-Particle-System-master-src</name>
-			<type>2</type>
-			<locationURI>DOCUMENTS/Konata/libraries/Starling-Extension-Particle-System-master/src</locationURI>
-		</link>
-		<link>
 			<name>[source path] Konata-src</name>
 			<type>2</type>
 			<locationURI>DOCUMENTS/Konata/libraries/Konata/src</locationURI>
+		</link>
+		<link>
+			<name>[source path] Starling-Extension-Particle-System-master-src</name>
+			<type>2</type>
+			<locationURI>DOCUMENTS/Konata/libraries/Starling-Extension-Particle-System-master/src</locationURI>
 		</link>
 		<link>
 			<name>[source path] assets</name>
@@ -44,6 +44,11 @@
 			<name>bin-debug</name>
 			<type>2</type>
 			<locationURI>DOCUMENTS/Konata/outputfolder</locationURI>
+		</link>
+		<link>
+			<name>bin-release1</name>
+			<type>2</type>
+			<location>D:/Libraries/Workspace/Konata/raw</location>
 		</link>
 	</linkedResources>
 </projectDescription>

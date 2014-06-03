@@ -2,6 +2,9 @@ package scenes {
 	import objects.Enemy;
 	import objects.Player;
 	
+	import starling.animation.Transitions;
+	import starling.animation.Tween;
+	import starling.core.Starling;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -25,16 +28,20 @@ package scenes {
 		private var _screenShakeFactor:int;
 		private var _screenShaking:Boolean;
 		
+		private var _starting:Boolean;
+		
 		private var _txtStats:TextField;
 		
 		public function GamePage() {
 			super();
 			
+			_starting = true;
+			
 			_screenShaking = false;
 			_screenShakeFactor = 0;
 			
 			_player = new Player();
-			_player.x = Constants.GameWidth * 0.15;
+			_player.x = -_player.width * 2;
 			_player.y = Constants.GameHeight * 0.5;
 			
 			_background = new Background();
@@ -72,6 +79,8 @@ package scenes {
 		override protected function onTouch(touchEvent:TouchEvent=null):void {
 			super.onTouch(touchEvent);
 			
+			if(_starting) return;
+			
 			_touch = touchEvent.getTouch(stage);
 			
 			if(_touch) {
@@ -80,6 +89,8 @@ package scenes {
 		}
 		
 		override protected function onTick(e:Event=null):void {
+			if(_starting) return;
+			
 			_player.followCursor(_touchY);
 			
 			shakeScreen();
@@ -92,13 +103,21 @@ package scenes {
 			
 			addChild(_background);
 			
-			for each(var enemy:Enemy in _enemies) {
-				addChild(enemy);
-			}
-			
+			var playerIntroTween:Tween = new Tween(_player, 1, Transitions.EASE_OUT);
+			playerIntroTween.onComplete = onPlayerIntroTween;
+			playerIntroTween.animate("x", Constants.GameWidth * 0.15);
+			Starling.juggler.add(playerIntroTween);
 			addChild(_player);
 			
 			addChild(_txtStats);
+		}
+		
+		private function onPlayerIntroTween():void {
+			_starting = false;
+			
+			for each(var enemy:Enemy in _enemies) {
+				addChild(enemy);
+			}
 		}
 	}
 }

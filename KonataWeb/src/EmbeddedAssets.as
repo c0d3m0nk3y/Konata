@@ -14,10 +14,6 @@ package
 		 *    referenced by file name.
 		 * 
 		 */
-		
-		[Embed(source="/textures/background.png")]
-		public static const background:Class;
-		
 		// Texture Atlas
 		
 		[Embed(source="/textures/sprites.xml", mimeType="application/octet-stream")]
@@ -26,31 +22,7 @@ package
 		[Embed(source="/textures/sprites.png")]
 		public static const sprites:Class;
 		
-		[Embed(source="/textures/templelane.xml", mimeType="application/octet-stream")]
-		public static const templelane_xml:Class;
-		
-		[Embed(source="/textures/templelane.png")]
-		public static const templelane:Class;
-		
-		[Embed(source="/textures/cherub.png")]
-		public static const cherub:Class;
-		
-		[Embed(source="/textures/cherub.xml", mimeType="application/octet-stream")]
-		public static const cherub_xml:Class;
-
 		// Bitmap Fonts
-		
-		[Embed(source="/fonts/cooperblack.fnt", mimeType="application/octet-stream")]
-		public static const cooperblack_fnt:Class;
-		
-		[Embed(source = "/fonts/cooperblack.png")]
-		public static const cooperblack:Class;
-		
-		[Embed(source="/fonts/cooperblacklg.fnt", mimeType="application/octet-stream")]
-		public static const cooperblacklg_fnt:Class;
-		
-		[Embed(source = "/fonts/cooperblacklg.png")]
-		public static const cooperblacklg:Class;
 
 		[Embed(source="/fonts/corbel.fnt", mimeType="application/octet-stream")]
 		public static const corbel_fnt:Class;
@@ -60,7 +32,13 @@ package
 		
 		// Sounds
 		
-		[Embed(source="/audio/pop.mp3")]
-		public static const pop:Class;
+		[Embed(source="/audio/pew.mp3")]
+		public static const pew:Class;
+		
+		[Embed(source="/audio/spacemusic.mp3")]
+		public static const spacemusic:Class;
+		
+		[Embed(source="/audio/small_explosion.mp3")]
+		public static const small_explosion:Class;
 	}
 }

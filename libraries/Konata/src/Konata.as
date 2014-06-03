@@ -131,6 +131,7 @@ package {
 		private function checkKeyPress(event:flash.events.KeyboardEvent=null):void {
 			switch (event.keyCode) {
 				case Keyboard.BACK:
+				case Keyboard.ESCAPE:
 					
 					if (mCurrentScene) {
 						event.preventDefault();

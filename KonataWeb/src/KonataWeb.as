@@ -9,7 +9,7 @@ package {
 	import starling.textures.Texture;
 	import starling.utils.AssetManager;
 	
-	[SWF(frameRate = "60", width = "800", height = "600", backgroundColor = "0x333333")]
+	[SWF(frameRate = "30", width = "1066", height = "600", backgroundColor = "0x0")]
 	public class KonataWeb extends Sprite {
 		private static var _instance:KonataWeb;
 		
@@ -60,7 +60,7 @@ package {
 		private function start():void {
 			Support.platform = Constants.PLATFORM_CANVAS;
 			
-			Starling.multitouchEnabled = true; // for Multitouch Scene
+			Starling.multitouchEnabled = false; // for Multitouch Scene
 			Starling.handleLostContext = true; // required on Windows, needs more memory
 			
 			var o:Object = LoaderInfo(this.loaderInfo);
@@ -69,7 +69,7 @@ package {
 			Support.log("KonataWeb.start " + JSON.stringify(Support.flashvars));
 			
 			mStarling = new Starling(Konata, stage);
-			mStarling.simulateMultitouch = true;
+//			mStarling.simulateMultitouch = true;
 			mStarling.enableErrorChecking = Capabilities.isDebugger;
 			mStarling.start();
 			

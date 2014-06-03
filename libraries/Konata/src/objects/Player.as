@@ -1,4 +1,6 @@
 package objects {
+	import flash.media.Sound;
+	
 	import scenes.GamePage;
 	
 	import starling.core.Starling;
@@ -194,7 +196,11 @@ package objects {
 		}
 		
 		public function takeHit():void {
-			if(_alive) (parent as GamePage).startScreenShake();
+			if(!_alive) return;
+			
+			(parent as GamePage).startScreenShake();
+			
+			Sounds.playAtVolume(Sounds.EXPLOSION, 0.015 * (1 + _maxShield - _shield));
 			
 			if(_shield > 0) {
 				_shield--;

@@ -6,6 +6,7 @@ package {
 	
 	public class Sounds {
 		public static const PEW:String = "pew";
+		public static const EXPLOSION:String = "small_explosion";
 		
 		public static function play(name:String, startTime:Number=0, loops:int=0, transform:SoundTransform=null):SoundChannel {
 			return AudioManager.playSound(name, startTime, loops, transform);
