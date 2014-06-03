@@ -1,6 +1,4 @@
 package objects {
-	import flash.media.Sound;
-	
 	import scenes.GamePage;
 	
 	import starling.core.Starling;
@@ -114,7 +112,7 @@ package objects {
 					var enemy:Enemy = gameObject as Enemy;
 					if(enemy) {
 						takeHit();
-						enemy.kill();
+						enemy.resetPosition();
 					}
 				}
 			}
@@ -130,7 +128,7 @@ package objects {
 					for each(var collisionObject:GameObject in laserCollisions) {
 						var enemy:Enemy = collisionObject as Enemy;
 						if(enemy) {
-							enemy.kill();
+							enemy.resetPosition();
 							_score++;
 							laser.remove();
 						}
@@ -249,5 +247,10 @@ package objects {
 			return _shield;
 		}
 
+		public function restore():void {
+			_alive = true;
+			_shield = _maxShield;
+			setShield();
+		}
 	}
 }

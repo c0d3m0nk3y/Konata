@@ -4,22 +4,27 @@
 	Created with ShoeBox
 	http://renderhjs.net/shoebox/
 	-->
-	<SubTexture name="bg"	x="0"	y="499"	width="1"	height="1" frameX="-0" frameY="-0" frameWidth="1" frameHeight="1"/>
-	<SubTexture name="enemy_000"	x="154"	y="262"	width="26"	height="36" frameX="-0" frameY="-0" frameWidth="26" frameHeight="36"/>
-	<SubTexture name="enemy_001"	x="128"	y="463"	width="26"	height="36" frameX="-0" frameY="-0" frameWidth="26" frameHeight="36"/>
-	<SubTexture name="enemy_002"	x="100"	y="463"	width="26"	height="36" frameX="-0" frameY="-0" frameWidth="26" frameHeight="36"/>
-	<SubTexture name="farground"	x="0"	y="0"	width="169"	height="138" frameX="-14" frameY="-8" frameWidth="200" frameHeight="150"/>
-	<SubTexture name="laser"	x="0"	y="481"	width="48"	height="16" frameX="-0" frameY="-0" frameWidth="48" frameHeight="16"/>
-	<SubTexture name="laser0"	x="0"	y="481"	width="48"	height="16" frameX="-0" frameY="-0" frameWidth="48" frameHeight="16"/>
-	<SubTexture name="laser1"	x="0"	y="463"	width="48"	height="16" frameX="-0" frameY="-0" frameWidth="48" frameHeight="16"/>
-	<SubTexture name="laser2"	x="50"	y="463"	width="48"	height="16" frameX="-0" frameY="-0" frameWidth="48" frameHeight="16"/>
-	<SubTexture name="midground_001"	x="0"	y="235"	width="152"	height="107" frameX="-33" frameY="-11" frameWidth="200" frameHeight="150"/>
-	<SubTexture name="midground_002"	x="161"	y="140"	width="128"	height="120" frameX="-21" frameY="-15" frameWidth="200" frameHeight="150"/>
-	<SubTexture name="nearground_001"	x="0"	y="344"	width="142"	height="117" frameX="-28" frameY="-11" frameWidth="200" frameHeight="150"/>
-	<SubTexture name="nearground_002"	x="0"	y="140"	width="159"	height="93" frameX="-26" frameY="-27" frameWidth="200" frameHeight="150"/>
-	<SubTexture name="shield0"	x="274"	y="262"	width="122"	height="123" frameX="-3" frameY="-2" frameWidth="128" frameHeight="128"/>
-	<SubTexture name="shield1"	x="274"	y="387"	width="122"	height="123" frameX="-3" frameY="-2" frameWidth="128" frameHeight="128"/>
-	<SubTexture name="shield2"	x="291"	y="90"	width="122"	height="123" frameX="-3" frameY="-2" frameWidth="128" frameHeight="128"/>
-	<SubTexture name="ship_000"	x="144"	y="344"	width="128"	height="88" frameX="-0" frameY="-0" frameWidth="128" frameHeight="88"/>
-	<SubTexture name="ship_001"	x="171"	y="0"	width="128"	height="88" frameX="-0" frameY="-0" frameWidth="128" frameHeight="88"/>
+	<SubTexture name="bg"	x="0"	y="1010"	width="1"	height="1" frameX="-0" frameY="-0" frameWidth="1" frameHeight="1"/>
+	<SubTexture name="enemy_000"	x="195"	y="457"	width="26"	height="36" frameX="-0" frameY="-0" frameWidth="26" frameHeight="36"/>
+	<SubTexture name="enemy_001"	x="194"	y="692"	width="26"	height="36" frameX="-0" frameY="-0" frameWidth="26" frameHeight="36"/>
+	<SubTexture name="enemy_002"	x="178"	y="746"	width="26"	height="36" frameX="-0" frameY="-0" frameWidth="26" frameHeight="36"/>
+	<SubTexture name="explosion_000"	x="161"	y="472"	width="32"	height="32" frameX="-0" frameY="-0" frameWidth="32" frameHeight="32"/>
+	<SubTexture name="explosion_001"	x="144"	y="746"	width="32"	height="32" frameX="-0" frameY="-0" frameWidth="32" frameHeight="32"/>
+	<SubTexture name="explosion_002"	x="161"	y="506"	width="32"	height="32" frameX="-0" frameY="-0" frameWidth="32" frameHeight="32"/>
+	<SubTexture name="explosion_003"	x="161"	y="540"	width="24"	height="24" frameX="-4" frameY="-4" frameWidth="32" frameHeight="32"/>
+	<SubTexture name="explosion_004"	x="187"	y="540"	width="16"	height="16" frameX="-8" frameY="-8" frameWidth="32" frameHeight="32"/>
+	<SubTexture name="farground"	x="0"	y="332"	width="169"	height="138" frameX="-14" frameY="-8" frameWidth="200" frameHeight="150"/>
+	<SubTexture name="laser0"	x="144"	y="728"	width="48"	height="16" frameX="-0" frameY="-0" frameWidth="48" frameHeight="16"/>
+	<SubTexture name="laser1"	x="144"	y="710"	width="48"	height="16" frameX="-0" frameY="-0" frameWidth="48" frameHeight="16"/>
+	<SubTexture name="laser2"	x="144"	y="692"	width="48"	height="16" frameX="-0" frameY="-0" frameWidth="48" frameHeight="16"/>
+	<SubTexture name="midground_001"	x="0"	y="567"	width="152"	height="107" frameX="-33" frameY="-11" frameWidth="200" frameHeight="150"/>
+	<SubTexture name="midground_002"	x="0"	y="885"	width="128"	height="120" frameX="-21" frameY="-15" frameWidth="200" frameHeight="150"/>
+	<SubTexture name="nearground_001"	x="0"	y="676"	width="142"	height="117" frameX="-28" frameY="-11" frameWidth="200" frameHeight="150"/>
+	<SubTexture name="nearground_002"	x="0"	y="472"	width="159"	height="93" frameX="-26" frameY="-27" frameWidth="200" frameHeight="150"/>
+	<SubTexture name="purplebox"	x="0"	y="0"	width="430"	height="330" frameX="-0" frameY="-0" frameWidth="430" frameHeight="330"/>
+	<SubTexture name="shield0"	x="171"	y="332"	width="122"	height="123" frameX="-3" frameY="-2" frameWidth="128" frameHeight="128"/>
+	<SubTexture name="shield1"	x="154"	y="567"	width="122"	height="123" frameX="-3" frameY="-2" frameWidth="128" frameHeight="128"/>
+	<SubTexture name="shield2"	x="130"	y="885"	width="122"	height="123" frameX="-3" frameY="-2" frameWidth="128" frameHeight="128"/>
+	<SubTexture name="ship_000"	x="0"	y="795"	width="128"	height="88" frameX="-0" frameY="-0" frameWidth="128" frameHeight="88"/>
+	<SubTexture name="ship_001"	x="130"	y="795"	width="128"	height="88" frameX="-0" frameY="-0" frameWidth="128" frameHeight="88"/>
 </TextureAtlas>

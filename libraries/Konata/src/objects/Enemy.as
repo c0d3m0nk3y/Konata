@@ -4,6 +4,7 @@ package objects {
 	import starling.events.Event;
 	
 	public class Enemy extends GameObject {
+		private var _alive:Boolean;
 		private var _enemy:MovieClip;
 		private var _yTarget:Number;
 		private var _lasers:Vector.<Laser>;
@@ -11,6 +12,7 @@ package objects {
 		public function Enemy() {
 			super();
 			
+			_alive = true;
 			solid = true;
 			_velocity.x = randomVelocity();
 			_velocity.y = randomVelocity(0.005,0.1);
@@ -52,15 +54,17 @@ package objects {
 			
 			move(time);
 			
-			moveTowardsYTarget();
-			
-			if(arrivedAtYTarget()) {
-				setRandomYTarget();
-				shoot();
-			}
-			
-			if(leftScreen()) {
-				resetPosition();
+			if(_alive) {
+				moveTowardsYTarget();
+				
+				if(arrivedAtYTarget()) {
+					setRandomYTarget();
+					shoot();
+				}
+				
+				if(leftScreen()) {
+					resetPosition();
+				}
 			}
 			
 			laserHitPlayer();
@@ -132,7 +136,9 @@ package objects {
 			return y > _yTarget - 1 && y < _yTarget + 1;
 		}
 		
-		private function resetPosition():void {
+		public function resetPosition():void {
+			if(!_alive) return;
+			
 			_velocity.x = randomVelocity();
 			_velocity.y = randomVelocity(0.005,0.1);
 			x = randomStartPosition();
@@ -144,6 +150,11 @@ package objects {
 		}
 		
 		public function kill():void {
+			_alive = false;
+		}
+		
+		public function restore():void{
+			_alive = true;
 			resetPosition();
 		}
 	}

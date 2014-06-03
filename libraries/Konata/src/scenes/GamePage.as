@@ -1,10 +1,13 @@
 package scenes {
 	import objects.Enemy;
+	import objects.GameOverPanel;
 	import objects.Player;
 	
+	import starling.animation.DelayedCall;
 	import starling.animation.Transitions;
 	import starling.animation.Tween;
 	import starling.core.Starling;
+	import starling.display.Quad;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
@@ -24,13 +27,13 @@ package scenes {
 		private var _leftShot:Boolean;
 		private var _enemies:Vector.<Enemy>;
 		private var _numEnemies:int = 3;
-//		private var _screenShakeIncrement:int;
 		private var _screenShakeFactor:int;
 		private var _screenShaking:Boolean;
 		
 		private var _starting:Boolean;
 		
 		private var _txtStats:TextField;
+		private var _gameOverShown:Boolean;
 		
 		public function GamePage() {
 			super();
@@ -41,8 +44,6 @@ package scenes {
 			_screenShakeFactor = 0;
 			
 			_player = new Player();
-			_player.x = -_player.width * 2;
-			_player.y = Constants.GameHeight * 0.5;
 			
 			_background = new Background();
 			
@@ -59,7 +60,7 @@ package scenes {
 		
 		public function startScreenShake():void {
 			_screenShaking = true;
-			_screenShakeFactor = (4 - _player.shield) * 10;//_screenShakeIncrement;
+			_screenShakeFactor = (4 - _player.shield) * 10;
 		}
 		
 		private function shakeScreen():void {
@@ -96,6 +97,12 @@ package scenes {
 			shakeScreen();
 			
 			_txtStats.text = "Score " + _player.score;
+			
+			if(!_player.alive && !_gameOverShown) {
+				_gameOverShown = true;
+				warpAllEnemiesOff();
+				Starling.juggler.add(new DelayedCall(showGameOver,1.5));
+			}
 		}
 		
 		override protected function onAddedToStage():void {
@@ -103,13 +110,55 @@ package scenes {
 			
 			addChild(_background);
 			
+			tweenPlayerIn();
+			
+			addChild(_txtStats);
+		}
+		
+		private function tweenPlayerIn():void {
+			_player.x = -_player.width * 2;
+			_player.y = Constants.GameHeight * 0.5;
 			var playerIntroTween:Tween = new Tween(_player, 1, Transitions.EASE_OUT);
 			playerIntroTween.onComplete = onPlayerIntroTween;
 			playerIntroTween.animate("x", Constants.GameWidth * 0.15);
 			Starling.juggler.add(playerIntroTween);
 			addChild(_player);
+		}
+		
+		private function restartGame():void {
+			_player.restore();
+			_gameOverShown = false;
+			tweenPlayerIn();
 			
-			addChild(_txtStats);
+			for each(var enemy:Enemy in _enemies) {
+				enemy.restore();
+			}
+		}
+		
+		private function showGameOver():void {
+			
+			var gameOverPanel:GameOverPanel = new GameOverPanel(restartGame);
+			gameOverPanel.pivotX = gameOverPanel.width / 2;
+			gameOverPanel.pivotY = gameOverPanel.height / 2;
+			gameOverPanel.x = Constants.GameWidth / 2;
+			gameOverPanel.y = Constants.GameHeight / 2;
+			gameOverPanel.scaleX = 0;
+			gameOverPanel.scaleY = 0;
+			
+			addChild(gameOverPanel);
+			
+			var gameOverTween:Tween = new Tween(gameOverPanel, 0.5, Transitions.EASE_IN);
+			gameOverTween.animate("scaleX", 1);
+			gameOverTween.animate("scaleY", 1);
+			Starling.juggler.add(gameOverTween);
+			
+		}
+		
+		private function warpAllEnemiesOff():void {
+			for each(var enemy:Enemy in _enemies) {
+				enemy.velocity.x *= 3;
+				enemy.kill();
+			}
 		}
 		
 		private function onPlayerIntroTween():void {
