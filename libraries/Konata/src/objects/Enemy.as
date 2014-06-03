@@ -8,6 +8,7 @@ package objects {
 		private var _enemy:MovieClip;
 		private var _yTarget:Number;
 		private var _lasers:Vector.<Laser>;
+		private var _score:int;
 		
 		public function Enemy() {
 			super();
@@ -29,6 +30,8 @@ package objects {
 			_yTarget = randomYTarget();
 			
 			_lasers = new Vector.<Laser>();
+			
+			_score = 100;
 		}
 		
 		private function randomFPS():Number {
@@ -157,5 +160,11 @@ package objects {
 			_alive = true;
 			resetPosition();
 		}
+
+		public function get score():int
+		{
+			return _score;
+		}
+
 	}
 }

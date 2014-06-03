@@ -35,6 +35,8 @@ package scenes {
 		private var _txtStats:TextField;
 		private var _gameOverShown:Boolean;
 		
+		private var _greyCover:Quad;
+		
 		public function GamePage() {
 			super();
 			
@@ -56,6 +58,10 @@ package scenes {
 			_txtStats = new TextField(Constants.GameWidth * 0.9, Constants.GameHeight * 0.1, "", "Veranda", 16, 0xffffff, true);
 			_txtStats.x = Constants.GameWidth * 0.1;
 			_txtStats.hAlign = HAlign.LEFT;
+			
+			_greyCover = new Quad(Constants.GameWidth, Constants.GameHeight, 0x0);
+			_greyCover.touchable = false;
+			_greyCover.alpha = 0.7;
 		}
 		
 		public function startScreenShake():void {
@@ -101,7 +107,7 @@ package scenes {
 			if(!_player.alive && !_gameOverShown) {
 				_gameOverShown = true;
 				warpAllEnemiesOff();
-				Starling.juggler.add(new DelayedCall(showGameOver,1.5));
+				Starling.juggler.add(new DelayedCall(showGameOver,2));
 			}
 		}
 		
@@ -126,6 +132,8 @@ package scenes {
 		}
 		
 		private function restartGame():void {
+			removeChild(_greyCover);
+			
 			_player.restore();
 			_gameOverShown = false;
 			tweenPlayerIn();
@@ -136,6 +144,7 @@ package scenes {
 		}
 		
 		private function showGameOver():void {
+			addChild(_greyCover);
 			
 			var gameOverPanel:GameOverPanel = new GameOverPanel(restartGame);
 			gameOverPanel.pivotX = gameOverPanel.width / 2;

@@ -1,6 +1,7 @@
 package objects {
 	import scenes.GamePage;
 	
+	import starling.animation.DelayedCall;
 	import starling.core.Starling;
 	import starling.display.Image;
 	import starling.display.MovieClip;
@@ -19,6 +20,7 @@ package objects {
 		private var _timeSinceLastShieldRegen:Number;
 		private var _shields:Vector.<Image>;
 		private var _score:int;
+		private var _explosion:MovieClip;
 		
 		public function Player() {
 			super();
@@ -33,6 +35,10 @@ package objects {
 			_ship.x = Math.ceil(-_ship.width/2);
 			_ship.y = Math.ceil(-_ship.height/2);
 			Starling.juggler.add(_ship);
+			
+			_explosion = new MovieClip(Assets.getTextures("explosion_"), 24);
+			_explosion.x = Math.ceil(-_explosion.width/2);
+			_explosion.y = Math.ceil(-_explosion.height/2);
 			
 			_lasers = new Vector.<Laser>();
 			
@@ -129,7 +135,7 @@ package objects {
 						var enemy:Enemy = collisionObject as Enemy;
 						if(enemy) {
 							enemy.resetPosition();
-							_score++;
+							_score += enemy.score;
 							laser.remove();
 						}
 					}
@@ -229,6 +235,21 @@ package objects {
 		
 		public function kill():void {
 			_alive = false;
+			explode();
+		}
+		
+		private function explode():void {
+			_ship.visible = false;
+			Starling.juggler.add(_explosion);
+			addChild(_explosion);
+			Starling.juggler.add(new DelayedCall(onExplode, 2));
+		}		
+		
+		private function onExplode():void {
+			removeChild(_explosion);
+			_ship.visible = true;
+			visible = false;
+			Starling.juggler.remove(_explosion);
 		}
 
 		public function get alive():Boolean {
@@ -250,6 +271,7 @@ package objects {
 		public function restore():void {
 			_alive = true;
 			_shield = _maxShield;
+			visible = true;
 			setShield();
 		}
 	}
