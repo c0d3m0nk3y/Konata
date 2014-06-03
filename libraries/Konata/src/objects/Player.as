@@ -268,6 +268,7 @@ package objects {
 		}
 
 		public function restore():void {
+			_score = 0;
 			_alive = true;
 			_shield = _maxShield;
 			visible = true;

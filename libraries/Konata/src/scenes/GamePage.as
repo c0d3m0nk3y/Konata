@@ -4,8 +4,8 @@ package scenes {
 	
 	import objects.Enemy;
 	import objects.GameOverPanel;
-	import objects.Player;
 	import objects.MessageBar;
+	import objects.Player;
 	
 	import starling.animation.DelayedCall;
 	import starling.animation.Transitions;
@@ -40,7 +40,9 @@ package scenes {
 		private var _gameOverShown:Boolean;
 		
 		private var _greyCover:Quad;
-		private var messageBar:MessageBar;
+		
+		private var _messageBar:MessageBar;
+		private var _nextLevelDelayedCall:DelayedCall;
 		
 		public function GamePage() {
 			super();
@@ -64,10 +66,8 @@ package scenes {
 			_greyCover.touchable = false;
 			_greyCover.alpha = 0.7;
 			
-			startLevelTimer();
-			
-			messageBar = new MessageBar();
-			messageBar.touchable = false;
+			_messageBar = new MessageBar();
+			_messageBar.touchable = false;
 		}
 		
 		private function createEnemies():void {
@@ -79,19 +79,21 @@ package scenes {
 		}
 		
 		private function showMessage(message:String, delay:Number=5):void {
-			messageBar.setMessage(message);
-			addChild(messageBar);
+			_messageBar.setMessage(message);
+			addChild(_messageBar);
 			Starling.juggler.add(new DelayedCall(removeMessageBar, delay));
 		}
 		
 		private function startLevelTimer():void {
-			Starling.juggler.add(new DelayedCall(nextLevel, 10));
+			_nextLevelDelayedCall = new DelayedCall(nextLevel, 10);
+			Starling.juggler.add(_nextLevelDelayedCall);
 		}
 		
 		protected function nextLevel():void {
 			if(!_player.alive) return;
 			
 			showMessage("Enemy reinforcements are arriving!");
+			_numEnemies++;
 			var enemy:Enemy = new Enemy();
 			_enemies.push(enemy);
 			addChild(enemy);
@@ -100,7 +102,7 @@ package scenes {
 		}
 		
 		private function removeMessageBar():void {
-			removeChild(messageBar);
+			removeChild(_messageBar);
 		}
 		
 		public function startScreenShake():void {
@@ -185,6 +187,8 @@ package scenes {
 		private function showGameOver():void {
 			addChild(_greyCover);
 			
+			restoreNumEnemiesToDefault();
+			
 			var gameOverPanel:GameOverPanel = new GameOverPanel(restartGame);
 			gameOverPanel.pivotX = gameOverPanel.width / 2;
 			gameOverPanel.pivotY = gameOverPanel.height / 2;
@@ -200,6 +204,15 @@ package scenes {
 			gameOverTween.animate("scaleY", 1);
 			Starling.juggler.add(gameOverTween);
 			
+			Starling.juggler.remove(_nextLevelDelayedCall);
+		}
+		
+		private function restoreNumEnemiesToDefault():void {
+			while(_enemies.length > 3) {
+				var enemy:Enemy = _enemies.pop();
+				enemy.removeFromParent(true);
+				_numEnemies = 3;
+			}
 		}
 		
 		private function warpAllEnemiesOff():void {
@@ -215,6 +228,8 @@ package scenes {
 			for each(var enemy:Enemy in _enemies) {
 				addChild(enemy);
 			}
+			
+			startLevelTimer();
 		}
 	}
 }
