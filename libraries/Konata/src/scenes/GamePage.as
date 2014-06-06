@@ -1,7 +1,4 @@
 package scenes {
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
-	
 	import objects.Enemy;
 	import objects.GameOverPanel;
 	import objects.MessageBar;
@@ -85,7 +82,7 @@ package scenes {
 		}
 		
 		private function startLevelTimer():void {
-			_nextLevelDelayedCall = new DelayedCall(nextLevel, 10);
+			_nextLevelDelayedCall = new DelayedCall(nextLevel, 30);
 			Starling.juggler.add(_nextLevelDelayedCall);
 		}
 		

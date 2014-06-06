@@ -51,12 +51,15 @@ package objects {
 			_score = 0;
 			
 			var shield0:Image = new Image(Assets.getTexture("shield0"));
+			shield0.alpha = 0.3;
 			shield0.x = Math.ceil(-shield0.width/2);
 			shield0.y = Math.ceil(-shield0.height/2);
 			var shield1:Image = new Image(Assets.getTexture("shield1"));
+			shield1.alpha = 0.25;
 			shield1.x = Math.ceil(-shield1.width/2);
 			shield1.y = Math.ceil(-shield1.height/2);
 			var shield2:Image = new Image(Assets.getTexture("shield2"));
+			shield2.alpha = 0.2;
 			shield2.x = Math.ceil(-shield2.width/2);
 			shield2.y = Math.ceil(-shield2.height/2);
 			
@@ -158,7 +161,7 @@ package objects {
 			
 			var laser:Laser = new Laser();
 			laser.x = x + width * 0.5;
-			laser.y = y + (height * 0.25) - (laser.height * 0.5);
+			laser.y = y + height * 0.1;
 			parent.addChild(laser);
 			_lasers.push(laser);
 		}
