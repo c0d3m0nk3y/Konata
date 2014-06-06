@@ -1,4 +1,6 @@
 package objects {
+	import Events.ShipEvent;
+	
 	import starling.core.Starling;
 	import starling.display.MovieClip;
 	import starling.events.Event;
@@ -66,7 +68,7 @@ package objects {
 				}
 				
 				if(leftScreen()) {
-					resetPosition();
+					restore();
 				}
 			}
 			
@@ -154,6 +156,7 @@ package objects {
 		
 		public function kill():void {
 			_alive = false;
+			onDeath();
 		}
 		
 		public function restore():void{
@@ -166,5 +169,8 @@ package objects {
 			return _score;
 		}
 
+		private function onDeath(event:Event=null):void {
+			dispatchEvent(new ShipEvent(ShipEvent.DEATH, true));
+		}
 	}
 }

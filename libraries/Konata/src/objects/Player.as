@@ -120,7 +120,8 @@ package objects {
 					var enemy:Enemy = gameObject as Enemy;
 					if(enemy) {
 						takeHit();
-						enemy.resetPosition();
+						enemy.kill();
+						enemy.restore();
 					}
 				}
 			}
@@ -136,7 +137,8 @@ package objects {
 					for each(var collisionObject:GameObject in laserCollisions) {
 						var enemy:Enemy = collisionObject as Enemy;
 						if(enemy) {
-							enemy.resetPosition();
+							enemy.kill();
+							enemy.restore();
 							_score += enemy.score;
 							laser.remove();
 						}

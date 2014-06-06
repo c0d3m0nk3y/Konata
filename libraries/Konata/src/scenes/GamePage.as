@@ -1,4 +1,6 @@
 package scenes {
+	import Events.ShipEvent;
+	
 	import objects.Enemy;
 	import objects.GameOverPanel;
 	import objects.MessageBar;
@@ -72,7 +74,12 @@ package scenes {
 			for(var i:int = 0; i < _numEnemies; i++) {
 				var enemy:Enemy = new Enemy();
 				_enemies.push(enemy);
+				enemy.addEventListener(ShipEvent.DEATH, onEnemyDeath);
 			}
+		}
+		
+		private function onEnemyDeath(event:Event=null):void{
+			Support.log("foo");
 		}
 		
 		private function showMessage(message:String, delay:Number=5):void {
