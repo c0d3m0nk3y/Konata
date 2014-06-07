@@ -5,6 +5,7 @@ package scenes {
 	import objects.GameOverPanel;
 	import objects.MessageBar;
 	import objects.Player;
+	import objects.PowerUp;
 	
 	import starling.animation.DelayedCall;
 	import starling.animation.Transitions;
@@ -67,6 +68,22 @@ package scenes {
 			
 			_messageBar = new MessageBar();
 			_messageBar.touchable = false;
+			
+			addEventListener(ShipEvent.DEATH_BY_WEAPON, onShipDeath);
+		}
+		
+		private function onShipDeath(event:ShipEvent):void {
+			var enemy:Enemy = event.target as Enemy;
+			if(enemy) {
+				var powerUp:PowerUp = new PowerUp();
+				
+				powerUp.pivotX = powerUp.width * 0.5;
+				powerUp.pivotY = powerUp.height * 0.5;
+				powerUp.x = int(enemy.x);
+				powerUp.y = int(enemy.y);
+				
+				addChild(powerUp);
+			}
 		}
 		
 		private function createEnemies():void {
@@ -74,7 +91,6 @@ package scenes {
 			for(var i:int = 0; i < _numEnemies; i++) {
 				var enemy:Enemy = new Enemy();
 				_enemies.push(enemy);
-				enemy.addEventListener(ShipEvent.DEATH, onEnemyDeath);
 			}
 		}
 		

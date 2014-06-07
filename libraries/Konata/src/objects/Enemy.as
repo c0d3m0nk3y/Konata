@@ -156,7 +156,15 @@ package objects {
 		
 		public function kill():void {
 			_alive = false;
-			onDeath();
+		}
+		
+		public function killByCollision():void {
+			kill();
+		}
+		
+		public function killByWeapon():void {
+			kill();
+			dispatchEvent(new ShipEvent(ShipEvent.DEATH_BY_WEAPON, true));
 		}
 		
 		public function restore():void{
@@ -167,10 +175,6 @@ package objects {
 		public function get score():int
 		{
 			return _score;
-		}
-
-		private function onDeath(event:Event=null):void {
-			dispatchEvent(new ShipEvent(ShipEvent.DEATH, true));
 		}
 	}
 }

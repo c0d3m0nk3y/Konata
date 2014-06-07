@@ -3,7 +3,7 @@ package Events
 	import starling.events.Event;
 	
 	public class ShipEvent extends Event {
-		public static const DEATH:String = "Death";
+		public static const DEATH_BY_WEAPON:String = "Death";
 		
 		private var _result:Boolean;
 		
