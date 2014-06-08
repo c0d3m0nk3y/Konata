@@ -1,4 +1,6 @@
 package objects {
+	import Effects.PlayerAttackSpeedEffect;
+	
 	import scenes.GamePage;
 	
 	import starling.animation.DelayedCall;
@@ -8,6 +10,9 @@ package objects {
 	import starling.events.Event;
 	
 	public class Player extends GameObject {
+		public static const Y_SPEED_DEFAULT:Number = 0.075;
+		public static const SECONDS_BETWEEN_SHOTS_DEFAULT:Number = 1;
+		private var _ySpeedMultiplier:Number;
 		private var _ship:MovieClip;
 		private var _alive:Boolean;
 		private var _lasers:Vector.<Laser>;
@@ -29,6 +34,7 @@ package objects {
 			name = "Player";
 			
 			_alive = true;
+			_ySpeedMultiplier = Y_SPEED_DEFAULT;
 			
 			_ship = new MovieClip(Assets.getTextures("ship_"), 6);
 			_ship.x = Math.ceil(-_ship.width/2);
@@ -42,7 +48,7 @@ package objects {
 			_lasers = new Vector.<Laser>();
 			
 			_timeSinceLastShot = 0;
-			_secondsBetweenShots = 1;
+			_secondsBetweenShots = SECONDS_BETWEEN_SHOTS_DEFAULT;
 			
 			_shield = _maxShield = 3;
 			_timeSinceLastShieldRegen = 0;
@@ -187,7 +193,7 @@ package objects {
 		
 		private function flyTowardsCursor(cursorY:Number):void {
 			if(!isNaN(cursorY)) {
-				y -= (y - cursorY) * 0.075;
+				y -= (y - cursorY) * _ySpeedMultiplier;
 			}
 		}
 		
@@ -276,22 +282,31 @@ package objects {
 			setShield();
 		}
 		
-		public function enablePowerUp(type:int):void
-		{
+		public function enablePowerUp(type:int):void {
 			switch(type) {
 				case PowerUp.LASER:
-					Support.log("laser");
 					break;
 				case PowerUp.SHIELD:
-					Support.log("shield");
 					break;
 				case PowerUp.SPEED:
-					Support.log("speed");
+					if(!hasEffect(PlayerAttackSpeedEffect.TYPE)) {
+						addEffect(new PlayerAttackSpeedEffect(this));
+					}
 					break;
 				default:
 					Support.log("UNKNOWN POWERUP TYPE " + type);
 					break;
 			}
 		}
+
+		public function set ySpeedMultiplier(value:Number):void {
+			_ySpeedMultiplier = value;
+		}
+
+		public function set secondsBetweenShots(value:Number):void {
+			_secondsBetweenShots = value;
+		}
+
+
 	}
 }
