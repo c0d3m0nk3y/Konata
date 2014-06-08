@@ -81,16 +81,13 @@ package objects {
 			var laserCollisions:Vector.<GameObject>
 			
 			for each(var laser:Laser in _lasers) {
-				// TODO: should this assignment be done at decleration?
 				laserCollisions = Collidables.getCollisions(laser);
-				
-				if(laserCollisions) {
-					for each(var collisionObject:GameObject in laserCollisions) {
-						var player:Player = collisionObject as Player;
-						if(player) {
-							player.takeHit();
-							laser.remove();
-						}
+
+				for each(var collisionObject:GameObject in laserCollisions) {
+					var player:Player = collisionObject as Player;
+					if(player) {
+						player.takeHit();
+						laser.remove();
 					}
 				}
 			}

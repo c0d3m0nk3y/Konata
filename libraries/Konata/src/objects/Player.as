@@ -115,14 +115,12 @@ package objects {
 		private function collideWithEnemy():void {
 			var collisions:Vector.<GameObject> = Collidables.getCollisions(this);
 			
-			if(collisions) {
-				for each(var gameObject:GameObject in collisions) {
-					var enemy:Enemy = gameObject as Enemy;
-					if(enemy) {
-						takeHit();
-						enemy.killByCollision();
-						enemy.restore();
-					}
+			for each(var gameObject:GameObject in collisions) {
+				var enemy:Enemy = gameObject as Enemy;
+				if(enemy) {
+					takeHit();
+					enemy.killByCollision();
+					enemy.restore();
 				}
 			}
 		}
@@ -131,18 +129,15 @@ package objects {
 			var laserCollisions:Vector.<GameObject>;
 			
 			for each(var laser:Laser in _lasers) {
-				// TODO: Should this not be assigned outside the loop at decleration?
 				laserCollisions = Collidables.getCollisions(laser);
 				
-				if(laserCollisions) {
-					for each(var collisionObject:GameObject in laserCollisions) {
-						var enemy:Enemy = collisionObject as Enemy;
-						if(enemy) {
-							enemy.killByWeapon();
-							enemy.restore();
-							_score += enemy.score;
-							laser.remove();
-						}
+				for each(var collisionObject:GameObject in laserCollisions) {
+					var enemy:Enemy = collisionObject as Enemy;
+					if(enemy) {
+						enemy.killByWeapon();
+						enemy.restore();
+						_score += enemy.score;
+						laser.remove();
 					}
 				}
 			}
