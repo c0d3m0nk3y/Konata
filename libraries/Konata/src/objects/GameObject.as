@@ -44,15 +44,28 @@ package objects {
 			}
 		}
 		
-		protected function addEffect(effect:Effect):void {
+		protected function addEffect(effect:Effect, preventStacking:Boolean=true):void {
+			if(preventStacking) {
+				removeEffectType(effect.type);
+			}
 			_effects.push(effect);
 		}
 		
 		public function removeEffect(effect:Effect): void {
 			for(var effectIndex:int = 0; effectIndex < _effects.length; effectIndex++) {
 				if(_effects[effectIndex] == effect) {
-					_effects.splice(effectIndex, 1);
 					Starling.juggler.remove(effect);
+					_effects.splice(effectIndex, 1);
+					effectIndex--;
+				}
+			}
+		}
+		
+		protected function removeEffectType(type:String):void {
+			for(var effectIndex:int = 0; effectIndex < _effects.length; effectIndex++) {
+				if(_effects[effectIndex].type == type) {
+					Starling.juggler.remove(_effects[effectIndex]);
+					_effects.splice(effectIndex, 1);
 					effectIndex--;
 				}
 			}

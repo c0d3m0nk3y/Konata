@@ -3,9 +3,10 @@ package Effects {
 	
 	public class PlayerAttackSpeedEffect extends Effect {
 		public static const TYPE:String = "PlayerAttackSpeed";
+		private static const DEFAULT_DURATION:Number=15;
 		private var _player:Player;
 		
-		public function PlayerAttackSpeedEffect(player:Player, duration:Number=3) {
+		public function PlayerAttackSpeedEffect(player:Player, duration:Number=DEFAULT_DURATION) {
 			super(TYPE, duration);
 			_player = player;
 		}

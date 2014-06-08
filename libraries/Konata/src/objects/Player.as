@@ -206,6 +206,7 @@ package objects {
 		}
 		
 		public function takeHit():void {
+			return;
 			if(!_alive) return;
 			
 			(parent as GamePage).startScreenShake();
@@ -289,14 +290,16 @@ package objects {
 				case PowerUp.SHIELD:
 					break;
 				case PowerUp.SPEED:
-					if(!hasEffect(PlayerAttackSpeedEffect.TYPE)) {
-						addEffect(new PlayerAttackSpeedEffect(this));
-					}
+					enableAttackSpeedPowerup();
 					break;
 				default:
 					Support.log("UNKNOWN POWERUP TYPE " + type);
 					break;
 			}
+		}
+		
+		private function enableAttackSpeedPowerup():void {
+			addEffect(new PlayerAttackSpeedEffect(this));
 		}
 
 		public function set ySpeedMultiplier(value:Number):void {
