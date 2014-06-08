@@ -81,6 +81,7 @@ package objects {
 			var laserCollisions:Vector.<GameObject>
 			
 			for each(var laser:Laser in _lasers) {
+				// TODO: should this assignment be done at decleration?
 				laserCollisions = Collidables.getCollisions(laser);
 				
 				if(laserCollisions) {
@@ -164,7 +165,7 @@ package objects {
 		
 		public function killByWeapon():void {
 			kill();
-			dispatchEvent(new ShipEvent(ShipEvent.DEATH_BY_WEAPON, true));
+			dispatchEvent(new ShipEvent(ShipEvent.KILLED_BY_WEAPON, true));
 		}
 		
 		public function restore():void{

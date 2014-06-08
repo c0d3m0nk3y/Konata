@@ -69,16 +69,13 @@ package scenes {
 			_messageBar = new MessageBar();
 			_messageBar.touchable = false;
 			
-			addEventListener(ShipEvent.DEATH_BY_WEAPON, onShipDeath);
+			addEventListener(ShipEvent.KILLED_BY_WEAPON, onShipKilledByWeapon);
 		}
 		
-		private function onShipDeath(event:ShipEvent):void {
+		private function onShipKilledByWeapon(event:ShipEvent):void {
 			var enemy:Enemy = event.target as Enemy;
 			if(enemy) {
-				var powerUp:PowerUp = new PowerUp();
-				
-				powerUp.pivotX = powerUp.width * 0.5;
-				powerUp.pivotY = powerUp.height * 0.5;
+				var powerUp:PowerUp = new PowerUp(enemy.velocity.x * 2);
 				powerUp.x = int(enemy.x);
 				powerUp.y = int(enemy.y);
 				
@@ -92,10 +89,6 @@ package scenes {
 				var enemy:Enemy = new Enemy();
 				_enemies.push(enemy);
 			}
-		}
-		
-		private function onEnemyDeath(event:Event=null):void{
-			Support.log("foo");
 		}
 		
 		private function showMessage(message:String, delay:Number=5):void {

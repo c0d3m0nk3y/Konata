@@ -46,7 +46,7 @@ package objects {
 		}
 		
 		private function getCollisions(gameObject:GameObject):Vector.<GameObject> {
-			var collisionObjects:Vector.<GameObject>;// = new Vector.<GameObject>();
+			var collisionObjects:Vector.<GameObject>;
 			
 			for each(var collidable:GameObject in _collidables) {
 				if(gameObject != collidable && gameObject.bounds.intersects(collidable.bounds)) {
@@ -74,7 +74,7 @@ package objects {
 		private var _collidables:Vector.<GameObject>;
 		
 		private function addCollidable(collidable:GameObject):void {
-			if (_collidables.indexOf(collidable) == -1) {
+			if (!contains(collidable)) {
 				_collidables.push(collidable);
 			}
 		}

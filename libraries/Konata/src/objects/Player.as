@@ -131,6 +131,7 @@ package objects {
 			var laserCollisions:Vector.<GameObject>;
 			
 			for each(var laser:Laser in _lasers) {
+				// TODO: Should this not be assigned outside the loop at decleration?
 				laserCollisions = Collidables.getCollisions(laser);
 				
 				if(laserCollisions) {
@@ -278,6 +279,24 @@ package objects {
 			_shield = _maxShield;
 			visible = true;
 			setShield();
+		}
+		
+		public function enablePowerUp(type:int):void
+		{
+			switch(type) {
+				case PowerUp.LASER:
+					Support.log("laser");
+					break;
+				case PowerUp.SHIELD:
+					Support.log("shield");
+					break;
+				case PowerUp.SPEED:
+					Support.log("speed");
+					break;
+				default:
+					Support.log("UNKNOWN POWERUP TYPE " + type);
+					break;
+			}
 		}
 	}
 }
