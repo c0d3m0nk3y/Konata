@@ -109,7 +109,6 @@ package {
 			});
 			
 			addEventListener(Event.TRIGGERED, onButtonTriggered);
-			KeyRegister.initialise();
 			
 			initDebug();
 		}

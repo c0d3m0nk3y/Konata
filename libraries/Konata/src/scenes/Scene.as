@@ -1,12 +1,8 @@
 package scenes {
-	import com.greensock.TweenMax;
-	
 	import starling.core.Starling;
 	import starling.display.Sprite;
 	import starling.events.Event;
 	import starling.events.TouchEvent;
-	
-	import utils.BackgroundFactory;
 	
 	public class Scene extends Sprite {
 		
@@ -18,13 +14,10 @@ package scenes {
 		
 		public function destroy():void {
 			removeEventListeners();
-			TweenMax.killAll();
 			removeAllDelayedCalls();
 		}
 		
 		protected function initialise():void {
-			setBackground(Background.HILLS_BACKGROUND);
-			
 			addEventListener(TouchEvent.TOUCH, onTouch);
 			addEventListener(Event.ENTER_FRAME, onTick);
 		}
@@ -42,10 +35,6 @@ package scenes {
 		
 		protected function removeAllDelayedCalls():void {
 			Starling.juggler.purge();
-		}
-		
-		protected function setBackground(name):void {
-			addChildAt(BackgroundFactory.getBG(name), 0);
 		}
 	}
 
