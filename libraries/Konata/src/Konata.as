@@ -174,10 +174,10 @@ package {
 		private function onAssetsLoaded():void {
 			Assets.loaded = true;
 			
-			var background:Image = new Image(Assets.getTexture("background"));
-			background.pivotX = background.width / 2;
-			background.x = Constants.GameWidth / 2;
-			addChild(background);
+//			var background:Image = new Image(Assets.getTexture("background"));
+//			background.pivotX = background.width / 2;
+//			background.x = Constants.GameWidth / 2;
+//			addChild(background);
 			
 			showMainMenu();
 		}

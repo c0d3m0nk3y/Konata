@@ -72,12 +72,12 @@ package io.github.c0d3m0nk3y {
 			BackgroundHD = null; // no longer needed!
 			
 			//For the width, you need to multiply height by (image width in pixels / image height in pixels)
-			background.height = viewPort.height;
-			background.width = background.height * 1137 / 640;
-			background.x = viewPort.width / 2 - background.width / 2;
-			background.y = viewPort.y;
-			background.smoothing = true;
-			addChild(background);
+//			background.height = viewPort.height;
+//			background.width = background.height * 1137 / 640;
+//			background.x = viewPort.width / 2 - background.width / 2;
+//			background.y = viewPort.y;
+//			background.smoothing = true;
+//			addChild(background);
 			
 			// launch Starling
 			mStarling = new Starling(Konata, stage, viewPort);
@@ -87,7 +87,6 @@ package io.github.c0d3m0nk3y {
 			mStarling.enableErrorChecking = false;
 			mStarling.showStats = true;
 			mStarling.addEventListener(starling.events.Event.ROOT_CREATED, function():void {
-				removeChild(background);
 				
 				var konata:Konata = mStarling.root as Konata;
 				var bgTexture:Texture = Texture.fromBitmap(background);//, false, false, scaleFactor);
