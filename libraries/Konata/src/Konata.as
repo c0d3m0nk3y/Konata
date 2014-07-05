@@ -1,4 +1,6 @@
 package {
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
 	import flash.utils.getDefinitionByName;
 	
 	import scenes.MainMenu;
@@ -43,7 +45,7 @@ package {
 		public function Konata() {
 			instance = this;
 			
-//			Starling.current.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, checkKeyPress, false, 0, true);
+			Starling.current.nativeStage.addEventListener(flash.events.KeyboardEvent.KEY_DOWN, checkKeyPress, false, 0, true);
 		}
 		
 		private var backgroundImage:Image;
@@ -126,17 +128,17 @@ package {
 			}
 		}
 		
-//		private function checkKeyPress(event:flash.events.KeyboardEvent=null):void {
-//			switch (event.keyCode) {
-//				case Keyboard.BACK:
-//					
-//					if (mCurrentScene) {
-//						event.preventDefault();
-//						closeScene();
-//					}
-//					break;
-//			}
-//		}
+		private function checkKeyPress(event:KeyboardEvent=null):void {
+			switch (event.keyCode) {
+				case Keyboard.BACK:
+					
+					if (mCurrentScene) {
+						event.preventDefault();
+						closeScene();
+					}
+					break;
+			}
+		}
 		
 		private function closeScene():void {
 			if (mCurrentScene) {
