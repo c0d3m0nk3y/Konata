@@ -26,7 +26,7 @@ package {
 			}
 		}
 		
-		[Embed(source = "/startupHD.png")]
+		[Embed(source = "/startup.png")]
 		private var Background:Class;
 		
 		private var mStarling:Starling;
